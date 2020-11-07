@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.3.5.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
+	id "com.gradle.build-scan" version "3.5"
 }
 
 group = 'com.juyeon.team'
@@ -13,6 +14,11 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'junit:junit:4.12'
+	compile 'org.projectlombok:lombok'
+	compile 'javax.xml.bind:jaxb-api:2.3.0'
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -24,4 +30,12 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+// --scan yes 동의
+gradleEnterprise {
+	buildScan {
+		termsOfServiceUrl = "https://gradle.com/terms-of-service"
+		termsOfServiceAgree = "yes"
+	}
 }

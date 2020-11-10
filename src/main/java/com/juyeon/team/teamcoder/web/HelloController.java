@@ -1,7 +1,6 @@
-package com.juyeon.team.teamcoder.controller;
+package com.juyeon.team.teamcoder.web;
 
-import com.juyeon.team.teamcoder.dto.HelloResponseDto;
-import org.springframework.stereotype.Controller;
+import com.juyeon.team.teamcoder.web.dto.HelloResponseDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

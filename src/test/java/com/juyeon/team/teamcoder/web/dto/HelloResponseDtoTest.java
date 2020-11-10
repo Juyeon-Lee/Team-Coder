@@ -1,6 +1,5 @@
-package com.juyeon.team.teamcoder.dto;
+package com.juyeon.team.teamcoder.web.dto;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

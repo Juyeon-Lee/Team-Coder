@@ -1,4 +1,4 @@
-package com.juyeon.team.teamcoder.dto;
+package com.juyeon.team.teamcoder.web.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

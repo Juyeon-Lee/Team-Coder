@@ -1,0 +1,22 @@
+{{>layout/header}}
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            {{#userName}}   <!--# 이후 값이 true 이면 / 전까지 출력한다.-->
+                Logged in as: <span id="user">{{.}}</span>
+                <a href="/logout" class="btn btn-info active" role="button">Logout</a>   <!--/logout 스프링 시큐리티에서 기본 제공. 별도 컨트롤러 필요 없음.-->
+                <span id="email">{{userEmail}}</span>
+                <img src="{{userPic}}">
+            {{/userName}}
+            {{^userName}}   <!-- 해당 값이 존재 하지 않으면 / 전까지 출력한다.-->
+                <!-- /oauth2/authorization 까지는 고정이다. properties에 등록한 redirect-url 값에 맞춰 자동으로 등록-->
+                <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+                <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
+                <a href="/oauth2/authorization/kakao" class="btn btn-warning active" role="button">Kakao Login</a>
+            {{/userName}}
+        </div>
+    </div>
+</div>
+
+{{>layout/footer}}

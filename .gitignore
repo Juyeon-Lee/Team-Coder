@@ -38,3 +38,4 @@ out/
 
 ### private settings ###
 application-oauth.properties
+test.txt

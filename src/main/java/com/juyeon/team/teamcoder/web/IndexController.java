@@ -27,6 +27,19 @@ public class IndexController {
         return "index";
     }
 
+    /*
+    nav-header에서 로그인/로그아웃 버튼 눌렀을 때 이동
+     */
+    @GetMapping("/logoption")
+    public String loginOption(Model model, @LoginUser SessionUser user){
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+            model.addAttribute("userEmail", user.getEmail());
+            model.addAttribute("userPic", user.getPicture());
+        }
+        return "logoption";
+    }
+
     @GetMapping("/posts/save")
     public String postsSave(){
         return "posts-save";

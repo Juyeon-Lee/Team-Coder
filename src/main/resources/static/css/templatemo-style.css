@@ -338,7 +338,7 @@ section.banner {
 }
 
 .banner {
-  background-image: url(../assets/img/main_banner.jpg);
+  background-image: url(../assets/img/main_banner.png);
   width: 100%;
   height: 100%;
   background-position: center;
@@ -378,6 +378,33 @@ section.banner {
   border-bottom: 5px solid #4883ff;
   background-color: #fff;
   padding: 15px;
+}
+
+.search .submit-form #search-row{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border:  5px solid #3251b1;
+}
+
+.search .submit-form button {
+  width: 100%;
+  height: 50px;
+  line-height: 35px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 0px;
+  background-color: #3251b1;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  color: #fff;
+  font-weight: 600;
+  border: 2px solid #3251b1;
+  transition: all 0.5s;
+}
+
+.search .submit-form button:hover {
+  background-color: transparent;
+  color: #3251b1;
 }
 
 .submit-form .first-item {
@@ -447,16 +474,16 @@ section.banner {
   color: #4883ff;
 }
 
-.popular-places .owl-nav {
+.my-groups .owl-nav {
   display: none;
 }
 
-.popular-places .owl-dots {
+.my-groups .owl-dots {
   margin-top: 40px;
   text-align: center;
 }
 
-.popular-places .owl-dots .owl-dot span  {
+.my-groups .owl-dots .owl-dot span  {
   width: 12px;
   height: 12px;
   background-color: #cdcdcd!important;
@@ -465,19 +492,19 @@ section.banner {
   margin: 0 3px;
 }
 
-.popular-places .owl-dots .active span {
+.my-groups .owl-dots .active span {
   background-color: #4883ff!important;
 }
 
-.popular-places .owl-dots button {
+.my-groups .owl-dots button {
   outline: none;
 }
 
-.popular-places .popular-item .thumb {
+.my-groups .popular-item .thumb {
   position: relative;
 }
 
-.popular-places .popular-item .thumb img {
+.my-groups .popular-item .thumb img {
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -485,7 +512,7 @@ section.banner {
   border-radius: 5px;
 }
 
-.popular-places .popular-item .thumb .text-content {
+.my-groups .popular-item .thumb .text-content {
   position: absolute;
   bottom: 20px;
   left: 20px;
@@ -493,7 +520,16 @@ section.banner {
   color: #fff;
 }
 
-.popular-places .popular-item .thumb .text-content h4 {
+.my-groups .popular-item .thumb .text-content h3 {
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  color: rgb(237, 245, 124);
+}
+
+.my-groups .popular-item .thumb .text-content h4 {
   font-size: 19px;
   font-weight: 500;
   letter-spacing: 0.5px;
@@ -501,14 +537,14 @@ section.banner {
   margin-bottom: 5px;
 }
 
-.popular-places .popular-item .thumb .text-content span {
+.my-groups .popular-item .thumb .text-content span {
   font-size: 13px;
   font-weight: 300;
   letter-spacing: 0.5px;
   display: block;
 }
 
-.popular-places .popular-item .thumb .plus-button {
+.my-groups .popular-item .thumb .plus-button {
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -516,7 +552,7 @@ section.banner {
 }
 
 
-.popular-places .popular-item .thumb .plus-button i {
+.my-groups .popular-item .thumb .plus-button i {
   width: 30px;
   height: 30px;
   line-height: 30px;
@@ -528,11 +564,26 @@ section.banner {
   transition: all 0.5s;
 }
 
-.popular-places .popular-item .thumb .plus-button i:hover {
+.my-groups .popular-item .thumb .plus-button i:hover {
   background-color: rgba(250,250,250,0.3);
 }
 
+section.group-manage {
+  background-image: url(../assets/img/main_banner3.jpg);
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 80px;
+  padding-bottom: 80px;
+  opacity: 0.9;
+}
 
+.group-manage .container {
+  opacity: 0.9;
+  background: #f4f4f4;
+}
 
 section.featured-places {
   margin-top: 80px;
@@ -557,12 +608,16 @@ section.featured-places {
   z-index: 9;
   top: 30px;
   left: 30px;
-  color: #fff;
-}
-
-.featured-places .featured-item .thumb .overlay-content li {
-  display: inline;
-  margin-right: 3px;
+  color: rgb(34, 32, 32);
+  text-align: center;
+  width: 120px;
+  height: 120px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #8697bd;
+  padding: 10 10 10 10px;
+  border-radius: 10%;
 }
 
 .featured-places .featured-item .thumb .date-content {

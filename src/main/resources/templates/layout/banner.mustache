@@ -4,10 +4,10 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="banner-caption">
                     <div class="line-dec"></div>
-                    <h2>Best Finder For You</h2>
-                    <span>Suspendisse eu lorem massa. Integer sit amet posuere tellus.</span>
+                    <h2>나와 잘 맞는 코딩 메이트를 찾아보세요!</h2>
+                    <span>그룹을 만들거나 참여해서 프로젝트를 진행해보세요.</span>
                     <div class="blue-button">
-                        <a class="scrollTo" data-scrollTo="popular" href="#">Discover More</a>
+                        <a class="scrollTo" data-scrollTo="popular" href="#blog">그룹 구경하기</a>
                     </div>
                 </div>
                 <div class="submit-form">
@@ -15,31 +15,31 @@
                         <div class="row">
                             <div class="col-md-3 first-item">
                                 <fieldset>
-                                    <input name="name" type="text" class="form-control" id="name" placeholder="Your name..." required="">
+                                    <select required name='aim' onchange='this.form.()'>
+                                        <option value="">목적 선택</option>
+                                        <option value="Contest">공모전</option>
+                                        <option value="Study">스터디</option>
+                                        <option value="Project">프로젝트 개발</option>
+                                    </select>
                                 </fieldset>
                             </div>
                             <div class="col-md-3 second-item">
                                 <fieldset>
-                                    <input name="location" type="text" class="form-control" id="location" placeholder="Type location..." required="">
+                                    <input name="tags" type="text" class="form-control" id="tags" placeholder="태그로 검색" required="">
                                 </fieldset>
                             </div>
                             <div class="col-md-3 third-item">
                                 <fieldset>
-                                    <select required name='category' onchange='this.form.()'>
-                                        <option value="">Select category...</option>
-                                        <option value="Shops">Shops</option>
-                                        <option value="Hotels">Hotels</option>
-                                        <option value="Restaurants">Restaurants</option>
-                                        <option value="Events">Events</option>
-                                        <option value="Meetings">Meetings</option>
-                                        <option value="Fitness">Fitness</option>
-                                        <option value="Cafes">Cafes</option>
+                                    <select required name='period' onchange='this.form.()'>
+                                        <option value="">기간 선택</option>
+                                        <option value="All">기간 전체 검색</option>
+                                        <option value="Possible">지금 가능한 기간만</option>
                                     </select>
                                 </fieldset>
                             </div>
                             <div class="col-md-3">
                                 <fieldset>
-                                    <button type="submit" id="form-submit" class="btn">Search Now</button>
+                                    <button type="submit" id="form-submit" class="btn">지금 검색</button>
                                 </fieldset>
                             </div>
                         </div>

@@ -32,8 +32,23 @@ public class OAuthAttributes {
         if("naver".equals(registrationId)){
             return ofNaver("id", attributes);
         }
+        else if("kakao".equals(registrationId)){
+            return ofKakao("id", attributes);
+        }
 
         return ofGoogle(userNameAttributeName, attributes);
+    }
+
+    private static OAuthAttributes ofKakao(String userNameAttributeName, Map<String, Object> attributes) {
+        Map<String,Object> response = (Map<String, Object>)attributes.get("kakao_account");
+        Map<String, Object> profile = (Map<String, Object>) response.get("profile");
+        return OAuthAttributes.builder()
+                .name((String)profile.get("nickname"))
+                .email((String)response.get("email"))
+                .picture((String)profile.get("profile_image_url"))
+                .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .build();
     }
 
     private static OAuthAttributes ofNaver(String userNameAttributeName,
@@ -51,6 +66,7 @@ public class OAuthAttributes {
 
     private static OAuthAttributes ofGoogle(String userNameAttributeName,
                                             Map<String, Object> attributes){
+
         return OAuthAttributes.builder()
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
@@ -65,7 +81,7 @@ public class OAuthAttributes {
                 .name(name)
                 .email(email)
                 .picture(picture)
-                .role(Role.GUEST)
+                .role(Role.GUEST)   // TODO: USER로 바꿀 것인가?
                 .build();
     }
 }

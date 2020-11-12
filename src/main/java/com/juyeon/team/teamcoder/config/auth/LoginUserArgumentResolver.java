@@ -1,6 +1,7 @@
 package com.juyeon.team.teamcoder.config.auth;
 
 import com.juyeon.team.teamcoder.config.auth.dto.SessionUser;
+import com.juyeon.team.teamcoder.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import javax.servlet.http.HttpSession;
+import java.util.Iterator;
 
 @RequiredArgsConstructor
 @Component
@@ -30,6 +32,7 @@ public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver 
                                   ModelAndViewContainer mavContainer,
                                   NativeWebRequest webRequest,
                                   WebDataBinderFactory binderFactory) throws Exception { // 파라미터에 전달할 객체를 생성
+        //SessionUser 로 반환
         return httpSession.getAttribute("user");
     }
 }

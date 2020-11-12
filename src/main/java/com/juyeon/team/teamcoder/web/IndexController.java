@@ -10,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import javax.servlet.http.HttpSession;
-
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
@@ -26,6 +24,59 @@ public class IndexController {
         }
         return "index";
     }
+
+    /*
+    nav-header에서 로그인/로그아웃 버튼 눌렀을 때 이동
+     */
+    @GetMapping("/logoption")
+    public String loginOption(Model model, @LoginUser SessionUser user){
+        if(user != null){
+            model.addAttribute("user", user);
+            model.addAttribute("userName", user.getName());
+        }
+        return "logoption";
+    }
+
+    @GetMapping("/user/info")
+    public String userInfo(Model model, @LoginUser SessionUser user){
+        if(user != null){
+            model.addAttribute("user", user);
+            model.addAttribute("userName", user.getName());
+        }
+        return "user-info";
+    }
+
+    @GetMapping("/user/storage")
+    public String userStorage(Model model, @LoginUser SessionUser user){
+        if(user != null){
+            model.addAttribute("user", user);
+            model.addAttribute("userName", user.getName());
+        }
+        return "storage";
+    }
+
+    @GetMapping("/user/apply")
+    public String userApply(Model model, @LoginUser SessionUser user){
+        if(user != null){
+            model.addAttribute("user", user);
+            model.addAttribute("userName", user.getName());
+        }
+        return "apply-list";
+    }
+
+    @GetMapping("/search")
+    public String search(Model model){
+        return "search-group";
+    }
+
+    @GetMapping("/group")
+    public String group() { return "group-manage"; }
+
+    @GetMapping("/group/save")
+    public String groupSave() { return "group-save"; }
+
+    @GetMapping("/group/update")
+    public String groupUpdate() { return "group-update"; }
 
     @GetMapping("/posts/save")
     public String postsSave(){

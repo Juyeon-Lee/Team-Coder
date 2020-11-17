@@ -1,4 +1,4 @@
-var index = {
+var main = {
     init : function () {
         var _this = this;
         $('#btn-save').on('click', function () {
@@ -72,4 +72,4 @@ var index = {
 
 };
 
-index.init();
+main.init();

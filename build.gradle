@@ -1,8 +1,6 @@
 plugins {
 	id 'org.springframework.boot' version '2.3.5.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
-	//querydsl 추가
-	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 	id 'java'
 	id "com.gradle.build-scan" version "3.5"
 }
@@ -11,38 +9,23 @@ group = 'com.juyeon.team'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
-
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-	//thymeleaf 버전 맞추기 중요
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	//implementation 'org.thymeleaf:thymeleaf:3.0.11.RELEASE'    //-> thymeleaf-sping5에 포함
-	//implementation 'org.thymeleaf:thymeleaf-spring5:3.0.11.RELEASE'  //-> spring-boot-starter-thymeleaf에 포함
-	//implementation 'nz.nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.4.1'   //->Layout 인식 안되서 실패..
-	//implementation 'com.github.zhanhb:thymeleaf-layout-dialect:2.4.1'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'commons-fileupload:commons-fileupload:1.2.1'
-	implementation 'org.springframework.boot:spring-boot-devtools'
-	//implementation 'com.h2database:h2'
-	implementation 'org.springframework.session:spring-session-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-	implementation 'com.querydsl:querydsl-jpa'
-
 	implementation 'junit:junit:4.12'
-	compileOnly 'org.projectlombok:lombok'
+	implementation 'org.projectlombok:lombok' // annotaionProcessor
 	annotationProcessor 'org.projectlombok:lombok'
 
+	//implementation 'com.h2database:h2'
+	implementation 'org.springframework.session:spring-session-jdbc'
+
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-mustache'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.postgresql:postgresql'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
@@ -61,21 +44,3 @@ gradleEnterprise {
 		termsOfServiceAgree = "yes"
 	}
 }
-
-//querydsl 추가 시작
-def querydslDir = "$buildDir/generated/querydsl"
-
-querydsl {
-	jpa = true
-	querydslSourcesDir = querydslDir
-}
-sourceSets {
-	main.java.srcDir querydslDir
-}
-configurations {
-	querydsl.extendsFrom compileClasspath
-}
-compileQuerydsl {
-	options.annotationProcessorPath = configurations.querydsl
-}
-//querydsl 추가 끝

@@ -16,7 +16,6 @@ public class OptionDto {
     private Map<String,String> edu;
 
     public OptionDto(){
-        //왜 순서 정렬이 안되지??
         List<Location> allLocations = Arrays.asList(Location.values());
         //allLocations.sort(Location.indexComparator);
 
@@ -25,6 +24,9 @@ public class OptionDto {
         this.korLoc = allLocations.stream().map(Location::getTitle)
                 .collect(Collectors.toList());
         System.out.println("=====================location sort : "+ engLoc);
+
+        //왜 순서 정렬이 안되지??  - 이 마지막 줄이후에서 순서가 다시 망가지는듯..?
+        // enhancement
         this.loc = IntStream.range(0, engLoc.size())
                 .boxed().collect(Collectors.toMap(i -> this.engLoc.get(i),
                                                 i-> this.korLoc.get(i)));

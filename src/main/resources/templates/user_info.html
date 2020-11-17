@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <th:block th:replace="fragments/main/main_header :: mainHead"></th:block>
+    <!--/*기본적인 html head 추가부 title*/-->
+    <meta title="Team-Coder Home">
+    <meta name="description" content="team-coder: 같이 코딩할 개발자 팀원들을 모집하세요.">
+
+    <!--Etc Add on Lib-->
+
+
+    <!--Custom or page css-->
+
+</head>
+
+<body>
+    <div class="wrap">
+        <th:block th:replace="fragments/main/nav-header :: nav-header"></th:block>
+
+        <div class="content-wrapper">
+            <!--... 실제 컨텐츠 내용 작성... -->
+            <section class="user-info" id="user">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12" th:if="${not #lists.isEmpty(userName)}">
+                            <h1>내 정보 관리</h1>
+                            <h4>특정 정보들은 입력하지 않으면 그룹 서비스 정상 이용이 불가능~~~</h4>
+                            <form th:action="@{'/api/v1/user/' + ${user.id}}" method="put">
+                                <table class="form-table">
+                                    <tr>
+                                        <td class="col-sm-2"><h5>user num. </h5></td>
+                                        <td class="col-sm-8">
+                                            <input type="text" class="form-control" th:field="*{user.id}" readonly>
+                                        </td>
+                                    </tr>
+                                    <br>
+                                    <tr>
+                                        <td>이름</td>
+                                        <td><input type="text" class="form-control" th:field="*{user.name}"
+                                                   placeholder="이름을 입력하세요"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>관심 분야 (띄어쓰기 없이 ','로 구분하여 입력해주세요.)</td>
+                                        <td><input type="text" class="form-control" th:field="*{user.tags}"
+                                                   placeholder="예 : Java, Python, 백엔드, 프론트, 인공지능,..."></td>
+                                    </tr>
+                                    <tr>
+                                        <td>이메일</td>
+                                        <td><input type="email" class="form-control" th:field="*{user.email}"
+                                                   placeholder="이메일 주소를 입력하세요 (예: Hong123@naver.com)"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>태어난 년도</td>
+                                        <td><input type="text" class="form-control" th:field="*{user.birth}"
+                                                   placeholder="태어난 년도 (예: 1999)"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>최종 학력</td>
+                                        <td>
+                                            <select id="education" class="form-control" th:field="*{user.education}">
+                                            <!--/*자동 옵션 반복 */-->
+                                            <option th:each="e: ${edu}" th:value="${e.key}" th:text="${e.value}"
+                                                    th:selected="${user.education}==${e.key}"></option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>지내고 있는 지역을 선택해주세요</td>
+                                        <td>
+                                            <select id="location" class="form-control" th:field="*{user.location}">
+                                                <!--/*자동 옵션 반복 */-->
+                                                <option th:each="o: ${loc}" th:value="${o.key}" th:text="${o.value}"
+                                                        th:selected="${user.location}==${o.key}" ></option>
+                                            </select>
+                                        </td>
+                                    </tr>
+<!--                                    <tr><td><input type="checkbox" id="vehicle1" name="vehicle1" value="개인정보이용동의"></td><td></td></tr>-->
+                                    <tr>
+                                        <td></td><td><input type="button" value="수정 완료" class="btn btn-primary" id="btn-update" style="float: right;"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td><td><input type="button" value="탈퇴하기" class="btn btn-danger" id="btn-delete" style="float: right;"/></td>
+                                    </tr>
+                                </table>
+                            </form>
+<!--/*
+                            <div th:if="${message}">
+                                <h3 th:text="${message}"/>
+                            </div>*/-->
+                            <form th:action="@{'/api/v1/user/pic/' + ${user.id}}" method="post" enctype="multipart/form-data">
+                                <table>
+                                    <tr><td><label th:for="picture">프로필 사진</label></td>
+                                        <td><input type="file" name="picture" accept="image/png, image/jpeg" /></td></tr>
+                                    <tr><td><img th:src="@{${user.picture}}" id="picture_img" alt="내 프로필 사진"></td>
+                                        <td><input type="submit" class="btn btn-info" th:value="upload" /></td></tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <th:block th:replace="fragments/main/main_footer"></th:block>
+    </div>
+
+    <script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+
+    <script th:src="@{/js/datepicker.js}"></script>
+    <script th:src="@{/js/plugins.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+
+    <!--custom_js            
+            index.js 추가
+        <script src="/js/app/index.js"></script>-->
+    <!--
+    <script>
+        console.log("${user.education}")
+        alert( "${user}")
+        alert('${user.location}')
+    </script>
+    -->
+    <script type="text/javascript" th:src="@{/js/app/userInfo.js}"></script>
+</body>
+
+</html>

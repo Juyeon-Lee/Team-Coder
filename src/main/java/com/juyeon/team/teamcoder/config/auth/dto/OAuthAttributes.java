@@ -45,7 +45,7 @@ public class OAuthAttributes {
         return OAuthAttributes.builder()
                 .name((String)profile.get("nickname"))
                 .email((String)response.get("email"))
-                .picture((String)profile.get("profile_image_url"))
+                //.picture((String)profile.get("profile_image_url"))
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
@@ -58,7 +58,7 @@ public class OAuthAttributes {
         return OAuthAttributes.builder()
                 .name((String) response.get("name"))
                 .email((String) response.get("email"))
-                .picture((String) response.get("profile_image"))
+                //.picture((String) response.get("profile_image"))
                 .attributes(response)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
@@ -70,7 +70,7 @@ public class OAuthAttributes {
         return OAuthAttributes.builder()
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
-                .picture((String) attributes.get("picture"))
+                //.picture((String) attributes.get("picture"))
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
@@ -80,8 +80,7 @@ public class OAuthAttributes {
         return User.builder()
                 .name(name)
                 .email(email)
-                .picture(picture)
-                .role(Role.GUEST)   // TODO: USER로 바꿀 것인가?
+                //.picture(picture)
                 .build();
     }
 }

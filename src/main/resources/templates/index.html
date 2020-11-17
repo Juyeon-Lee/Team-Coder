@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <th:block th:replace="fragments/main/main_header :: mainHead"></th:block>
+    <!--/*기본적인 html head 추가부 title*/-->
+    <meta title="Team-Coder Home">
+    <meta name="description" content="team-coder: 같이 코딩할 개발자 팀원들을 모집하세요.">
+
+    <!--Etc Add on Lib-->
+
+
+    <!--Custom or page css-->
+
+</head>
+
+<body>
+    <div class="wrap">
+        <th:block th:replace="fragments/main/nav-header :: nav-header"></th:block>
+
+        <div class="content-wrapper">
+            <!--... 실제 컨텐츠 내용 작성... -->
+            <th:block th:replace="fragments/banner"></th:block>
+            <th:block th:replace="fragments/main-my-group"></th:block>
+            <th:block th:replace="fragments/group-list"></th:block>
+        </div>
+
+        <th:block th:replace="fragments/main/main_footer"></th:block>
+    </div>
+
+    <script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+
+    <script th:src="@{/js/datepicker.js}"></script>
+    <script th:src="@{/js/plugins.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+
+    <!--custom_js            
+            index.js 추가
+        <script src="/js/app/index.js"></script>-->
+</body>
+
+</html>

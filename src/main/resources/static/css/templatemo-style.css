@@ -4,7 +4,14 @@ Venue Template
 
 http://www.templatemo.com/tm-522-venue
 
+edited something I need : Juyeon-Lee
 */
+
+.form-table tr{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px 0px;
+}
 
 body {
   font-family: 'Raleway', 'sans-serif';

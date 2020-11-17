@@ -1,0 +1,40 @@
+<div class="wrap">
+    <header id="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="primary-nav-button" type="button">Menu</button>
+                    <a href="/"><div class="logo">
+                        <img src="/assets/img/logo.png" alt="TeamCoder Logo">
+                    </div></a>
+                    <nav id="primary-nav" class="dropdown cf">
+                        <ul class="dropdown menu">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/search">Search Group</a>
+                                <ul class="sub-menu">
+                                    <li><a href="/search">목적으로 조회</a></li>
+                                    <li><a href="/search">태그로 조회</a></li>
+                                    <li><a href="/search">설정으로 조회</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">그룹관리</a>
+                                <ul class="sub-menu">
+                                    <li><a href="/group">소유그룹 생성/수정</a></li>
+                                    <li><a href="/user/apply">참여 신청 현황</a></li>
+                                    <li><a href="/user/storage">저장한 그룹</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="scrollTo" data-scrollTo="services" href="/user/info">내정보</a></li>
+                            {{#userName}}
+                                <li><a id="primary-nav-login" href="/logoption">로그아웃</a></li>
+                            {{/userName}}
+                            {{^userName}}
+                                <li><a id="primary-nav-login" href="/logoption">로그인</a></li>
+                            {{/userName}}
+                        </ul>
+                    </nav><!-- / #primary-nav -->
+                </div>
+            </div>
+        </div>
+    </header>
+</div>

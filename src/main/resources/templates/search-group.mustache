@@ -1,0 +1,108 @@
+{{>layout/header}}
+{{>layout/nav-header}}
+
+<section class="search" id="search">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="banner-caption">
+                    <div class="line-dec"></div>
+                    <h2>나와 잘 맞는 코딩 그룹을 찾아보세요!</h2>
+                    <span>여러 조건들을 설정할 수 있습니다.</span>
+                </div>
+                <div class="submit-form">
+                    <form id="form-submit" action="" method="get">
+                        <div class="row" id="search-row">
+                            <div class="col-md-3 first-item">
+                                <fieldset>
+                                    <select required name='aim' onchange='this.form.()'>
+                                        <option value="">목적 선택</option>
+                                        <option value="Contest">공모전</option>
+                                        <option value="Study">스터디</option>
+                                        <option value="Project">프로젝트 개발</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+
+                            <div class="col-md-3 second-item">
+                                <fieldset>
+                                    <select required name='period' onchange='this.form.()'>
+                                        <option value="">기간 선택</option>
+                                        <option value="All">기간 전체 검색</option>
+                                        <option value="Possible">지금 가능한 기간만</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                            <div class="col-md-3 third-item">
+                                <fieldset>
+                                    <input name="age" type="text" class="form-control" id="age" placeholder="나의 나이 입력" required="">
+                                </fieldset>
+                            </div>
+                            <div class="col-md-3">
+                                <fieldset>
+                                    <input name="age" type="text" class="form-control" id="age" placeholder="희망 지역 입력" required="">
+                                </fieldset>
+                            </div>
+                            <div class="col-md-3">
+                                <fieldset>
+                                    <input name="tags" type="text" class="form-control" id="tags" placeholder="태그로 검색" required="">
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="container" style="width: inherit;">
+                            <div class="col" style="margin: auto; width: 200px;">
+                                <fieldset>
+                                    <button type="submit" id="form-submit" class="btn">지금 검색</button>
+                                </fieldset>
+                            </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--========================================
+     group search result-->
+<section class="featured-places" id="blog" style="margin-top: 50px; padding-top: 50px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <span>그룹 List</span>
+                    <h3>그룹을 살펴보고 원하는 곳에 참여하세요.</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12"> <!-- 있는 만큼 반복 -->
+                <div class="featured-item">
+                    <div class="down-content">
+                        <h4>그룹 이름</h4>
+                        <span>그룹 목표</span>
+                        <p>그룹 설명</p>
+                        <div class="row">
+                            <div class="col-md-6 first-button">
+                                <div class="text-button">
+                                    <a href="#">저장하기/저장함</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="text-button">
+                                    <a href="#">참여하기/신청함/참여중</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+{{>layout/footer}}

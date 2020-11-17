@@ -1,32 +1,20 @@
 package com.juyeon.team.teamcoder.web;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juyeon.team.teamcoder.config.auth.LoginUser;
 import com.juyeon.team.teamcoder.config.auth.dto.SessionUser;
-import com.juyeon.team.teamcoder.domain.user.Location;
 import com.juyeon.team.teamcoder.service.posts.PostsService;
-import com.juyeon.team.teamcoder.service.user.UserService;
-import com.juyeon.team.teamcoder.web.dto.OptionDto;
 import com.juyeon.team.teamcoder.web.dto.PostsResponseDto;
-import com.juyeon.team.teamcoder.web.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
-import net.minidev.json.JSONObject;
-import net.minidev.json.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
 
     private final PostsService postsService;
-    private final UserService userService;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user){ // @LoginUser 어노테이션으로 세션 정보 값 가져옴.
@@ -52,24 +40,10 @@ public class IndexController {
     @GetMapping("/user/info")
     public String userInfo(Model model, @LoginUser SessionUser user){
         if(user != null){
-            UserResponseDto dto = userService.findById(user.getId());
-            OptionDto optionDto = new OptionDto();
-            model.addAttribute("loc", optionDto.getLocOption());
-            model.addAttribute("edu", optionDto.getEduOption());
-            model.addAttribute("user", dto);
+            model.addAttribute("user", user);
             model.addAttribute("userName", user.getName());
         }
-        return "user_info";
-    }
-
-    @GetMapping("/user/pic")
-    public String userPic(Model model, @LoginUser SessionUser user){
-        if(user != null){
-            UserResponseDto dto = userService.findById(user.getId());
-            model.addAttribute("user", dto);
-            model.addAttribute("userName", user.getName());
-        }
-        return "user_picture";
+        return "user-info";
     }
 
     @GetMapping("/user/storage")

@@ -5,6 +5,7 @@ import com.juyeon.team.teamcoder.config.auth.dto.SessionUser;
 import com.juyeon.team.teamcoder.domain.user.User;
 import com.juyeon.team.teamcoder.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.event.spi.SaveOrUpdateEvent;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -49,8 +50,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
     private User saveOrUpdate(OAuthAttributes attributes){
         User user = userRepository.findByEmail(attributes.getEmail())
-                .map(entity -> entity.updateName(attributes.getName()))
-                        //attributes.getPicture()))
+                .map(entity -> entity.update(attributes.getName(),
+                        attributes.getPicture()))
                 .orElse(attributes.toEntity());
 
         return userRepository.save(user);

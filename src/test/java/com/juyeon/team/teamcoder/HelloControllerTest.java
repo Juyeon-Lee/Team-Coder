@@ -1,7 +1,7 @@
 package com.juyeon.team.teamcoder;
 
 import com.juyeon.team.teamcoder.config.auth.SecurityConfig;
-import com.juyeon.team.teamcoder.web.controller.HelloController;
+import com.juyeon.team.teamcoder.web.HelloController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

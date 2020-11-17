@@ -1,0 +1,99 @@
+{{>layout/header}}
+{{>layout/nav-header}}
+
+<section class="group-manage" id="groupSave">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>그룹 등록</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="name">그룹명</label>
+                        <input type="text" class="form-control" id="name" placeholder="그룹의 이름을 입력하세요">
+                    </div>
+                    <h5>그룹의 목적을 하나만 선택하세요 : </h5>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="aimRadio1" value="contest">
+                        <label class="form-check-label" for="inlineRadio1">공모전</label>
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="aimRadio2" value="study">
+                        <label class="form-check-label" for="inlineRadio1">스터디</label>
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="aimRadio3" value="project">
+                        <label class="form-check-label" for="inlineRadio1">프로젝트 개발</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="tags">태그 입력:</label>
+                        <input type="text" class="form-control" id="tags" placeholder="예 : Java, Python, 백엔드, 프론트, 인공지능,...">
+                    </div>
+                    <div class="form-group">
+                        <label for="maxNum">최대 인원</label>
+                        <input type="text" class="form-control" id="maxNum" placeholder="최대 인원을 입력하세요 (예: 4)">
+                    </div>
+                    <div class="row" style="margin-bottom: 10px;">
+                        <label for="minAge" style="margin-left: 15px;">나이 제한</label>
+                        <br>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="minAge" placeholder="팀원의 최소 나이 (예: 20)">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="maxAge" placeholder="팀원의 최대 나이 (예: 26)">
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 10px;">
+                        <label for="startDate" style="margin-left: 15px;">활동 예정일</label>
+                        <br>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="startDate" placeholder="활동 시작 예정일">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="endDate" placeholder="활동 종료 예정일">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="education">최종 학력</label>
+                            <select id="education" class="form-control">
+                                <option value="high" selected>고졸</option>
+                                <option value="inCollege">대학 재학중</option>
+                                <option value="juniorCollege">전문대졸</option>
+                                <option value="bachelor">대졸(학사)</option>
+                                <option value="graduateSchool">대학원 재학중</option>
+                                <option value="master">석사</option>
+                                <option value="doctor">박사</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="location">활동을 진행하기 희망하는 지역을 선택해주세요</label>
+                            <select id="location" class="form-control">
+                                <option value="seoul" selected>서울시</option>
+                                <option value="incheon">인천</option>
+                                <option value="busan">부산</option>
+                                <option value="daegu">대구</option>
+                                <option value="daejeon">대전</option>
+                                <option value="gwangju">광주</option>
+                                <option value="ulsan">울산</option>
+                                <option value="gyeonggi">경기도</option>
+                                <option value="gangwon">강원도</option>
+                                <option value="chungcheongN">충청북도</option>
+                                <option value="chungcheongS">충청남도</option>
+                                <option value="jeollaN">전라북도</option>
+                                <option value="jeollaS">전라남도</option>
+                                <option value="gyeongsangN">경상북도</option>
+                                <option value="gyeongsangS">경상남도</option>
+                                <option value="jeju">제주도</option>
+                                <option value="sejong">세종시</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">그룹 설명 및 팀원들께 하고 싶은 말을 적어주세요.</label>
+                        <textarea class="form-control" id="content" placeholder="기타 세부사항"></textarea>
+                    </div>
+                </form>
+                <a href="/" role="button" class="btn btn-secondary">취소</a>
+                <button type="button" class="btn btn-primary" id="btn-save">등록</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{>layout/footer}}

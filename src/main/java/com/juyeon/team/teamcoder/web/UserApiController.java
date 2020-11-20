@@ -27,8 +27,7 @@ public class UserApiController {
 
     @PostMapping("/api/v1/user/pic/{id}")
     public String updatePic(@PathVariable Long id,
-                       @RequestPart("picture") MultipartFile multipartFile,
-                            RedirectAttributes redirectAttributes) throws IOException{
+                       @RequestPart("picture") MultipartFile multipartFile) throws IOException{
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 
         String uploadDir = "user-photos/" + id;

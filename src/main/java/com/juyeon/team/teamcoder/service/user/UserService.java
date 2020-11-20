@@ -14,9 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RequiredArgsConstructor
 @Service
@@ -31,30 +29,42 @@ public class UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("해당 유저의 정보가 없습니다. id="+id));
 
-        //tag, taguser 객체 생성 후 연결
-        List<TagUser> tagUsers = new ArrayList<TagUser>();
-        for(String st : requestDto.getTags()){
-            Optional<Tag> optionalTag = tagRepository.findByName(st);
-            Tag tag;
-            if(optionalTag.isPresent()){ // 이미 존재하면 해당 태그로 연결
-                tag=optionalTag.get();
-            }else{
-                tag=tagRepository.save(new Tag(st));
-            }
-
-            Optional<TagUser> optionalTagUser = tagUserRepository.findByTagAndUser(tag,user);
-            if(optionalTagUser.isPresent()){  // 이미 존재하면 해당 태그로 연결
-                tagUsers.add(optionalTagUser.get());
-            }else{
-                tagUsers.add(tagUserRepository.save(TagUser.builder()
-                                            .tag(tag).user(user).build()));
-            }
-        }
+        Set<TagUser> tagUsers = syncTagUser(requestDto.getTags(), user);
 
         user.updateRegister(requestDto.getName(), "",
                 requestDto.getEducation(), requestDto.getBirth(),
                 requestDto.getLocation(), tagUsers);
         return id;
+    }
+
+    /*
+    기존 tag string 미리 저장 후 변경된 tag 하나씩 삭제 ,모든 작업 완료 후 남아있는 태그유저 삭제
+     */
+    private Set<TagUser> syncTagUser(List<String> tags, User user) {
+        //tag, taguser 객체 생성 후 연결
+        Set<TagUser> newTagUsers = new HashSet<TagUser>();
+        for(String st : tags){
+            Optional<Tag> optTag = tagRepository.findByName(st);
+            Tag tag;
+            if(optTag.isPresent()){ // 이미 존재하면 해당 태그로 연결
+                tag=optTag.get();
+            }else{
+                tag=tagRepository.save(new Tag(st));
+                //tagUser 검사 필요 없음 -> 바로 추가
+                newTagUsers.add(tagUserRepository.save(TagUser.builder()
+                        .tag(tag).user(user).build()));
+                continue;
+            }
+
+            Optional<TagUser> optTagUser = tagUserRepository.findByTagAndUser(tag, user);
+            if(optTagUser.isPresent()){  // 이미 존재하면 해당 태그로 연결
+                newTagUsers.add(optTagUser.get());
+            }else{
+                newTagUsers.add(tagUserRepository.save(TagUser.builder()
+                                            .tag(tag).user(user).build()));
+            }
+        }
+        return newTagUsers;
     }
 
     @Transactional
@@ -72,11 +82,14 @@ public class UserService {
         User entity = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. id="+ id));
 
-        List<TagUser> tagusers = customUserRepository.findTagUserByUser(entity);
-        List<String> tags = new ArrayList<String>();
-        for(TagUser t : tagusers){
-            tags.add(t.getTag().getName());
-        }
+        //List<TagUser> tagusers = (List<TagUser>) customUserRepository.findTagUserByUser(entity);
+//        List<String> tags = new ArrayList<String>();
+//        for(TagUser t : tagusers){
+//            tags.add(t.getTag().getName());
+//            System.out.println("<tag출력>======================"+tags.toString());
+//        }
+        List<String> tags = (List<String>) customUserRepository.findTagByUser(entity);
+        System.out.println(tags.toString());
         return new UserResponseDto(entity, tags);
     }
 

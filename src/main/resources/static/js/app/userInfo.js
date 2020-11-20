@@ -17,8 +17,8 @@ var user_info = {
     },
     arrayToComma : function (){ // param : array
         var x = "${user.tags}";
-        console.log(x);
         x = x.toString().slice(1,-1);
+        console.log(x);
         document.getElementById("tags").innerHTML = x;
     },
     commaToArray : function (param){

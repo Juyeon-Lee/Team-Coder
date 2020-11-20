@@ -1,6 +1,8 @@
 package com.juyeon.team.teamcoder.domain.user;
 
+import com.juyeon.team.teamcoder.domain.group.Group;
 import com.juyeon.team.teamcoder.domain.tag.Tag;
+import com.juyeon.team.teamcoder.domain.tagGroup.TagGroup;
 import com.juyeon.team.teamcoder.domain.tagUser.TagUser;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +10,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @NoArgsConstructor
@@ -38,8 +42,12 @@ public class User {
     @Enumerated(EnumType.STRING)
     private EduLevel education;
 
-    @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<TagUser> tagUsers = new ArrayList<TagUser>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
+            orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<TagUser> tagUsers = new HashSet<TagUser>();
+
+    @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Group> createdGroups = new ArrayList<Group>();
 
     @Builder
     private User(String name, String email, String picture) {
@@ -61,14 +69,15 @@ public class User {
 
     public User updateRegister(String name, String picture,
                                EduLevel education, int birth,
-                               Location location, List<TagUser> tagUsers){
+                               Location location, Set<TagUser> tagUsers){
         this.name = name;
         this.picture = picture;
         this.role = Role.USER;
         this.education = education;
         this.birth = birth;
         this.location = location;
-        this.tagUsers = tagUsers;
+        this.tagUsers.clear();
+        this.tagUsers.addAll(tagUsers);
         return this;
     }
 
@@ -81,5 +90,9 @@ public class User {
 
     public String getRoleKey() {
         return this.role.getKey();
+    }
+
+    public void setTagUsers(Set<TagUser> tagUsers){
+        this.tagUsers = tagUsers;
     }
 }

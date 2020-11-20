@@ -1,12 +1,123 @@
 package com.juyeon.team.teamcoder.service.group;
 
+import com.juyeon.team.teamcoder.domain.group.CustomGroupRepository;
+import com.juyeon.team.teamcoder.domain.group.Group;
 import com.juyeon.team.teamcoder.domain.group.GroupRepository;
+import com.juyeon.team.teamcoder.domain.tag.Tag;
+import com.juyeon.team.teamcoder.domain.tag.TagRepository;
+import com.juyeon.team.teamcoder.domain.tagGroup.TagGroup;
+import com.juyeon.team.teamcoder.domain.tagGroup.TagGroupRepository;
+import com.juyeon.team.teamcoder.domain.user.User;
+import com.juyeon.team.teamcoder.domain.user.UserRepository;
+import com.juyeon.team.teamcoder.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class GroupService {
     private final GroupRepository groupRepository;
+    private final CustomGroupRepository customGroupRepository;
+    private final TagGroupRepository tagGroupRepository;
+    private final TagRepository tagRepository;
+    private final UserRepository userRepository;
+
+    @Transactional
+    public Group save(GroupSaveRequestDto requestDto){
+        Long id = requestDto.getOwnerId();
+        System.out.println("id출력=========================="+id.toString());
+        User user = userRepository.findById(id)  // 그룹매니저
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저의 정보가 없습니다. id="+id));
+        // 먼저 group 저장.
+        Group group = groupRepository.save(requestDto.toEntity(user));
+        //tag, taguser 객체 생성 후 연결
+        group.setTagGroups(syncTagGroup(requestDto.getTags(), group));
+
+        return group;
+    }
+
+    public Long update(Long id, GroupUpdateRequestDto requestDto) {
+        //이미 만들어져있음
+        Group group = groupRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 그룹의 정보가 없습니다. id="+ id));
+        //tag, taggroup 객체 생성 후 연결
+        group.setTagGroups(syncTagGroup(requestDto.getTags(), group));
+
+        return id;
+    }
+
+    /*
+    기존 tag string 미리 저장 후 변경된 tag 하나씩 삭제 ,모든 작업 완료 후 남아있는 태그그룹 삭제
+     */
+    private Set<TagGroup> syncTagGroup(List<String> tags, Group group) {
+
+        Set<TagGroup> origianlTagGroups = group.getTagGroups(); // 기존 태그
+        Set<TagGroup> newTagGroups = new HashSet<TagGroup>();
+        for(String st : tags){
+            Optional<Tag> optTag = tagRepository.findByName(st);
+            Tag tag;
+            if(optTag.isPresent()){ // 이미 존재하면 해당 태그로 연결
+                tag=optTag.get();
+            }else{
+                tag=tagRepository.save(new Tag(st));
+                //tagGroup 검사 필요 없음 -> 바로 추가
+                newTagGroups.add(tagGroupRepository.save(TagGroup.builder()
+                        .tag(tag).group(group).build()));
+                continue;
+            }
+
+            Optional<TagGroup> optTagGroup = tagGroupRepository.findByTagAndGroup(tag, group);
+            if(optTagGroup.isPresent()){  // 이미 존재하면 해당 태그그룹으로 연결
+                TagGroup tg = optTagGroup.get();
+                newTagGroups.add(tg);
+                // 전 set에서 삭제
+                //origianlTagGroups.remove(tg);
+            }else{
+                newTagGroups.add(tagGroupRepository.save(TagGroup.builder()
+                        .tag(tag).group(group).build()));
+            }
+
+        }
+        return newTagGroups;
+    }
+
+    @Transactional
+    public Long updatePic(Long id, String fileName) throws IOException {
+        Group group = groupRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("해당 유저의 정보가 없습니다. id="+id));
+
+        group.updateFile(fileName);
+        groupRepository.save(group);
+
+        return id;
+    }
+
+    public GroupResponseDto findById(Long id) {
+        Group group = groupRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("해당 유저의 정보가 없습니다. id="+id));
+
+        List<String> tags= customGroupRepository.findTagByGroup(group);
+        return new GroupResponseDto(group, tags);
+    }
+
+    @Transactional(readOnly = true) // 조회 기능만 남겨둠.
+    public List<GroupListResponseDto> findAllByManagerDesc(Long id){
+        User user = userRepository.findById(id)  // 그룹매니저
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저의 정보가 없습니다. id="+id));
+
+        //TODO: tags String으로 변환해서 넣을 건지 생각. - 그냥 세부 화면에만 tag 띄우자..
+        return groupRepository.findAllByManager(user)
+                .stream().map(GroupListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    public void delete(Long id) {
+    }
+
 
 }

@@ -6,5 +6,5 @@ import com.juyeon.team.teamcoder.domain.tagUser.TagUser;
 import java.util.List;
 
 public interface CustomUserRepository {
-    public List<TagUser> findTagUserByUser(User userEntity);
+    public List findTagByUser(User userEntity);
 }

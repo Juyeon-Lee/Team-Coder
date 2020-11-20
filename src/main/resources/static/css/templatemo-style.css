@@ -6,10 +6,25 @@ http://www.templatemo.com/tm-522-venue
 
 edited something I need : Juyeon-Lee
 */
-
+table{
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+thead tr{
+  position: absolute;
+  top:0;
+}
+tbody tr{
+  display: table-row;
+}
 .form-table tr{
-  margin-top: 10px;
-  margin-bottom: 10px;
+  display: inline-table;
+  table-layout: fixed;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
   padding: 10px 0px;
 }
 

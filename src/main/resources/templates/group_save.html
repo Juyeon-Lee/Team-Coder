@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <th:block th:replace="fragments/main/main_header :: mainHead"></th:block>
+    <!--/*기본적인 html head 추가부 title*/-->
+    <meta title="Team-Coder Group Create">
+    <meta name="description" content="team-coder: 같이 코딩할 개발자 팀원들을 모집하세요.">
+
+    <!--Etc Add on Lib-->
+
+    <!--Custom or page css-->
+
+</head>
+
+<body>
+<div class="wrap">
+    <th:block th:replace="fragments/main/nav_header :: nav-header"></th:block>
+
+    <div class="content-wrapper">
+        <!--... 실제 컨텐츠 내용 작성... -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" th:if="${not #lists.isEmpty(userName)}">
+                    <h1>그룹 등록</h1>
+                    <form th:action="@{/api/v1/group}" method="post">
+                        <table class="form-table">
+                            <tr>
+                                <td>관리자 id: </td>
+                                <td>
+                                    <input type="text" class="form-control" id="id" th:value="${userId}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>그룹명</td>
+                                <td>
+                                    <input type="text" class="form-control" id="name" placeholder="그룹의 이름을 입력하세요">
+                                </td>
+                            </tr>
+                            <tr class="form-check form-check-inline">
+                                <td>그룹의 목적을 하나만 선택하세요 :</td>
+                                <td>
+                                    <select id="aim" class="form-control">
+                                        <!--/*자동 옵션 반복 */-->
+                                        <option th:value="CONTEST">공모전</option>
+                                        <option th:value="STUDY">스터디</option>
+                                        <option th:value="PROJECT">프로젝트 개발</option>
+                                        <option th:value="OTHER">기타</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>개발 분야 태그 (띄어쓰기 없이 ','로 구분하여 입력해주세요.)</td>
+                                <td>
+                                    <input type="text" class="form-control" id="tags"
+                                           placeholder="예 : Java, Python, 백엔드, 프론트, 인공지능,...">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>최대 인원</td>
+                                <td>
+                                    <input type="text" class="form-control" id="maxNum"
+                                           placeholder="최대 인원을 입력하세요 (예: 4)">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>나이 제한</td>
+                                <td>
+                                    <input type="text" class="form-control" id="minAge"
+                                           placeholder="팀원의 최소 나이 (예: 20)">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="maxAge"
+                                           placeholder="팀원의 최대 나이 (예: 26)">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>활동 예정일</td>
+                                <td>
+                                    <input type="text" class="form-control"
+                                           id="start" placeholder="활동 시작 예정일">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control"
+                                           id="end" placeholder="활동 종료 예정일">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>학력 제한(다음 학력 이상)</td>
+                                <td>
+                                    <select id="education" class="form-control">
+                                        <!--/*자동 옵션 반복 */-->
+                                        <option th:each="e: ${edu}" th:value="${e.key}" th:text="${e.value}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>활동을 진행하기 희망하는 지역을 선택해주세요</td>
+                                <td>
+                                    <select id="location" class="form-control">
+                                        <!--/*자동 옵션 반복 */-->
+                                        <option th:each="o: ${loc}" th:value="${o.key}" th:text="${o.value}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>그룹 설명 및 팀원들께 하고 싶은 말을 적어주세요.</td>
+                                <td>
+                                    <textarea class="form-control" id="description" placeholder="기타 세부사항"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><a href="/group" role="button" class="btn btn-secondary"
+                                       style="float: right;">취소</a></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><input type="button" value="생성" class="btn btn-primary" id="btn-save"
+                                           style="float: right;"/></td>
+                            </tr>
+                        </table>
+                    </form>
+                    <h4>그룹 생성 후 관련 파일을 업로드 하실 수 있습니다.</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:replace="fragments/main/main_footer"></th:block>
+</div>
+
+<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+
+
+<script th:src="@{/js/datepicker.js}"></script>
+<script th:src="@{/js/plugins.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+<!--...custom_js 추가...-->
+<script th:src="@{/js/app/groupManage.js}"></script>
+<script th:src="@{/js/datepicker.ko.js}"></script>
+</body>
+
+</html>

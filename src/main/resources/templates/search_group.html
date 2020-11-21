@@ -1,5 +1,12 @@
-{{>layout/header}}
-{{>layout/nav-header}}
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      lang="ko">
+<head>
+    <title>Team-Coder</title>
+    <th:block th:replace="fragments/common-head"></th:block>
+</head>
+<body>
+<th:block th:replace="fragments/nav-header"></th:block>
 
 <section class="search" id="search">
     <div class="container">
@@ -35,12 +42,12 @@
                             </div>
                             <div class="col-md-3 third-item">
                                 <fieldset>
-                                    <input name="age" type="text" class="form-control" id="age" placeholder="나의 나이 입력" required="">
+                                    <input name="birth" type="text" class="form-control" id="birth" placeholder="나의 나이 입력" required="">
                                 </fieldset>
                             </div>
                             <div class="col-md-3">
                                 <fieldset>
-                                    <input name="age" type="text" class="form-control" id="age" placeholder="희망 지역 입력" required="">
+                                    <input name="birth" type="text" class="form-control" id="birth" placeholder="희망 지역 입력" required="">
                                 </fieldset>
                             </div>
                             <div class="col-md-3">
@@ -104,5 +111,6 @@
     </div>
 </section>
 
-
-{{>layout/footer}}
+<th:block th:replace="fragments/footer"></th:block>
+</body>
+</html>

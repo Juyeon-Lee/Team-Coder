@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<!--저장한 그룹 리스트에 넣을 것. -->
+<section th:fragment="table" class="pricing-tables">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <span>Group List</span>
+                    <h2>그룹 리스트와 상세정보</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div th:each="g: ${groups}" class="col-md-4 group-table-item" >
+                <div class="table-item">
+                    <div class="top-content">
+                        <h4 th:text="${g.name}"></h4>
+                        <h1 th:text="${g.aim}"></h1>
+                        <span>/monthly</span>
+                    </div>
+                    <ul>
+                        <li th:text="*{g.num.currentNum}">현재 인원</li>
+
+                    </ul>
+                    <div class="blue-button">
+                        <a href="#">수정하기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

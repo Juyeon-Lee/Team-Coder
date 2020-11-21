@@ -4,7 +4,29 @@ Venue Template
 
 http://www.templatemo.com/tm-522-venue
 
+edited something I need : Juyeon-Lee
 */
+table{
+  width: 100%;
+  table-layout: fixed;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+thead tr{
+  position: absolute;
+  top:0;
+}
+tbody tr{
+  display: table-row;
+}
+.form-table tr{
+  display: inline-table;
+  table-layout: fixed;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 10px 0px;
+}
 
 body {
   font-family: 'Raleway', 'sans-serif';
@@ -585,6 +607,11 @@ section.group-manage {
   background: #f4f4f4;
 }
 
+.group-manage .group-table-item{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 section.featured-places {
   margin-top: 80px;
   padding-bottom: 80px;
@@ -616,7 +643,7 @@ section.featured-places {
   text-align: center;
   vertical-align: middle;
   background-color: #8697bd;
-  padding: 10 10 10 10px;
+  padding: 10px;
   border-radius: 10%;
 }
 
@@ -880,13 +907,16 @@ section#video-container {
 }
 
 
+section.pricing-tables .group-table-item {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
 
 section.pricing-tables .table-item {
   text-align: center;
   background-color: #eeeeee;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  padding: 0px 0px 40px 0px;
+  border-radius: 10px;
+  padding: 0px 0px 25px 0px;
 }
 
 section.pricing-tables .table-item .top-content {

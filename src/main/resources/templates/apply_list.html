@@ -1,5 +1,12 @@
-{{>layout/header}}
-{{>layout/nav-header}}
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      lang="ko">
+<head>
+    <title>Team-Coder</title>
+    <th:block th:replace="fragments/common-head"></th:block>
+</head>
+<body>
+<th:block th:replace="fragments/nav-header"></th:block>
 
 <section class="featured-places" id="apply">
     <div class="container">
@@ -36,5 +43,6 @@
     </div>
 </section>
 
-
-{{>layout/footer}}
+<th:block th:replace="fragments/footer"></th:block>
+</body>
+</html>

@@ -53,6 +53,7 @@ var group_manage = {
     },
     update : function () {
         var data = {
+            name: $('#name').val(),
             aim: $('#aim').val(),
             description: $('#description').val(),
             maxNum: $('#maxNum').val(),
@@ -74,7 +75,7 @@ var group_manage = {
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function() {
-            alert('글이 수정되었습니다.');
+            alert('그룹이 수정되었습니다.');
             window.location.href = '/group';
         }).fail(function (error) {
             alert(JSON.stringify(error));
@@ -89,7 +90,7 @@ var group_manage = {
             dataType: 'json',
             contentType:'application/json; charset=utf-8'
         }).done(function() {
-            alert('글이 삭제되었습니다.');
+            alert('그룹이 삭제되었습니다.');
             window.location.href = '/group';
         }).fail(function (error) {
             alert(JSON.stringify(error));
@@ -100,8 +101,11 @@ var group_manage = {
 
 group_manage.init();
 
+var windowLoc = $(location).attr('pathname'); // to get window.location.pathname
 
 window.onload = function() {
-    //group_manage.arrayToComma();
+    if($('body').is('#update')){ // 생성화면에서는 실행안됨.
+        group_manage.arrayToComma();
+    }
 
 };

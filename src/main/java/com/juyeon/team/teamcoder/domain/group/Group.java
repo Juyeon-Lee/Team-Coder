@@ -75,7 +75,7 @@ public class Group {
     }
 
     public void setTagGroups(Set<TagGroup> tagGroups){
-        this.tagGroups = tagGroups;
+        this.tagGroups.addAll(tagGroups);
     }
 
     public Group updateFile(String fileName) {
@@ -83,14 +83,28 @@ public class Group {
         return this;
     }
 
-    public Group update(String name, String file,
-                               EduLevel education,
-                               Location location, Set<TagGroup> tagGroups){
+    @Transient
+    public String getFilePath(){
+        if(file==null || id== null) return null;
+
+        return "/group-files/" + id+"/"+ file;
+    }
+
+    public Group update(String name, String file, GroupAim aim,
+                        EduLevel education, Location location,
+                        String description, Num num, Age age,
+                        Period period, Set<TagGroup> tagGroups){
         this.name = name;
         this.file = file;
+        this.aim = aim;
         this.education = education;
         this.location = location;
-        this.tagGroups = tagGroups;
+        this.description = description;
+        this.memberNum = num;
+        this.ageLimit = age;
+        this.workPeriod = period;
+        this.tagGroups.clear();
+        this.tagGroups.addAll(tagGroups);
         return this;
     }
 

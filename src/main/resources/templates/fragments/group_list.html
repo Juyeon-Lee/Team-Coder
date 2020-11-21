@@ -12,22 +12,27 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12"> <!-- 있는 만큼 반복 -->
+            <div th:each="g: ${groups}" class="col-md-4 col-sm-6 col-xs-12"> <!-- 있는 만큼 반복 -->
                 <div class="featured-item">
                     <div class="thumb">
                         <img src="/assets/img/group_img_1.jpg" alt="">
                         <div class="overlay-content">
-                            그룹정보~~
+                            <span th:text="${g.status}">모집중/모집종료</span>
                         </div>
                         <div class="date-content">
-                            <h6>0명</h6>
-                            <span>총 m명</span>
+                            <h6 th:text="${g.num.currentNum}+'명'">0명</h6>
+                            <span th:text="'총 '+${g.num.maxNum}+'명'">총 m명</span>
                         </div>
                     </div>
                     <div class="down-content">
-                        <h4>그룹 이름</h4>
-                        <span>그룹 목표</span>
-                        <p>그룹 설명</p>
+                        <h4 th:text="${g.name}">그룹 이름</h4>
+                        <h5 th:text="${g.aim}">그룹 목표</h5>
+                        <ul>
+                            <li th:text="'활동 예정구역 :' + ${g.location}">활동 예정 구역</li>
+                            <li th:text="'활동 예정일 :'+ (${g.period?.startDate!=null}?${g.period?.startDate}:'미정') +' ~ '+(${g.period?.endDate!=null}?${g.period?.endDate}:'미정')">활동 예정 기간</li>
+                            <li th:text="'희망 나이:' +${g.age.minAge}+'~'+${g.age.maxAge}">나이</li>
+                        </ul>
+                        <br>
                         <div class="row">
                             <div class="col-md-6 first-button">
                                 <div class="text-button">
@@ -43,7 +48,8 @@
                     </div>
                 </div>
             </div>
-
+            <!--===========그룹 1개 끝======= -->
         </div>
+        <!--===========그룹 반복 테이블 끝======= -->
     </div>
 </section>

@@ -1,6 +1,8 @@
 package com.juyeon.team.teamcoder.web.controller;
 
 import com.juyeon.team.teamcoder.service.StorageService;
+import com.juyeon.team.teamcoder.service.group.GroupService;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -16,7 +18,10 @@ import java.io.IOException;
 import java.util.stream.Collectors;
 
 @Controller
+@NoArgsConstructor
 public class FileUploadController {
+
+    //private final GroupService groupService;
     /*
     private final StorageService storageService;
 
@@ -36,15 +41,16 @@ public class FileUploadController {
         return "uploadForm";
     }
 
-    @GetMapping("/files/{filename:.+}")
+    @GetMapping("/group-files/{id}/{filename:.+}")
     @ResponseBody
-    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+    public ResponseEntity<Resource> serveFile(@PathVariable Long id, @PathVariable String filename) {
 
-        Resource file = storageService.loadAsResource(filename);
+        Resource file = '/group-files/' + id + filename;
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-    }
+    }*/
 
+    /*
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
@@ -55,6 +61,7 @@ public class FileUploadController {
 
         return "redirect:/";
     }
+
 
 
     @ExceptionHandler(StorageFileNotFoundException.class)

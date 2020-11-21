@@ -93,6 +93,6 @@ public class User {
     }
 
     public void setTagUsers(Set<TagUser> tagUsers){
-        this.tagUsers = tagUsers;
+        this.tagUsers.addAll(tagUsers);
     }
 }

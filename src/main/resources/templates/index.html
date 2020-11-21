@@ -17,13 +17,13 @@
 
 <body>
     <div class="wrap">
-        <th:block th:replace="fragments/main/nav-header :: nav-header"></th:block>
+        <th:block th:replace="fragments/main/nav_header :: nav-header"></th:block>
 
         <div class="content-wrapper">
             <!--... 실제 컨텐츠 내용 작성... -->
             <th:block th:replace="fragments/banner"></th:block>
-            <th:block th:replace="fragments/main-my-group"></th:block>
-            <th:block th:replace="fragments/group-list"></th:block>
+            <th:block th:replace="fragments/main_my_group"></th:block>
+            <th:block th:replace="fragments/group_list"></th:block>
         </div>
 
         <th:block th:replace="fragments/main/main_footer"></th:block>

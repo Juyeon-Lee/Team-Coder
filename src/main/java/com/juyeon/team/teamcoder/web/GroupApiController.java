@@ -1,17 +1,15 @@
 package com.juyeon.team.teamcoder.web;
 
 import com.juyeon.team.teamcoder.domain.group.Group;
-import com.juyeon.team.teamcoder.domain.user.User;
 import com.juyeon.team.teamcoder.service.group.GroupService;
 import com.juyeon.team.teamcoder.web.dto.GroupResponseDto;
 import com.juyeon.team.teamcoder.web.dto.GroupSaveRequestDto;
 import com.juyeon.team.teamcoder.web.dto.GroupUpdateRequestDto;
-import com.juyeon.team.teamcoder.web.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
@@ -20,7 +18,8 @@ import java.io.IOException;
 public class GroupApiController {
     // 로그인 후 유저 상세정보 입력, 수정, 탈퇴
 
-    private  final GroupService groupService;
+    @Autowired
+    private final GroupService groupService;
 
     @PostMapping("/api/v1/group")
     public Long save(@RequestBody GroupSaveRequestDto requestDto){
@@ -41,7 +40,7 @@ public class GroupApiController {
 
         String uploadDir = "group-files/" + id;
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        groupService.updatePic(id, fileName);
+        groupService.updateFile(id, fileName);
 
         return "You successfully uploaded " + fileName + "!";
     }

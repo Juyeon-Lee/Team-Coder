@@ -13,15 +13,15 @@
             </div>
         </div>
         <div class="row">
-            <div th:each="g: ${groups}" class="col-md-4" >
+            <div th:each="g: ${groups}" class="col-md-4 group-table-item" >
                 <div class="table-item">
                     <div class="top-content">
-                        <h4 th:text="*{name}"></h4>
-                        <h1 th:text="*{aim}"></h1>
+                        <h4 th:text="${g.name}"></h4>
+                        <h1 th:text="${g.aim}"></h1>
                         <span>/monthly</span>
                     </div>
                     <ul>
-                        <li th:text="*{memberNum.currentNum}">현재 인원</li>
+                        <li th:text="*{g.num.currentNum}">현재 인원</li>
 
                     </ul>
                     <div class="blue-button">

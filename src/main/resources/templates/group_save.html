@@ -5,7 +5,7 @@
 <head>
     <th:block th:replace="fragments/main/main_header :: mainHead"></th:block>
     <!--/*기본적인 html head 추가부 title*/-->
-    <meta title="Team-Coder Home">
+    <meta title="Team-Coder Group Create">
     <meta name="description" content="team-coder: 같이 코딩할 개발자 팀원들을 모집하세요.">
 
     <!--Etc Add on Lib-->
@@ -16,7 +16,7 @@
 
 <body>
 <div class="wrap">
-    <th:block th:replace="fragments/main/nav-header :: nav-header"></th:block>
+    <th:block th:replace="fragments/main/nav_header :: nav-header"></th:block>
 
     <div class="content-wrapper">
         <!--... 실제 컨텐츠 내용 작성... -->
@@ -24,7 +24,7 @@
             <div class="row">
                 <div class="col-md-12" th:if="${not #lists.isEmpty(userName)}">
                     <h1>그룹 등록</h1>
-                    <form th:action="@{/api/v1/group/}" method="post">
+                    <form th:action="@{/api/v1/group}" method="post">
                         <table class="form-table">
                             <tr>
                                 <td>관리자 id: </td>
@@ -141,8 +141,6 @@
 <!--...custom_js 추가...-->
 <script th:src="@{/js/app/groupManage.js}"></script>
 <script th:src="@{/js/datepicker.ko.js}"></script>
-<script type="text/javascript">
-</script>
 </body>
 
 </html>

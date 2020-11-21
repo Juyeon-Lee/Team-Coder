@@ -1,8 +1,11 @@
 package com.juyeon.team.teamcoder.domain.group;
 
+import lombok.Getter;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+@Getter
 @Embeddable
 public class Num {
     @Column(nullable = false)

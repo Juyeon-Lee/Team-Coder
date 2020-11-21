@@ -1,5 +1,7 @@
 package com.juyeon.team.teamcoder.web;
 
+import com.juyeon.team.teamcoder.domain.user.Role;
+import com.juyeon.team.teamcoder.service.RoleService;
 import com.juyeon.team.teamcoder.service.user.UserService;
 import com.juyeon.team.teamcoder.web.dto.UserResponseDto;
 import com.juyeon.team.teamcoder.web.dto.UserUpdateRequestDto;
@@ -18,10 +20,13 @@ public class UserApiController {
     // 로그인 후 유저 상세정보 입력, 수정, 탈퇴
 
     private  final UserService userService;
+    private final RoleService roleService;
 
     @PutMapping("/api/v1/user/{id}")
     public Long update(@PathVariable Long id,
                        @RequestBody UserUpdateRequestDto requestDto){
+
+        roleService.reloadRolesForAuthenticatedUser(Role.USER.getKey());
         return userService.update(id, requestDto);
     }
 
@@ -43,6 +48,7 @@ public class UserApiController {
     @DeleteMapping("/api/v1/user/{id}")
     public Long delete(@PathVariable Long id){
         userService.delete(id);
+        //TODO : 자동 로그아웃/ 세션 재할당
         return id;
     }
 }

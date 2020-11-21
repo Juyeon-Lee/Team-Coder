@@ -6,6 +6,7 @@ import com.juyeon.team.teamcoder.domain.user.Location;
 import com.juyeon.team.teamcoder.domain.user.User;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -16,6 +17,12 @@ public class GroupListResponseDto {
     private GroupAim aim;
     private Location location;
     private GroupStatus status;
+//    private int currentNum;
+//    private int maxNum;
+//    private LocalDate start;
+//    private LocalDate end;
+//    private int minAge;
+//    private int maxAge;
     private Num num;
     private Period period;
     private Age age;

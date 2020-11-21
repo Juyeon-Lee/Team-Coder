@@ -1,11 +1,14 @@
 package com.juyeon.team.teamcoder.domain.group;
 
+import lombok.Getter;
+
 import javax.persistence.Embeddable;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.time.LocalDate;
 import java.util.Date;
 
+@Getter
 @Embeddable
 public class Period {
     java.time.LocalDate startDate;

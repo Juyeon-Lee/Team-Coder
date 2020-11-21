@@ -1,7 +1,10 @@
 package com.juyeon.team.teamcoder.domain.group;
 
+import lombok.Getter;
+
 import javax.persistence.Embeddable;
 
+@Getter
 @Embeddable
 public class Age {
 

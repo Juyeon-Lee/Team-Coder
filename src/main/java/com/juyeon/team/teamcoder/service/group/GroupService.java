@@ -1,8 +1,6 @@
 package com.juyeon.team.teamcoder.service.group;
 
-import com.juyeon.team.teamcoder.domain.group.CustomGroupRepository;
-import com.juyeon.team.teamcoder.domain.group.Group;
-import com.juyeon.team.teamcoder.domain.group.GroupRepository;
+import com.juyeon.team.teamcoder.domain.group.*;
 import com.juyeon.team.teamcoder.domain.tag.Tag;
 import com.juyeon.team.teamcoder.domain.tag.TagRepository;
 import com.juyeon.team.teamcoder.domain.tagGroup.TagGroup;
@@ -45,9 +43,14 @@ public class GroupService {
         //이미 만들어져있음
         Group group = groupRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 그룹의 정보가 없습니다. id="+ id));
-        //tag, taggroup 객체 생성 후 연결
-        group.setTagGroups(syncTagGroup(requestDto.getTags(), group));
 
+        group.update(requestDto.getName(), requestDto.getFile(), requestDto.getAim(),
+                requestDto.getEducation(), requestDto.getLocation(),
+                requestDto.getDescription(),
+                new Num(requestDto.getMaxNum(),group.getMemberNum().getCurrentNum()),
+                new Age(requestDto.getMinAge(),requestDto.getMaxAge()),
+                new Period(requestDto.getStart(), requestDto.getEnd()),
+                syncTagGroup(requestDto.getTags(), group)); //tag, taggroup 객체 생성 후 연결
         return id;
     }
 
@@ -87,9 +90,9 @@ public class GroupService {
     }
 
     @Transactional
-    public Long updatePic(Long id, String fileName) throws IOException {
+    public Long updateFile(Long id, String fileName) throws IOException {
         Group group = groupRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("해당 유저의 정보가 없습니다. id="+id));
+                .orElseThrow(()-> new IllegalArgumentException("해당 그룹의 정보가 없습니다. id="+id));
 
         group.updateFile(fileName);
         groupRepository.save(group);
@@ -99,7 +102,7 @@ public class GroupService {
 
     public GroupResponseDto findById(Long id) {
         Group group = groupRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("해당 유저의 정보가 없습니다. id="+id));
+                .orElseThrow(()-> new IllegalArgumentException("해당 그룹의 정보가 없습니다. id="+id));
 
         List<String> tags= customGroupRepository.findTagByGroup(group);
         return new GroupResponseDto(group, tags);
@@ -112,6 +115,13 @@ public class GroupService {
 
         //TODO: tags String으로 변환해서 넣을 건지 생각. - 그냥 세부 화면에만 tag 띄우자..
         return groupRepository.findAllByManager(user)
+                .stream().map(GroupListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)  // index.html에서 그룹 리스트
+    public List<GroupListResponseDto> findAll(){
+        return groupRepository.findAll()
                 .stream().map(GroupListResponseDto::new)
                 .collect(Collectors.toList());
     }

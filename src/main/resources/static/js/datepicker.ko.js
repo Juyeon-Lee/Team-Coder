@@ -23,6 +23,7 @@
     */
 
 datePickerSet($("#start"), $("#end"), true);
+datePickerSet($("#period.startDate"), $('#period.endDate'), true);
 
 function datePickerSet(sDate, eDate, flag) {
 

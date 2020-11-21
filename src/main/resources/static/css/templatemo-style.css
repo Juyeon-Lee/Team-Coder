@@ -607,6 +607,11 @@ section.group-manage {
   background: #f4f4f4;
 }
 
+.group-manage .group-table-item{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 section.featured-places {
   margin-top: 80px;
   padding-bottom: 80px;
@@ -638,7 +643,7 @@ section.featured-places {
   text-align: center;
   vertical-align: middle;
   background-color: #8697bd;
-  padding: 10 10 10 10px;
+  padding: 10px;
   border-radius: 10%;
 }
 
@@ -902,13 +907,16 @@ section#video-container {
 }
 
 
+section.pricing-tables .group-table-item {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
 
 section.pricing-tables .table-item {
   text-align: center;
   background-color: #eeeeee;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  padding: 0px 0px 40px 0px;
+  border-radius: 10px;
+  padding: 0px 0px 25px 0px;
 }
 
 section.pricing-tables .table-item .top-content {

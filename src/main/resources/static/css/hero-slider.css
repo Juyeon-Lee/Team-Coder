@@ -204,7 +204,7 @@ Slider
 
 Single slide style
 
--------------------------------- */
+--------------------------------
 .cd-hero-slider li {
   background-position: center center;
   background-size: cover;
@@ -218,7 +218,7 @@ Single slide style
 }
 .cd-hero-slider li:nth-of-type(3) {
   background-image: url(../assets/img/slide_03.jpg);
-}
+}*/
 .cd-hero-slider .cd-full-width,
 .cd-hero-slider .cd-half-width {
   position: absolute;

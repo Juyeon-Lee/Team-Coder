@@ -1,116 +1,153 @@
-<!DOCTYPE>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      lang="ko">
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
-    <title>Team-Coder</title>
-    <th:block th:replace="fragments/common-head"></th:block>
+    <th:block th:replace="fragments/main/main_header :: mainHead"></th:block>
+    <!--/*기본적인 html head 추가부 title*/-->
+    <meta title="Team-Coder Home">
+    <meta name="description" content="team-coder: 같이 코딩할 개발자 팀원들을 모집하세요.">
+
+    <!--Etc Add on Lib-->
+
+
+    <!--Custom or page css-->
+
 </head>
+
 <body>
-<th:block th:replace="fragments/nav-header"></th:block>
+<div class="wrap">
+    <th:block th:replace="fragments/main/nav_header :: nav-header"></th:block>
 
-<section class="search" id="search">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="banner-caption">
-                    <div class="line-dec"></div>
-                    <h2>나와 잘 맞는 코딩 그룹을 찾아보세요!</h2>
-                    <span>여러 조건들을 설정할 수 있습니다.</span>
-                </div>
-                <div class="submit-form">
-                    <form id="form-submit" action="" method="get">
-                        <div class="row" id="search-row">
-                            <div class="col-md-3 first-item">
-                                <fieldset>
-                                    <select required name='aim' onchange='this.form.()'>
-                                        <option value="">목적 선택</option>
-                                        <option value="Contest">공모전</option>
-                                        <option value="Study">스터디</option>
-                                        <option value="Project">프로젝트 개발</option>
-                                    </select>
-                                </fieldset>
-                            </div>
-
-                            <div class="col-md-3 second-item">
-                                <fieldset>
-                                    <select required name='period' onchange='this.form.()'>
-                                        <option value="">기간 선택</option>
-                                        <option value="All">기간 전체 검색</option>
-                                        <option value="Possible">지금 가능한 기간만</option>
-                                    </select>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-3 third-item">
-                                <fieldset>
-                                    <input name="birth" type="text" class="form-control" id="birth" placeholder="나의 나이 입력" required="">
-                                </fieldset>
-                            </div>
-                            <div class="col-md-3">
-                                <fieldset>
-                                    <input name="birth" type="text" class="form-control" id="birth" placeholder="희망 지역 입력" required="">
-                                </fieldset>
-                            </div>
-                            <div class="col-md-3">
-                                <fieldset>
-                                    <input name="tags" type="text" class="form-control" id="tags" placeholder="태그로 검색" required="">
-                                </fieldset>
-                            </div>
+    <div class="content-wrapper">
+        <!--... 실제 컨텐츠 내용 작성... -->
+        <section class="search" id="search">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="banner-caption">
+                            <div class="line-dec"></div>
+                            <h2>나와 잘 맞는 코딩 그룹을 찾아보세요!</h2>
+                            <span>여러 조건들을 설정할 수 있습니다.</span>
                         </div>
-                        <div class="row">
-                            <div class="container" style="width: inherit;">
-                            <div class="col" style="margin: auto; width: 200px;">
-                                <fieldset>
-                                    <button type="submit" id="form-submit" class="btn">지금 검색</button>
-                                </fieldset>
-                            </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+                        <div class="submit-form">
+                            <form id="form-search" th:action="@{/search/redirect}" th:object="${search}" method="post">
+                                <div class="row" id="search-row">
+                                    <div class="col-md-3 first-item">
+                                        <fieldset>
+                                            <select required th:field="*{aim}">
+                                                <option value="">목적 선택</option>
+                                                <option value="CONTEST">공모전</option>
+                                                <option value="STUDY">스터디</option>
+                                                <option value="PROJECT">프로젝트 개발</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
 
-<!--========================================
-     group search result-->
-<section class="featured-places" id="blog" style="margin-top: 50px; padding-top: 50px;">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="section-heading">
-                    <span>그룹 List</span>
-                    <h3>그룹을 살펴보고 원하는 곳에 참여하세요.</h3>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12"> <!-- 있는 만큼 반복 -->
-                <div class="featured-item">
-                    <div class="down-content">
-                        <h4>그룹 이름</h4>
-                        <span>그룹 목표</span>
-                        <p>그룹 설명</p>
-                        <div class="row">
-                            <div class="col-md-6 first-button">
-                                <div class="text-button">
-                                    <a href="#">저장하기/저장함</a>
+                                    <div class="col-md-3 second-item">
+                                        <fieldset>
+                                            <select th:field="*{period}">
+                                                <option value="">기간 선택</option>
+                                                <option value="ALL">기간 전체 검색</option>
+                                                <option value="POSSIBLE">지금 가능한 기간만</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-3 third-item">
+                                        <fieldset>
+                                            <input type="text" class="form-control" th:field="*{age}" placeholder="나의 나이 입력"
+                                                    onfocus="this.value=''">
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <fieldset>
+                                            <select th:field="*{loc}">
+                                                <option value="">희망 지역 입력</option>
+                                                <option value="ALL">지역 전체 검색</option>
+                                                <option th:each="o: ${loc}" th:value="${o.key}" th:text="${o.value}"></option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <fieldset>
+                                            <input type="text" class="form-control" th:field="*{tags}" placeholder="태그로 검색">
+                                        </fieldset>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="text-button">
-                                    <a href="#">참여하기/신청함/참여중</a>
+                                <div class="row">
+                                    <div class="container" style="width: inherit;">
+                                        <div class="col" style="margin: auto; width: 200px;">
+                                            <fieldset>
+<!--                                                <button type="submit" id="btn-update" class="btn">지금 검색</button>-->
+                                                <input type="submit" class="btn btn-submit" value="Submit"/>
+                                            </fieldset>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-        </div>
+        <!--========================================
+             group search result-->
+        <section class="featured-places" id="blog" style="margin-top: 50px; padding-top: 50px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading">
+                            <span>그룹 List</span>
+                            <h3>그룹을 살펴보고 원하는 곳에 참여하세요.</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div th:if="${not #lists.isEmpty(groups)}" th:each="g: ${groups}" class="col-md-4 col-sm-6 col-xs-12"> <!-- 있는 만큼 반복 -->
+                        <div class="featured-item">
+                            <div class="down-content">
+                                <h4 th:text="${g.name}">그룹 이름</h4>
+                                <h5 th:text="${g.aim}">그룹 목표</h5>
+                                <span th:text="${g.status}">모집중/모집종료</span>
+                                <h6 th:text="'현재 '+${g.num.currentNum}+'명/ 총'+${g.num.maxNum}+'명'">0명/총m명</h6>
+                                <ul>
+                                    <li th:text="'활동 예정구역 :' + ${g.location}">활동 예정 구역</li>
+                                    <li th:text="'활동 예정일 :'+ (${g.period?.startDate!=null}?${g.period?.startDate}:'미정') +' ~ '+(${g.period?.endDate!=null}?${g.period?.endDate}:'미정')">활동 예정 기간</li>
+                                    <li th:text="'희망 나이:' +${g.age.minAge}+'~'+${g.age.maxAge}">나이</li>
+                                </ul>
+                                <div class="row">
+                                    <div class="col-md-6 first-button">
+                                        <div class="text-button">
+                                            <a href="#">저장하기/저장함</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-button">
+                                            <a href="#">참여하기/신청함/참여중</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!--/*<th:block th:replace="fragments/group_list"></th:block>*/-->
     </div>
-</section>
 
-<th:block th:replace="fragments/footer"></th:block>
+    <th:block th:replace="fragments/main/main_footer"></th:block>
+</div>
+
+<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+
+<script th:src="@{/js/datepicker.js}"></script>
+<script th:src="@{/js/plugins.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+<!--custom_js 추가-->
 </body>
+
 </html>

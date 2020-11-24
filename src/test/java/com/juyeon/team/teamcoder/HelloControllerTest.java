@@ -1,5 +1,5 @@
 package com.juyeon.team.teamcoder;
-
+/*
 import com.juyeon.team.teamcoder.config.auth.SecurityConfig;
 import com.juyeon.team.teamcoder.web.HelloController;
 import org.junit.Test;
@@ -52,3 +52,4 @@ public class HelloControllerTest {
         );
     }
 }
+*/

@@ -1,5 +1,6 @@
 package com.juyeon.team.teamcoder.domain.group;
 
+import com.querydsl.core.types.Predicate;
 import lombok.Getter;
 
 import javax.persistence.Embeddable;

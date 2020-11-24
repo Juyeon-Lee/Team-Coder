@@ -1,75 +1,48 @@
 var main = {
     init : function () {
         var _this = this;
-        $('#btn-save').on('click', function () {
-            _this.save();
-        });
-
+        //안쓰임
         $('#btn-update').on('click', function () {
             _this.update();
         }); // id: btn-update인 버튼이 click 됐을 때 update함수 실행
-
-        $('#btn-delete').on('click', function () {
-            _this.delete();
-        });
-    },
-    save : function () {
-        var data = {
-            title: $('#title').val(),
-            author: $('#author').val(),
-            content: $('#content').val()
-        };
-
-        $.ajax({
-            type: 'POST',
-            url: '/api/v1/posts',
-            dataType: 'json',
-            contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function() {
-            alert('글이 등록되었습니다.');
-            window.location.href = '/';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
     },
     update : function () {
         var data = {
-            title: $('#title').val(),
-            content: $('#content').val()
+            aim: $('#aim').val(),
+            period: $('#period').val(),
+            loc: $('#location').val(),
+            age: $('#age').val(),
+            tags: $('#tags').val()
         };
-
-        var id = $('#id').val();
-
+        // var aim = $('#aim').val();
+        // var period = $('#period').val();
+        // var loc = $('#location').val();
+        // var age = $('#age').val();
+        // var tag = $('#tags').val();
+        console.log("javascript 함수 실행중");
         $.ajax({
-            type: 'PUT', // 수정할 때
-            url: '/api/v1/posts/'+id,  // 어느 게시글을 수정할 지
+            type: 'POST',
+            url: '/search/redirect',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function() {
-            alert('글이 수정되었습니다.');
-            window.location.href = '/';
+            alert('결과 화면으로 이동합니다');
+            window.location.href = '/search/result'
+            //window.location.href = '/search/result/'+aim+'/'+period+'/'+age+'/'+loc+'/'+tag;
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
-    },
-    delete : function () {
-        var id = $('#id').val();
 
-        $.ajax({
-            type: 'DELETE',
-            url: '/api/v1/posts/'+id,
-            dataType: 'json',
-            contentType:'application/json; charset=utf-8'
-        }).done(function() {
-            alert('글이 삭제되었습니다.');
-            window.location.href = '/';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
+        // $.redirect("/search/result",
+        //     {
+        //         aim : $('#aim').val(),
+        //         period : $('#period').val(),
+        //         loc : $('#location').val(),
+        //         age : $('#age').val(),
+        //         tag : $('#tags').val()
+        //     }, "GET")
     }
-
 };
 
 main.init();

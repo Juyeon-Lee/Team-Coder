@@ -4,14 +4,17 @@ import com.juyeon.team.teamcoder.config.auth.LoginUser;
 import com.juyeon.team.teamcoder.config.auth.dto.SessionUser;
 import com.juyeon.team.teamcoder.service.group.GroupService;
 import com.juyeon.team.teamcoder.service.user.UserService;
-import com.juyeon.team.teamcoder.web.dto.GroupResponseDto;
-import com.juyeon.team.teamcoder.web.dto.OptionDto;
-import com.juyeon.team.teamcoder.web.dto.UserResponseDto;
+import com.juyeon.team.teamcoder.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -23,17 +26,41 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user){ // @LoginUser 어노테이션으로 세션 정보 값 가져옴.
-        //model.addAttribute("posts", postsService.findAllDesc());
+        OptionDto optionDto = new OptionDto();
+        model.addAttribute("loc", optionDto.getLocOption());
+        model.addAttribute("search",new SearchRequestDto());
+        model.addAttribute("groups", groupService.findAll());
         if(user != null){
-            model.addAttribute("groups", groupService.findAll());
             model.addAttribute("userName", user.getName());
         }
         return "index";
     }
 
-    @GetMapping("/search")
+    @GetMapping("/search/main")
     public String search(Model model){
+        OptionDto optionDto = new OptionDto();
+        model.addAttribute("loc", optionDto.getLocOption());
+        model.addAttribute("search",new SearchRequestDto());
+        model.addAttribute("groups", new ArrayList<GroupListResponseDto>());
         return "search_group";
+    }
+
+    @GetMapping("/search/result")
+    public ModelAndView searchEnter(@ModelAttribute("groups") SearchRequestDto requestDto,
+                                    ModelMap model){
+        OptionDto optionDto = new OptionDto();
+        model.addAttribute("loc", optionDto.getLocOption());
+        model.addAttribute("search",new SearchRequestDto());
+        model.addAttribute("groups", groupService.findAllByCondition(requestDto.getAim(), requestDto.getPeriod(),
+                requestDto.getAge(), requestDto.getLoc(), requestDto.getTags()));
+        return new ModelAndView("search_group",model);
+    }
+
+    @PostMapping("/search/redirect")
+    public String searchRedirect(@ModelAttribute  SearchRequestDto requestDto,
+                                 RedirectAttributes attributes){
+        attributes.addFlashAttribute("groups", requestDto);
+        return "redirect:/search/result";
     }
 
     // =================================로그인/로그아웃/권한없음=======================================

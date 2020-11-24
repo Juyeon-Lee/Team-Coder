@@ -25,7 +25,7 @@ public class FileUploadTest {
 
     @MockBean
     private StorageService storageService;
-
+/*
     @Test
     public void shouldSaveUploadedFile() throws Exception {
         MockMultipartFile multipartFile = new MockMultipartFile("images","logo.txt",
@@ -44,5 +44,5 @@ public class FileUploadTest {
                 .willThrow(StorageFileNotFoundException.class);
 
         this.mvc.perform(get("/files/test.txt")).andExpect(status().isNotFound());
-    }
+    }*/
 }

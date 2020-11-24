@@ -19,10 +19,10 @@
     <th:block th:replace="fragments/main/nav_header :: nav-header"></th:block>
 
     <div class="content-wrapper">
-        <!--... 실제 컨텐츠 내용 작성... -->
+        <!--... 실제 컨텐츠 내용 작성...th:if="${not #lists.isEmpty(userName)}" -->
         <div class="container">
             <div class="row">
-                <div class="col-md-12" th:if="${not #lists.isEmpty(userName)}">
+                <div class="col-md-12" >
                     <h1>그룹 등록</h1>
                     <form th:action="@{/api/v1/group}" method="post">
                         <table class="form-table">

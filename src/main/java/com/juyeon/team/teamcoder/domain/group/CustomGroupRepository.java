@@ -8,5 +8,6 @@ import java.util.List;
 public interface CustomGroupRepository {
     public List<String> findTagByGroup(Group groupEntity);
 
-    public List<Group> findAllFilterAge(int age);
+    public List<Group> findAllByCondition(String aim, String period, int age,
+                                          String loc, List<String> tags);
 }

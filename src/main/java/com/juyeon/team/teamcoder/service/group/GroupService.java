@@ -5,6 +5,7 @@ import com.juyeon.team.teamcoder.domain.tag.Tag;
 import com.juyeon.team.teamcoder.domain.tag.TagRepository;
 import com.juyeon.team.teamcoder.domain.tagGroup.TagGroup;
 import com.juyeon.team.teamcoder.domain.tagGroup.TagGroupRepository;
+import com.juyeon.team.teamcoder.domain.user.Location;
 import com.juyeon.team.teamcoder.domain.user.User;
 import com.juyeon.team.teamcoder.domain.user.UserRepository;
 import com.juyeon.team.teamcoder.web.dto.*;
@@ -127,7 +128,19 @@ public class GroupService {
     }
 
     public void delete(Long id) {
+        Group group = groupRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("해당 그룹의 정보가 없습니다. id="+id));
+
+        groupRepository.delete(group);
     }
 
 
+    public List<GroupListResponseDto> findAllByCondition(String aim, String period, int age,
+                                   String loc, String tag) {
+        List<String> tags = new ArrayList<>(Arrays.asList(tag.split(",")));  // 콤마로 구분
+
+        return customGroupRepository.findAllByCondition(aim,period,age, loc, tags)
+                .stream().map(GroupListResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }

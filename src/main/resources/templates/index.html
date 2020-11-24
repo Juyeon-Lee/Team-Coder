@@ -21,7 +21,7 @@
 
         <div class="content-wrapper">
             <!--... 실제 컨텐츠 내용 작성... -->
-            <th:block th:replace="fragments/banner"></th:block>
+            <th:block th:replace="fragments/banner" th:with="search=${search}"></th:block>
             <th:block th:replace="fragments/main_my_group"></th:block>
             <th:block th:replace="fragments/group_list"></th:block>
         </div>
@@ -35,9 +35,7 @@
     <script th:src="@{/js/plugins.js}"></script>
     <script th:src="@{/js/main.js}"></script>
 
-    <!--custom_js            
-            index.js 추가
-        <script src="/js/app/index.js"></script>-->
+    <!--custom_js 추가-->
 </body>
 
 </html>

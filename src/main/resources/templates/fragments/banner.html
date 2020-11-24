@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <section class="banner" id="top" th:fragment="banner">
     <div class="container">
@@ -14,36 +14,57 @@
                     </div>
                 </div>
                 <div class="submit-form">
-                    <form id="form-submit" action="" method="get">
+                    <form id="form-search" th:action="@{/search/redirect}" th:object="${search}" method="post">
                         <div class="row">
                             <div class="col-md-3 first-item">
                                 <fieldset>
-                                    <select required name='aim' onchange='this.form.()'>
+                                    <select required th:field="*{aim}">
                                         <option value="">목적 선택</option>
-                                        <option value="Contest">공모전</option>
-                                        <option value="Study">스터디</option>
-                                        <option value="Project">프로젝트 개발</option>
+                                        <option value="CONTEST">공모전</option>
+                                        <option value="STUDY">스터디</option>
+                                        <option value="PROJECT">프로젝트 개발</option>
                                     </select>
                                 </fieldset>
                             </div>
                             <div class="col-md-3 second-item">
                                 <fieldset>
-                                    <input name="tags" type="text" class="form-control" id="tags" placeholder="태그로 검색" required="">
+                                    <select th:field="*{period}">
+                                        <option value="">기간 선택</option>
+                                        <option value="All">기간 전체 검색</option>
+                                        <option value="POSSIBLE">지금 가능한 기간만</option>
+                                    </select>
                                 </fieldset>
                             </div>
                             <div class="col-md-3 third-item">
                                 <fieldset>
-                                    <select required name='period' onchange='this.form.()'>
-                                        <option value="">기간 선택</option>
-                                        <option value="All">기간 전체 검색</option>
-                                        <option value="Possible">지금 가능한 기간만</option>
+                                    <select th:field="*{loc}">
+                                        <option value="">희망 지역 입력</option>
+                                        <option value="ALL">지역 전체 검색</option>
+                                        <option th:each="o: ${loc}" th:value="${o.key}" th:text="${o.value}"></option>
                                     </select>
                                 </fieldset>
                             </div>
                             <div class="col-md-3">
                                 <fieldset>
-                                    <button type="submit" id="form-submit" class="btn">지금 검색</button>
+                                    <input type="text" class="form-control" th:field="*{age}"
+                                           onfocus="this.value=''" placeholder="나의 나이 입력">
                                 </fieldset>
+                            </div>
+                            <div class="col-md-3 third-item">
+                                <fieldset>
+                                    <input type="text" class="form-control" th:field="*{tags}" placeholder="태그로 검색">
+                                </fieldset>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="container" style="width: inherit;">
+                                <div class="col" style="margin: auto; width: 200px;">
+                                    <fieldset>
+                                        <!--                                                <button type="submit" id="btn-update" class="btn">지금 검색</button>-->
+                                        <input type="submit" class="btn btn-submit" value="Submit"/>
+                                    </fieldset>
+                                </div>
                             </div>
                         </div>
                     </form>

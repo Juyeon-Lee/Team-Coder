@@ -26,6 +26,8 @@ public class QGroup extends EntityPathBase<Group> {
 
     public final EnumPath<GroupAim> aim = createEnum("aim", GroupAim.class);
 
+    public final SetPath<com.juyeon.team.teamcoder.domain.participate.Participate, com.juyeon.team.teamcoder.domain.participate.QParticipate> applyUsers = this.<com.juyeon.team.teamcoder.domain.participate.Participate, com.juyeon.team.teamcoder.domain.participate.QParticipate>createSet("applyUsers", com.juyeon.team.teamcoder.domain.participate.Participate.class, com.juyeon.team.teamcoder.domain.participate.QParticipate.class, PathInits.DIRECT2);
+
     public final StringPath description = createString("description");
 
     public final EnumPath<com.juyeon.team.teamcoder.domain.user.EduLevel> education = createEnum("education", com.juyeon.team.teamcoder.domain.user.EduLevel.class);

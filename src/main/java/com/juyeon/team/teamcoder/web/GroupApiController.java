@@ -2,9 +2,9 @@ package com.juyeon.team.teamcoder.web;
 
 import com.juyeon.team.teamcoder.domain.group.Group;
 import com.juyeon.team.teamcoder.service.group.GroupService;
-import com.juyeon.team.teamcoder.web.dto.GroupResponseDto;
-import com.juyeon.team.teamcoder.web.dto.GroupSaveRequestDto;
-import com.juyeon.team.teamcoder.web.dto.GroupUpdateRequestDto;
+import com.juyeon.team.teamcoder.web.dto.group.GroupResponseDto;
+import com.juyeon.team.teamcoder.web.dto.group.GroupSaveRequestDto;
+import com.juyeon.team.teamcoder.web.dto.group.GroupUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;

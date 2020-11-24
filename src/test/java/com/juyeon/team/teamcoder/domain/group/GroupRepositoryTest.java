@@ -1,13 +1,9 @@
 package com.juyeon.team.teamcoder.domain.group;
 
-import com.juyeon.team.teamcoder.domain.posts.Posts;
-import com.juyeon.team.teamcoder.domain.posts.PostsRepository;
-import com.juyeon.team.teamcoder.domain.tag.Tag;
-import com.juyeon.team.teamcoder.domain.user.Location;
 import com.juyeon.team.teamcoder.domain.user.User;
 import com.juyeon.team.teamcoder.domain.user.UserRepository;
 import com.juyeon.team.teamcoder.service.group.GroupService;
-import com.juyeon.team.teamcoder.web.dto.GroupSaveRequestDto;
+import com.juyeon.team.teamcoder.web.dto.group.GroupSaveRequestDto;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,14 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.InstanceOfAssertFactories.stream;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

@@ -1,8 +1,16 @@
-var group_manage = {
+var action = {
     init : function () {
         var _this = this;
-        $('#btn-save').on('click', function () {
-            _this.save();
+        $('#btn-apply').on('click', function () {
+            if(clicked){
+                _this.apply();
+            }else{
+                // 다음 창 입력
+                var div = document.getElementById("applyComment");
+                div.style.display = "block";
+                clicked= !clicked;
+            }
+
         });
 
         $('#btn-update').on('click', function () {
@@ -13,40 +21,20 @@ var group_manage = {
             _this.delete();
         });
     },
-    arrayToComma : function (){ // param : array
-        var x = "${group.tags}";
-        x = x.toString().slice(1,-1);
-        console.log(x);
-        document.getElementById("tags").innerHTML = x;
-    },
-    commaToArray : function (param){
-        return param.split(',');
-    },
-    save : function () {
-        var data = {
-            name: $('#name').val(),
-            ownerId: $('#id').val(),
-            aim: $('#aim').val(),
-            description: $('#description').val(),
-            maxNum: $('#maxNum').val(),
-            start: $('#start').val(),
-            end: $('#end').val(),
-            minAge: $('#minAge').val(),
-            maxAge: $('#maxAge').val(),
-            tags: this.commaToArray($('#tags').val()),
-            education: $('#education').val(),
-            location: $('#location').val()
+    apply : function () {
+        var data = { // groupName, comment
+            groupId: $('#id').text(),
+            comment: $('#comment').val()
         };
 
         $.ajax({
             type: 'POST',
-            url: '/api/v1/group',
+            url: '/api/v1/participate',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
         }).done(function() {
-            alert('새로운 그룹이 생성되었습니다.');
-            window.location.href = '/group/manage';
+            alert('지원에 성공했습니다.');
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -99,13 +87,6 @@ var group_manage = {
 
 };
 
-group_manage.init();
+action.init();
 
-var windowLoc = $(location).attr('pathname'); // to get window.location.pathname
-
-window.onload = function() {
-    if($('body').is('#update')){ // 생성화면에서는 실행안됨.
-        group_manage.arrayToComma();
-    }
-
-};
+var clicked = false;

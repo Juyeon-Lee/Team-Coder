@@ -1,4 +1,4 @@
-package com.juyeon.team.teamcoder.web.dto;
+package com.juyeon.team.teamcoder.web.dto.group;
 
 import com.juyeon.team.teamcoder.domain.group.Age;
 import com.juyeon.team.teamcoder.domain.group.GroupAim;

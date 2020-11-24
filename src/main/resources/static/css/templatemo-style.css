@@ -28,6 +28,40 @@ tbody tr{
   padding: 10px 0px;
 }
 
+/*
+for detail show table
+ */
+table.paleBlueRows {
+  border: 1px solid #FFFFFF;
+  background-color: #efefef;
+  width: 90%;
+  border-collapse: collapse;
+}
+table.paleBlueRows td, table.paleBlueRows th {
+  padding: 5px 3px;
+}
+table.paleBlueRows tbody td {
+  font-size: 15px;
+  color: #333333;
+}
+table.paleBlueRows td:nth-child(odd) { /*홀수*/
+  background: #CFDBFF;
+  border-right: 1px solid #333333;
+  width: 200px;
+  text-align: center;
+}
+table.paleBlueRows td:nth-child(even) { /*짝수*/
+  text-align: left;
+  padding-left: 15px;
+}
+table.paleBlueRows tr:not(:last-child) { /*마지막 행 제외*/
+  border-bottom: 1px solid #333333;
+}
+table.paleBlueRows tfoot td {
+  font-size: 14px;
+}
+
+
 body {
   font-family: 'Raleway', 'sans-serif';
   background-color: #fff;

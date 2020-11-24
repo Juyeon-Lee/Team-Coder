@@ -5,6 +5,9 @@ import com.juyeon.team.teamcoder.config.auth.dto.SessionUser;
 import com.juyeon.team.teamcoder.service.group.GroupService;
 import com.juyeon.team.teamcoder.service.user.UserService;
 import com.juyeon.team.teamcoder.web.dto.*;
+import com.juyeon.team.teamcoder.web.dto.group.GroupListResponseDto;
+import com.juyeon.team.teamcoder.web.dto.group.GroupResponseDto;
+import com.juyeon.team.teamcoder.web.dto.user.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -57,7 +59,7 @@ public class IndexController {
     }
 
     @PostMapping("/search/redirect")
-    public String searchRedirect(@ModelAttribute  SearchRequestDto requestDto,
+    public String searchRedirect(@ModelAttribute SearchRequestDto requestDto,
                                  RedirectAttributes attributes){
         attributes.addFlashAttribute("groups", requestDto);
         return "redirect:/search/result";
@@ -119,9 +121,14 @@ public class IndexController {
         return "apply_list";
     }
 
+    @GetMapping("/group/detail/{groupId}")  //그룹 세부정보 조회
+    public String groupDetail(@PathVariable Long groupId, Model model){
+        model.addAttribute("group", groupService.findById(groupId));
+        return "group_detail";
+    }
     
     // =================================소유 그룹 관련=======================================
-    @GetMapping("/group")
+    @GetMapping("/group/manage")
     public String group(Model model, @LoginUser SessionUser user) {
         if(user != null){
             model.addAttribute("groups",groupService.findAllByManagerDesc(user.getId()));

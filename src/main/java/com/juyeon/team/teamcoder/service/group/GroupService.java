@@ -5,10 +5,12 @@ import com.juyeon.team.teamcoder.domain.tag.Tag;
 import com.juyeon.team.teamcoder.domain.tag.TagRepository;
 import com.juyeon.team.teamcoder.domain.tagGroup.TagGroup;
 import com.juyeon.team.teamcoder.domain.tagGroup.TagGroupRepository;
-import com.juyeon.team.teamcoder.domain.user.Location;
 import com.juyeon.team.teamcoder.domain.user.User;
 import com.juyeon.team.teamcoder.domain.user.UserRepository;
-import com.juyeon.team.teamcoder.web.dto.*;
+import com.juyeon.team.teamcoder.web.dto.group.GroupListResponseDto;
+import com.juyeon.team.teamcoder.web.dto.group.GroupResponseDto;
+import com.juyeon.team.teamcoder.web.dto.group.GroupSaveRequestDto;
+import com.juyeon.team.teamcoder.web.dto.group.GroupUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,10 +38,10 @@ public class GroupService {
         Group group = groupRepository.save(requestDto.toEntity(user));
         //tag, taguser 객체 생성 후 연결
         group.setTagGroups(syncTagGroup(requestDto.getTags(), group));
-
         return group;
     }
 
+    @Transactional
     public Long update(Long id, GroupUpdateRequestDto requestDto) {
         //이미 만들어져있음
         Group group = groupRepository.findById(id)
@@ -101,6 +103,15 @@ public class GroupService {
         return id;
     }
 
+    @Transactional
+    public void delete(Long id) {
+        Group group = groupRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("해당 그룹의 정보가 없습니다. id="+id));
+
+        groupRepository.delete(group);
+    }
+
+    // ================================find=========================================
     public GroupResponseDto findById(Long id) {
         Group group = groupRepository.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("해당 그룹의 정보가 없습니다. id="+id));
@@ -126,14 +137,6 @@ public class GroupService {
                 .stream().map(GroupListResponseDto::new)
                 .collect(Collectors.toList());
     }
-
-    public void delete(Long id) {
-        Group group = groupRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("해당 그룹의 정보가 없습니다. id="+id));
-
-        groupRepository.delete(group);
-    }
-
 
     public List<GroupListResponseDto> findAllByCondition(String aim, String period, int age,
                                    String loc, String tag) {

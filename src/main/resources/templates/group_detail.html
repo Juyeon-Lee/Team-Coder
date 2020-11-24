@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <th:block th:replace="fragments/main/main_header :: mainHead"></th:block>
+    <!--/*기본적인 html head 추가부 title*/-->
+    <meta title="Team-Coder Home">
+    <meta name="description" content="team-coder: 같이 코딩할 개발자 팀원들을 모집하세요.">
+
+    <!--Etc Add on Lib-->
+
+    <!--Custom or page css-->
+
+</head>
+
+<body>
+<div class="wrap">
+    <th:block th:replace="fragments/main/nav_header :: nav-header"></th:block>
+
+    <div class="content-wrapper">
+        <!--... 실제 컨텐츠 내용 작성... -->
+        <div class="container" style="padding-top: 60px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 id="name" th:text="'그룹명 : '+*{name}">그룹명</h2>
+                    <table class="paleBlueRows" th:object="${group}">
+                        <tbody>
+                            <tr>
+                                <td>ID</td><td id="id" th:text="*{id}"></td>
+                            </tr>
+                            <tr>
+                                <td>매니저</td><td th:text="*{manager}">클릭시 매니저 정보로 연결</td>
+                            </tr>
+                            <tr>
+                                <td>활동 목표</td><td th:text="*{aim}"></td>
+                            </tr>
+                            <tr>
+                                <td>상태</td><td th:text="*{status}"></td>
+                            </tr>
+                            <tr>
+                                <td>현재인원/목표모집인원</td><td th:text="*{num.currentNum+'/'+num.maxNum}"></td>
+                            </tr>
+                            <tr>
+                                <td>활동 예정 구역</td><td th:text="*{location}"></td>
+                            </tr>
+                            <tr>
+                                <td>활동 예정 기간</td><td th:text="(*{period?.startDate!=null}?*{period?.startDate}:'미정') +' ~ '+(*{period?.endDate!=null}?*{period?.endDate}:'미정')"></td>
+                            </tr>
+                            <tr>
+                                <td>활동 희망 나이</td><td th:text="*{age.minAge+' ~ '+age.maxAge}"></td>
+                            </tr>
+                            <tr>
+                                <td>관련 파일</td><td th:text="*{file}"></td>
+                            </tr>
+                            <tr>
+                                <td>관심 태그</td><td th:text="*{tags}"></td>
+                            </tr>
+                            <tr>
+                                <td>희망 최저학력</td><td th:text="*{education}"></td>
+                            </tr>
+                            <tr>
+                                <td>추가 정보</td><td th:text="*{description}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-info" id="btn-store">내 저장함에 저장하기</button>
+                    <button class="btn btn-primary" id="btn-apply">참여 신청하기</button>
+                </div>
+            </div>
+            <br>
+            <div class="row" id="applyComment" style="display: none">
+                <form>
+                    <textarea class="form-control" id="comment" placeholder="지원 동기 및 하고 싶은 말"></textarea>
+<!--                    <input type="button" value="지원" class="btn btn-primary" id="btn-save"-->
+<!--                           style="float: right;"/>-->
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <th:block th:replace="fragments/main/main_footer"></th:block>
+</div>
+
+<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+
+<script th:src="@{/js/datepicker.js}"></script>
+<script th:src="@{/js/plugins.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+<!--custom_js 추가-->
+<script src="/js/app/action.js"></script>
+</body>
+
+</html>

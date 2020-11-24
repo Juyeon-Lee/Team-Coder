@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
+<!-- index.html에 첨부 -->
 <section class="featured-places" id="blog" th:fragment="group_list">
     <div class="container">
         <div class="row">
@@ -25,7 +26,7 @@
                         </div>
                     </div>
                     <div class="down-content">
-                        <h4 th:text="${g.name}">그룹 이름</h4>
+                        <a th:href="@{'/group/detail/'+${g.id}}"><h4 th:text="${g.name}">그룹 이름</h4></a>
                         <h5 th:text="${g.aim}">그룹 목표</h5>
                         <ul>
                             <li th:text="'활동 예정구역 :' + ${g.location}">활동 예정 구역</li>

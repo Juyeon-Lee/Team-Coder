@@ -34,6 +34,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final StringPath name = createString("name");
 
+    public final SetPath<com.juyeon.team.teamcoder.domain.participate.Participate, com.juyeon.team.teamcoder.domain.participate.QParticipate> participateGroups = this.<com.juyeon.team.teamcoder.domain.participate.Participate, com.juyeon.team.teamcoder.domain.participate.QParticipate>createSet("participateGroups", com.juyeon.team.teamcoder.domain.participate.Participate.class, com.juyeon.team.teamcoder.domain.participate.QParticipate.class, PathInits.DIRECT2);
+
     public final StringPath picture = createString("picture");
 
     public final EnumPath<Role> role = createEnum("role", Role.class);

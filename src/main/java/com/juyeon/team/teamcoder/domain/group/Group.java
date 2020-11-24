@@ -1,5 +1,6 @@
 package com.juyeon.team.teamcoder.domain.group;
 
+import com.juyeon.team.teamcoder.domain.participate.Participate;
 import com.juyeon.team.teamcoder.domain.tagGroup.TagGroup;
 import com.juyeon.team.teamcoder.domain.tagUser.TagUser;
 import com.juyeon.team.teamcoder.domain.user.EduLevel;
@@ -25,7 +26,7 @@ public class Group {
     @Column(name = "group_id")
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -56,6 +57,11 @@ public class Group {
             orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<TagGroup> tagGroups = new HashSet<TagGroup>();
 
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL,
+             fetch = FetchType.LAZY)
+    private Set<Participate> applyUsers = new HashSet<Participate>();
+
+    //======================Methods============================
     @Builder
     public Group(String name, User manager,
                  GroupAim aim, Location location, EduLevel education,

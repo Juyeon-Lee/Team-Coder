@@ -3,14 +3,12 @@ package com.juyeon.team.teamcoder.web;
 import com.juyeon.team.teamcoder.domain.user.Role;
 import com.juyeon.team.teamcoder.service.RoleService;
 import com.juyeon.team.teamcoder.service.user.UserService;
-import com.juyeon.team.teamcoder.web.dto.UserResponseDto;
-import com.juyeon.team.teamcoder.web.dto.UserUpdateRequestDto;
+import com.juyeon.team.teamcoder.web.dto.user.UserResponseDto;
+import com.juyeon.team.teamcoder.web.dto.user.UserUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
 

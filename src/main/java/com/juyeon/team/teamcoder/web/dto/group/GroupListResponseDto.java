@@ -14,15 +14,9 @@ public class GroupListResponseDto {
     private Long id;
     private String name;
     private User manager;
-    private GroupAim aim;
-    private Location location;
-    private GroupStatus status;
-//    private int currentNum;
-//    private int maxNum;
-//    private LocalDate start;
-//    private LocalDate end;
-//    private int minAge;
-//    private int maxAge;
+    private String aim;
+    private String location;
+    private String status;
     private Num num;
     private Period period;
     private Age age;
@@ -32,12 +26,12 @@ public class GroupListResponseDto {
         this.id = entity.getId();
         this.name = entity.getName();
         this.manager = entity.getManager();
-        this.aim = entity.getAim();
-        this.location = entity.getLocation();
+        this.aim = entity.getAim().getTitle();
+        this.location = entity.getLocation().getTitle();
         this.num = entity.getMemberNum();  // currentNum 반영
         this.period = entity.getWorkPeriod();
         this.age = entity.getAgeLimit();
-        this.status = entity.getStatus();
+        this.status = entity.getStatus().getTitle();
     }
 
     public void setTags(List<String> tags){

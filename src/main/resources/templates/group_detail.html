@@ -33,16 +33,16 @@
                                 <td>매니저</td><td th:text="*{manager}">클릭시 매니저 정보로 연결</td>
                             </tr>
                             <tr>
-                                <td>활동 목표</td><td th:text="*{aim}"></td>
+                                <td>활동 목표</td><td th:text="*{aim.getTitle()}"></td>
                             </tr>
                             <tr>
-                                <td>상태</td><td th:text="*{status}"></td>
+                                <td>상태</td><td th:text="*{status.getTitle()}"></td>
                             </tr>
                             <tr>
                                 <td>현재인원/목표모집인원</td><td th:text="*{num.currentNum+'/'+num.maxNum}"></td>
                             </tr>
                             <tr>
-                                <td>활동 예정 구역</td><td th:text="*{location}"></td>
+                                <td>활동 예정 구역</td><td th:text="*{location.getTitle()}"></td>
                             </tr>
                             <tr>
                                 <td>활동 예정 기간</td><td th:text="(*{period?.startDate!=null}?*{period?.startDate}:'미정') +' ~ '+(*{period?.endDate!=null}?*{period?.endDate}:'미정')"></td>
@@ -57,7 +57,7 @@
                                 <td>관심 태그</td><td th:text="*{tags}"></td>
                             </tr>
                             <tr>
-                                <td>희망 최저학력</td><td th:text="*{education}"></td>
+                                <td>희망 최저학력</td><td th:text="*{education.getTitle()}"></td>
                             </tr>
                             <tr>
                                 <td>추가 정보</td><td th:text="*{description}"></td>

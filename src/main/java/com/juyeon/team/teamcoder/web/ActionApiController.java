@@ -17,31 +17,32 @@ public class ActionApiController {
     private final ParticipateService participateService;
 
     // 참여- 신청, 취소, 승인, 거절
-    @PostMapping("/api/v1/participate")
+    @PostMapping("/api/v1/participate/apply")
     public Long apply(@RequestBody ApplyRequestDto requestDto,
                              @LoginUser SessionUser user){
         return participateService.apply(user.getId(),
                 requestDto.getGroupId(), requestDto.getComment()).getId();
     }
 
-    @DeleteMapping("/api/v1/participate/{id}")
-    public Long quit(@PathVariable Long partiId){
-        participateService.quit(partiId);
+    @DeleteMapping("/api/v1/participate/{partiId}")
+    public String quit(@PathVariable String partiId){
+        participateService.quit(Long.valueOf(partiId));
         return partiId;
     }
 
-    @PostMapping("/api/v1/participate/approve/{id}")
-    public Long approve(@PathVariable Long partiId){
-        participateService.approve(partiId);
+    @PostMapping("/api/v1/participate/approve/{partiId}")
+    public String approve(@PathVariable String partiId){
+        participateService.approve(Long.valueOf(partiId));
         return partiId;
     }
 
-    @PostMapping("/api/v1/participate/reject/{id}")
-    public Long reject(@PathVariable Long partiId){
-        participateService.reject(partiId);
+    @PostMapping("/api/v1/participate/reject/{partiId}")
+    public String reject(@PathVariable String partiId){
+        participateService.reject(Long.valueOf(partiId));
         return partiId;
     }
 
     //저장하기
+
 
 }

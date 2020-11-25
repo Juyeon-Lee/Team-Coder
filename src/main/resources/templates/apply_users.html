@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="section-heading">
-                            <h3>참가 신청한 그룹 List</h3>
+                            <h3>참가 신청한 유저 List</h3>
                         </div>
                     </div>
                 </div>
@@ -33,20 +33,24 @@
                     <div th:each="par: ${list}" class="col-md-4 col-sm-6 col-xs-12"> <!-- 있는 만큼 반복 -->
                         <div class="featured-item">
                             <div class="down-content">
-                                <span id="partiId" th:text="${par.id}">참가번호</span>
-                                <a th:href="@{'/group/detail/'+${par.groupId}}">
-                                    <h4 th:text="${par.groupName}">그룹 이름</h4></a>
+                                <h5 style="display: flex;">
+                                    <span id="partiId" th:text="${par.id}">참가번호</span> -
+                                    <span id="groupId" th:text="${par.groupId}"></span>
+                                </h5>
+                                <a th:href="@{'/user/detail/'+${par.userId}}">
+                                    <h4 th:text="${par.userName}">유저 이름</h4></a>
+                                <h5 th:text="${par.groupName}">지원 그룹 이름 ()</h5>
                                 <h5 th:text="'현재 상태 : '+${par.status}">현재 상태</h5>
                                 <p th:text="${par.applyComment}">지원문장</p>
                                 <div class="row">
                                     <div class="col-md-6 first-button">
-                                        <div class="text-button">
-                                            <h5 th:text="'현재 상태 : '+${par.status}">현재 상태</h5>
+                                        <div class="text-button" id="btn-reject">
+                                            <a href="#">거절하기</a>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="text-button" id="btn-quit">
-                                            <a href="#">취소하기/나가기</a>
+                                        <div class="text-button" id="btn-approve">
+                                            <a href="#">승인하기</a>
                                         </div>
                                     </div>
                                 </div>

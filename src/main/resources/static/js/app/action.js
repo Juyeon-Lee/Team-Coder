@@ -10,15 +10,15 @@ var action = {
                 div.style.display = "block";
                 clicked= !clicked;
             }
-
         });
-
-        $('#btn-update').on('click', function () {
-            _this.update();
-        }); // id: btn-update인 버튼이 click 됐을 때 update함수 실행
-
-        $('#btn-delete').on('click', function () {
-            _this.delete();
+        $('#btn-quit').on('click', function () {
+            _this.quit();
+        });
+        $('#btn-approve').on('click', function () {
+            _this.approve();
+        });
+        $('#btn-reject').on('click', function () {
+            _this.reject();
         });
     },
     apply : function () {
@@ -29,7 +29,7 @@ var action = {
 
         $.ajax({
             type: 'POST',
-            url: '/api/v1/participate',
+            url: '/api/v1/participate/apply',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
             data: JSON.stringify(data)
@@ -39,52 +39,53 @@ var action = {
             alert(JSON.stringify(error));
         });
     },
-    update : function () {
-        var data = {
-            name: $('#name').val(),
-            aim: $('#aim').val(),
-            description: $('#description').val(),
-            maxNum: $('#maxNum').val(),
-            start: $('#start').val(),
-            end: $('#end').val(),
-            minAge: $('#minAge').val(),
-            maxAge: $('#maxAge').val(),
-            tags: this.commaToArray($('#tags').val()),
-            education: $('#education').val(),
-            location: $('#location').val()
-        };
-
-        var id = $('#id').val();
+    quit : function () {
+        var id = $('#partiId').text(); //partiId
 
         $.ajax({
-            type: 'PUT', // 수정할 때
-            url: '/api/v1/group/'+id,  // 어느 게시글을 수정할 지
+            type: 'DELETE',
+            url: '/api/v1/participate/'+id,
             dataType: 'json',
-            contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
+            contentType:'application/json; charset=utf-8'
         }).done(function() {
-            alert('그룹이 수정되었습니다.');
-            window.location.href = '/group/manage';
+            alert('지원/참가가 취소되었습니다.');
+            window.location.href = '/user/apply';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
     },
-    delete : function () {
-        var id = $('#id').val();
+    approve : function () {
+        var id = $('#partiId').text(); //partiId
+        var groupId = $('#groupId').text();
 
         $.ajax({
-            type: 'DELETE',
-            url: '/api/v1/group/'+id,
+            type: 'POST',
+            url: '/api/v1/participate/approve/'+id,
             dataType: 'json',
             contentType:'application/json; charset=utf-8'
         }).done(function() {
-            alert('그룹이 삭제되었습니다.');
-            window.location.href = '/group/manage';
+            alert('지원을 승인하였습니다.');
+            window.location.href = '/group/'+groupId+'/apply/users';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    reject : function () {
+        var id = $('#partiId').text(); //partiId
+        var groupId = $('#groupId').text();
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/participate/reject/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function() {
+            alert('지원을 거절하였습니다.');
+            window.location.href = '/group/'+groupId+'/apply/users';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
     }
-
 };
 
 action.init();

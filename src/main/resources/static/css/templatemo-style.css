@@ -124,6 +124,24 @@ section {
   color: #4883ff;
 }
 
+.blue-black-button a {
+  display: inline-block;
+  background-color: #89a3de;
+  color: #232323;
+  font-size: 15px;
+  font-weight: 500;
+  width: 120px;
+  padding: 10px 10px;
+  text-decoration: none;
+  float: none;
+  border-collapse: collapse;
+  transition: all 0.5s;
+}
+
+.blue-black-button a:hover {
+  background-color: transparent;
+  color: #89a3de;
+}
 
 /* Header Style */
 
@@ -955,7 +973,7 @@ section.pricing-tables .table-item {
 
 section.pricing-tables .table-item .top-content {
   background-color: #4883ff;
-  padding: 30px;
+  padding: 15px;
   color: #fff;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
@@ -966,27 +984,27 @@ section.pricing-tables .table-item .top-content h4 {
   font-weight: 500;
   letter-spacing: 0.5px;
   margin: 0px;
-  margin-bottom: 0px;
 }
 
 section.pricing-tables .table-item .top-content h1 {
   font-size: 32px;
   font-weight: 700;
   letter-spacing: 0.5px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 
 section.pricing-tables .table-item ul {
-  margin: 40px 0px!important;
+  margin: 40px 0!important;
 }
 
 section.pricing-tables .table-item ul li {
-  margin: 25px 0px;
+  font-size: 15px;
+  margin: 15px 0;
 }
 
 section.pricing-tables .table-item ul li a {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: #4a4a4a;
   text-decoration: none;

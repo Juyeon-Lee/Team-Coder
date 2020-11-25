@@ -33,9 +33,8 @@ public class UserService {
 
         Set<TagUser> tagUsers = syncTagUser(requestDto.getTags(), user);
 
-        user.updateRegister(requestDto.getName(), "",
-                requestDto.getEducation(), requestDto.getBirth(),
-                requestDto.getLocation(), tagUsers);
+        user.updateRegister(requestDto.getName(), requestDto.getEducation(),
+                requestDto.getBirth(), requestDto.getLocation(), tagUsers);
         return id;
     }
 

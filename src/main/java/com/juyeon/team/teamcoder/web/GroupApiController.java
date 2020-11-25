@@ -27,10 +27,10 @@ public class GroupApiController {
         return group.getId();
     }
 
-    @PutMapping("/api/v1/group/{id}")
-    public Long update(@PathVariable Long id,
+    @PutMapping("/api/v1/group/{groupId}")
+    public Long update(@PathVariable Long groupId,
                        @RequestBody GroupUpdateRequestDto requestDto){
-        return groupService.update(id, requestDto);
+        return groupService.update(groupId, requestDto);
     }
 
     @PostMapping("/api/v1/group/pic/{id}")
@@ -48,7 +48,7 @@ public class GroupApiController {
     @GetMapping("/api/v1/group/{id}")
     public GroupResponseDto findById (@PathVariable Long id) { return groupService.findById(id); }
 
-    @DeleteMapping("/api/v1/group/{id}")
+    @DeleteMapping("/api/v1/group/{id}") //groupId
     public Long delete(@PathVariable Long id){
         groupService.delete(id);
         return id;

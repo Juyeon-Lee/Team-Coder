@@ -114,4 +114,7 @@ public class Group {
         return this;
     }
 
+    public void make() {
+        this.manager.getCreatedGroups().add(this);
+    }
 }

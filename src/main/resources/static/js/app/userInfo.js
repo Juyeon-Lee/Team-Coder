@@ -8,7 +8,10 @@ var user_info = {
         }); // id: btn-update인 버튼이 click 됐을 때 update함수 실행
 
         $('#btn-delete').on('click', function () {
-            _this.delete();
+            var result = confirm("정말 탈퇴하시겠습니까?");
+            if(result){
+                _this.delete();
+            }
         });
 
         $('#btn-picture').on('click', function () {
@@ -27,8 +30,7 @@ var user_info = {
     update : function () {
         var data = {
             name: $('#name').val(),
-            picture: "",
-            tags: this.commaToArray($('#tags').val()) ,
+            tags: this.commaToArray($('#tags').val()),
             email: $('#email').val(),
             birth: $('#birth').val(),
             education: $('#education').val().toUpperCase(),

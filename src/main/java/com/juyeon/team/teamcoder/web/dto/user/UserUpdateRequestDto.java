@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 public class UserUpdateRequestDto {
     private String name;
-    private String picture;
     private List<String> tags;
     private String email;
     private int birth;
@@ -20,11 +19,9 @@ public class UserUpdateRequestDto {
     private EduLevel education;
 
     @Builder
-    public UserUpdateRequestDto(String name, String picture,
-                                List<String> tags, String email, String birth,
+    public UserUpdateRequestDto(String name, List<String> tags, String email, String birth,
                                 String location, String education) {
         this.name = name;
-        this.picture = picture;
         this.tags = tags;
         this.email = email;
         this.birth = Integer.parseInt(birth);

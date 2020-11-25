@@ -35,8 +35,10 @@ public class ParticipateService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. id="+ userId));
 
-        return partiRepository.save(Participate.builder()
+        Participate parti = partiRepository.save(Participate.builder()
                 .group(group).user(user).comment(comment).build());
+        parti.apply();
+        return parti;
     }
 
     @Transactional
@@ -44,19 +46,26 @@ public class ParticipateService {
         Participate parti = partiRepository.findById(participateId)
                 .orElseThrow(()-> new IllegalArgumentException("해당 신청/참여 기록이 없습니다. id="+participateId));
 
+        parti.quit();
         partiRepository.delete(parti);
     }
 
     public List<PartiListResponseDto> findAllByUser(Long userId){
-        return partiRepository.findAllByUser_IdOrderByIdAsc(userId)
-                .stream().map(PartiListResponseDto::new)
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. id="+ userId));
+
+        return user.getParticipateGroups().stream()
+                .map(PartiListResponseDto::new)
                 .collect(Collectors.toList());
     }
 
     //========================for group manager ================================================
     public List<PartiListResponseDto> findAllByGroup(Long groupId){
-        return partiRepository.findAllByGroup_IdOrderByIdAsc(groupId)
-                .stream().map(PartiListResponseDto::new)
+        Group group = groupRepository.findById(groupId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 그룹이 없습니다. id="+ groupId));
+
+        return group.getApplyUsers().stream()
+                .map(PartiListResponseDto::new)
                 .collect(Collectors.toList());
     }
 

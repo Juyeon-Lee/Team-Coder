@@ -27,10 +27,8 @@
                     <form th:action="@{'/api/v1/group/'+${group.id}}" method="put">
                         <table class="form-table" th:object="${group}">
                             <tr>
-                                <td>관리자 id: </td>
-                                <td>
-                                    <input type="text" class="form-control" id="id" th:value="${userId}" readonly>
-                                </td>
+                                <td>그룹 id: </td>
+                                <td><h5 id="groupId" th:text="*{id}"></h5></td>
                             </tr>
                             <tr>
                                 <td>그룹명</td>

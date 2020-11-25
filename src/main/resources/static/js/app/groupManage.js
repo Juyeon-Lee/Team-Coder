@@ -10,7 +10,10 @@ var group_manage = {
         }); // id: btn-update인 버튼이 click 됐을 때 update함수 실행
 
         $('#btn-delete').on('click', function () {
-            _this.delete();
+            var result = confirm("그룹을 정말 삭제하시겠습니까?");
+            if(result){
+                _this.delete();
+            }
         });
     },
     arrayToComma : function (){ // param : array
@@ -66,7 +69,7 @@ var group_manage = {
             location: $('#location').val()
         };
 
-        var id = $('#id').val();
+        var id = $('#groupId').text();
 
         $.ajax({
             type: 'PUT', // 수정할 때
@@ -82,7 +85,7 @@ var group_manage = {
         });
     },
     delete : function () {
-        var id = $('#id').val();
+        var id = $('#groupId').val();
 
         $.ajax({
             type: 'DELETE',

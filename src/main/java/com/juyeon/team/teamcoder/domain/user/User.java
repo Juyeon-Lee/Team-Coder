@@ -47,10 +47,11 @@ public class User {
             orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<TagUser> tagUsers = new HashSet<TagUser>();
 
-    @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "manager", fetch = FetchType.LAZY)
     private List<Group> createdGroups = new ArrayList<Group>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
+            //참가신청 테이블은 같이 사라지게 할것인가 아님 냅둘것인가
             orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Participate> participateGroups = new HashSet<Participate>();
 
@@ -72,11 +73,9 @@ public class User {
         return this;
     }
 
-    public User updateRegister(String name, String picture,
-                               EduLevel education, int birth,
+    public User updateRegister(String name, EduLevel education, int birth,
                                Location location, Set<TagUser> tagUsers){
         this.name = name;
-        this.picture = picture;
         this.role = Role.USER;
         this.education = education;
         this.birth = birth;

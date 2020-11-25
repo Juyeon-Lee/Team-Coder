@@ -53,4 +53,14 @@ public class Participate {
     public void reject(){
         this.status = PartiStatus.REJECTED;
     }
+
+    public void apply() {
+        this.user.getParticipateGroups().add(this);
+        this.group.getApplyUsers().add(this);
+    }
+
+    public void quit() {
+        this.user.getParticipateGroups().remove(this);
+        this.group.getApplyUsers().remove(this);
+    }
 }

@@ -1,6 +1,7 @@
 package com.juyeon.team.teamcoder.domain.user;
 
 import com.juyeon.team.teamcoder.domain.group.Group;
+import com.juyeon.team.teamcoder.domain.participate.Participate;
 import com.juyeon.team.teamcoder.domain.tag.Tag;
 import com.juyeon.team.teamcoder.domain.tagGroup.TagGroup;
 import com.juyeon.team.teamcoder.domain.tagUser.TagUser;
@@ -48,6 +49,10 @@ public class User {
 
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Group> createdGroups = new ArrayList<Group>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
+            orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<Participate> participateGroups = new HashSet<Participate>();
 
     @Builder
     private User(String name, String email, String picture) {

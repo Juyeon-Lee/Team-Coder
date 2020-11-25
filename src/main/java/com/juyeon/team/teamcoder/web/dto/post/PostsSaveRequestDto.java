@@ -1,4 +1,4 @@
-package com.juyeon.team.teamcoder.web.dto;
+package com.juyeon.team.teamcoder.web.dto.post;
 
 import com.juyeon.team.teamcoder.domain.posts.Posts;
 import lombok.Builder;

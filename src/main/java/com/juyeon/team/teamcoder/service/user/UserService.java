@@ -1,5 +1,6 @@
 package com.juyeon.team.teamcoder.service.user;
 
+import com.juyeon.team.teamcoder.domain.group.GroupRepository;
 import com.juyeon.team.teamcoder.domain.tag.Tag;
 import com.juyeon.team.teamcoder.domain.tag.TagRepository;
 import com.juyeon.team.teamcoder.domain.tagUser.TagUser;
@@ -7,8 +8,8 @@ import com.juyeon.team.teamcoder.domain.tagUser.TagUserRepository;
 import com.juyeon.team.teamcoder.domain.user.CustomUserRepository;
 import com.juyeon.team.teamcoder.domain.user.User;
 import com.juyeon.team.teamcoder.domain.user.UserRepository;
-import com.juyeon.team.teamcoder.web.dto.UserResponseDto;
-import com.juyeon.team.teamcoder.web.dto.UserUpdateRequestDto;
+import com.juyeon.team.teamcoder.web.dto.user.UserResponseDto;
+import com.juyeon.team.teamcoder.web.dto.user.UserUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +24,7 @@ public class UserService {
     private final CustomUserRepository customUserRepository;
     private final TagRepository tagRepository;
     private final TagUserRepository tagUserRepository;
+    private final GroupRepository groupRepository;
 
     @Transactional
     public Long update(Long id, UserUpdateRequestDto requestDto){  // exclude picture
@@ -78,6 +80,14 @@ public class UserService {
         return id;
     }
 
+    @Transactional
+    public void delete (Long id){
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("해당 유저가 없습니다. id="+ id));
+
+        userRepository.delete(user);
+    }
+
     public UserResponseDto findById(Long id){
         User entity = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다. id="+ id));
@@ -92,15 +102,6 @@ public class UserService {
         System.out.println(tags.toString());
         return new UserResponseDto(entity, tags);
     }
-
-    @Transactional
-    public void delete (Long id){
-        User user = userRepository.findById(id).orElseThrow(() ->
-                new IllegalArgumentException("해당 유저가 없습니다. id="+ id));
-
-        userRepository.delete(user);
-    }
-
 
 
 }

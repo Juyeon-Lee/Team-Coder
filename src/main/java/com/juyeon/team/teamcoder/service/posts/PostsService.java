@@ -2,10 +2,10 @@ package com.juyeon.team.teamcoder.service.posts;
 
 import com.juyeon.team.teamcoder.domain.posts.Posts;
 import com.juyeon.team.teamcoder.domain.posts.PostsRepository;
-import com.juyeon.team.teamcoder.web.dto.PostsListResponseDto;
-import com.juyeon.team.teamcoder.web.dto.PostsResponseDto;
-import com.juyeon.team.teamcoder.web.dto.PostsSaveRequestDto;
-import com.juyeon.team.teamcoder.web.dto.PostsUpdateRequestDto;
+import com.juyeon.team.teamcoder.web.dto.post.PostsListResponseDto;
+import com.juyeon.team.teamcoder.web.dto.post.PostsResponseDto;
+import com.juyeon.team.teamcoder.web.dto.post.PostsSaveRequestDto;
+import com.juyeon.team.teamcoder.web.dto.post.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

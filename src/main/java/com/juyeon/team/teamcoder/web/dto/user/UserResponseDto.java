@@ -1,4 +1,4 @@
-package com.juyeon.team.teamcoder.web.dto;
+package com.juyeon.team.teamcoder.web.dto.user;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juyeon.team.teamcoder.domain.user.EduLevel;

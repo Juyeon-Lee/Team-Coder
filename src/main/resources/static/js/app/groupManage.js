@@ -46,7 +46,7 @@ var group_manage = {
             data: JSON.stringify(data)
         }).done(function() {
             alert('새로운 그룹이 생성되었습니다.');
-            window.location.href = '/group';
+            window.location.href = '/group/manage';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -76,7 +76,7 @@ var group_manage = {
             data: JSON.stringify(data)
         }).done(function() {
             alert('그룹이 수정되었습니다.');
-            window.location.href = '/group';
+            window.location.href = '/group/manage';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
@@ -91,7 +91,7 @@ var group_manage = {
             contentType:'application/json; charset=utf-8'
         }).done(function() {
             alert('그룹이 삭제되었습니다.');
-            window.location.href = '/group';
+            window.location.href = '/group/manage';
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });

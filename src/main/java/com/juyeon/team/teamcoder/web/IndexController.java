@@ -3,8 +3,12 @@ package com.juyeon.team.teamcoder.web;
 import com.juyeon.team.teamcoder.config.auth.LoginUser;
 import com.juyeon.team.teamcoder.config.auth.dto.SessionUser;
 import com.juyeon.team.teamcoder.service.group.GroupService;
+import com.juyeon.team.teamcoder.service.participate.ParticipateService;
 import com.juyeon.team.teamcoder.service.user.UserService;
 import com.juyeon.team.teamcoder.web.dto.*;
+import com.juyeon.team.teamcoder.web.dto.group.GroupListResponseDto;
+import com.juyeon.team.teamcoder.web.dto.group.GroupResponseDto;
+import com.juyeon.team.teamcoder.web.dto.user.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -23,6 +26,7 @@ public class IndexController {
 
     private final UserService userService;
     private final GroupService groupService;
+    private final ParticipateService participateService;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user){ // @LoginUser 어노테이션으로 세션 정보 값 가져옴.
@@ -32,12 +36,13 @@ public class IndexController {
         model.addAttribute("groups", groupService.findAll());
         if(user != null){
             model.addAttribute("userName", user.getName());
+            // model.addAttribute("list", participateService.findAllByUser(user.getId()));
         }
         return "index";
     }
 
     @GetMapping("/search/main")
-    public String search(Model model){
+    public String search(Model model, @LoginUser SessionUser user){
         OptionDto optionDto = new OptionDto();
         model.addAttribute("loc", optionDto.getLocOption());
         model.addAttribute("search",new SearchRequestDto());
@@ -47,7 +52,7 @@ public class IndexController {
 
     @GetMapping("/search/result")
     public ModelAndView searchEnter(@ModelAttribute("groups") SearchRequestDto requestDto,
-                                    ModelMap model){
+                                    ModelMap model, @LoginUser SessionUser user){
         OptionDto optionDto = new OptionDto();
         model.addAttribute("loc", optionDto.getLocOption());
         model.addAttribute("search",new SearchRequestDto());
@@ -57,7 +62,7 @@ public class IndexController {
     }
 
     @PostMapping("/search/redirect")
-    public String searchRedirect(@ModelAttribute  SearchRequestDto requestDto,
+    public String searchRedirect(@ModelAttribute SearchRequestDto requestDto,
                                  RedirectAttributes attributes){
         attributes.addFlashAttribute("groups", requestDto);
         return "redirect:/search/result";
@@ -115,14 +120,44 @@ public class IndexController {
         if(user != null){
             model.addAttribute("user", user);
             model.addAttribute("userName", user.getName());
+            model.addAttribute("list", participateService.findAllByUser(user.getId()));
         }
         return "apply_list";
     }
 
-    
+    @GetMapping("/group/detail/{groupId}")  //그룹 세부정보 조회
+    public String groupDetail(@PathVariable Long groupId, Model model,
+                            @LoginUser SessionUser user){
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
+        model.addAttribute("group", groupService.findById(groupId));
+        return "group_detail";
+    }
+
+    @GetMapping("/user/detail/{userId}")
+    public String userDetail(@PathVariable Long userId, Model model,
+                             @LoginUser SessionUser user){
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
+        model.addAttribute("userInfo", userService.findById(userId));
+        return "user_detail";
+    }
+
     // =================================소유 그룹 관련=======================================
-    @GetMapping("/group")
-    public String group(Model model, @LoginUser SessionUser user) {
+    @GetMapping("/group/{groupId}/apply/users")
+    public String groupApplyUsers(@PathVariable Long groupId,
+                                  Model model, @LoginUser SessionUser user){
+        if(user != null){
+            model.addAttribute("list", participateService.findAllByGroup(groupId));
+            model.addAttribute("userName", user.getName());
+        }
+        return "apply_users";
+    }
+
+    @GetMapping("/group/manage")
+    public String groupManage(Model model, @LoginUser SessionUser user) {
         if(user != null){
             model.addAttribute("groups",groupService.findAllByManagerDesc(user.getId()));
             model.addAttribute("userName", user.getName());

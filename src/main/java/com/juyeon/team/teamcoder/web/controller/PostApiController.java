@@ -1,9 +1,9 @@
 package com.juyeon.team.teamcoder.web.controller;
 
 import com.juyeon.team.teamcoder.service.posts.PostsService;
-import com.juyeon.team.teamcoder.web.dto.PostsResponseDto;
-import com.juyeon.team.teamcoder.web.dto.PostsSaveRequestDto;
-import com.juyeon.team.teamcoder.web.dto.PostsUpdateRequestDto;
+import com.juyeon.team.teamcoder.web.dto.post.PostsResponseDto;
+import com.juyeon.team.teamcoder.web.dto.post.PostsSaveRequestDto;
+import com.juyeon.team.teamcoder.web.dto.post.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

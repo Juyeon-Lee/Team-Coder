@@ -40,7 +40,7 @@
                             <div class="row">
                                 <div th:each="g: ${groups}" class="col-md-4 group-table-item" >
                                     <div class="table-item">
-                                        <div class="top-content">
+                                        <div class="top-content" th:href="@{'/group/detail/'+${g.id}}">
                                             <h1 th:text="${g.name}">그룹명</h1>
                                             <h3 th:text="${g.aim}">활동 목표</h3>
                                             <span th:text="${g.status}">모집중/모집종료</span>
@@ -51,8 +51,13 @@
                                             <li th:text="(${g.period?.startDate!=null}?${g.period?.startDate}:'미정') +' ~ '+(${g.period?.endDate!=null}?${g.period?.endDate}:'미정')">활동 예정 기간</li>
                                             <li th:text="${'희망 나이:' + g.age.minAge+'~'+g.age.maxAge}">나이</li>
                                         </ul>
-                                        <div class="blue-button">
-                                            <a th:href="@{/group/update/{groupId}(groupId=${g.id})}">수정하기</a>
+                                        <div class="row">
+                                            <div class="blue-black-button col-md-6" style="padding: 0 0 0 10px;">
+                                                <a th:href="@{/group/update/{groupId}(groupId=${g.id})}">수정하기</a>
+                                            </div>
+                                            <div class="blue-black-button col-md-6" style="padding: 0 10 0 0px;">
+                                                <a th:href="@{/group/{groupId}/apply/users(groupId=${g.id})}">지원자 현황</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

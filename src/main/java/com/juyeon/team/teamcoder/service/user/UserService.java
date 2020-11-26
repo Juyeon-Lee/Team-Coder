@@ -80,10 +80,13 @@ public class UserService {
     }
 
     @Transactional
-    public void delete (Long id){
+    public void delete (Long id) throws IllegalAccessException {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 유저가 없습니다. id="+ id));
-
+        //TODO: 삭제 시 경고 / 모두 삭제 방법 중 선택하기
+        if(!groupRepository.findAllByManager(user).isEmpty()){
+            throw new IllegalAccessException("그룹의 매니저인 상태로는 탈퇴할 수 없습니다.");
+        }
         userRepository.delete(user);
     }
 

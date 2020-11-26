@@ -28,19 +28,19 @@ public class GroupApiController {
     }
 
     @PutMapping("/api/v1/group/{groupId}")
-    public Long update(@PathVariable Long groupId,
+    public Long update(@PathVariable String groupId,
                        @RequestBody GroupUpdateRequestDto requestDto){
-        return groupService.update(groupId, requestDto);
+        return groupService.update(Long.valueOf(groupId), requestDto);
     }
 
     @PostMapping("/api/v1/group/pic/{id}")
-    public String updatePic(@PathVariable Long id,
+    public String updatePic(@PathVariable String id,
                        @RequestPart("file") MultipartFile multipartFile) throws IOException{
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 
         String uploadDir = "group-files/" + id;
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        groupService.updateFile(id, fileName);
+        groupService.updateFile(Long.valueOf(id), fileName);
 
         return "You successfully uploaded " + fileName + "!";
     }
@@ -49,8 +49,8 @@ public class GroupApiController {
     public GroupResponseDto findById (@PathVariable Long id) { return groupService.findById(id); }
 
     @DeleteMapping("/api/v1/group/{id}") //groupId
-    public Long delete(@PathVariable Long id){
-        groupService.delete(id);
+    public String delete(@PathVariable String id){
+        groupService.delete(Long.valueOf(id));
         return id;
     }
 }

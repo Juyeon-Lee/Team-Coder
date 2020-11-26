@@ -21,21 +21,21 @@ public class UserApiController {
     private final RoleService roleService;
 
     @PutMapping("/api/v1/user/{id}")
-    public Long update(@PathVariable Long id,
+    public Long update(@PathVariable String id,
                        @RequestBody UserUpdateRequestDto requestDto){
 
         roleService.reloadRolesForAuthenticatedUser(Role.USER.getKey());
-        return userService.update(id, requestDto);
+        return userService.update(Long.valueOf(id), requestDto);
     }
 
     @PostMapping("/api/v1/user/pic/{id}")
-    public String updatePic(@PathVariable Long id,
+    public String updatePic(@PathVariable String id,
                        @RequestPart("picture") MultipartFile multipartFile) throws IOException{
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 
         String uploadDir = "user-photos/" + id;
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        userService.updatePic(id, fileName);
+        userService.updatePic(Long.valueOf(id), fileName);
 
         return "You successfully uploaded " + fileName + "!";
     }
@@ -44,8 +44,8 @@ public class UserApiController {
     public UserResponseDto findById (@PathVariable Long id) { return userService.findById(id); }
 
     @DeleteMapping("/api/v1/user/{id}")
-    public Long delete(@PathVariable Long id){
-        userService.delete(id);
+    public String delete(@PathVariable String id){
+        userService.delete(Long.valueOf(id));
         //TODO : 자동 로그아웃/ 세션 재할당
         return id;
     }

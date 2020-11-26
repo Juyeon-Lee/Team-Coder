@@ -85,7 +85,7 @@ var group_manage = {
         });
     },
     delete : function () {
-        var id = $('#groupId').val();
+        var id = $('#groupId').text();
 
         $.ajax({
             type: 'DELETE',

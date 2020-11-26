@@ -23,14 +23,15 @@
         <div class="container" style="padding-top: 60px;">
             <div class="row">
                 <div class="col-md-12">
-                    <h2 id="name" th:text="'그룹명 : '+*{name}">그룹명</h2>
+                    <h2 id="name" th:text="'그룹명 : '+${group.name}">그룹명</h2>
                     <table class="paleBlueRows" th:object="${group}">
                         <tbody>
                             <tr>
                                 <td>ID</td><td id="id" th:text="*{id}"></td>
                             </tr>
                             <tr>
-                                <td>매니저</td><td th:text="*{manager}">클릭시 매니저 정보로 연결</td>
+                                <td>매니저</td>
+                                <td><a th:href="@{'/user/detail/'+${group.manager.id}}"><h4 th:text="*{manager.name}">클릭시 매니저 정보로 연결</h4></a></td>
                             </tr>
                             <tr>
                                 <td>활동 목표</td><td th:text="*{aim.getTitle()}"></td>
@@ -54,7 +55,7 @@
                                 <td>관련 파일</td><td th:text="*{file}"></td>
                             </tr>
                             <tr>
-                                <td>관심 태그</td><td th:text="*{tags}"></td>
+                                <td>관심 태그</td><td id="tags" th:text="*{tags}"></td>
                             </tr>
                             <tr>
                                 <td>희망 최저학력</td><td th:text="*{education.getTitle()}"></td>
@@ -95,6 +96,13 @@
 <script th:src="@{/js/main.js}"></script>
 
 <!--custom_js 추가-->
+<script>
+    window.onload = function() {
+        var x = document.getElementById("tags").textContent;
+        x = x.toString().slice(1,-1);
+        document.getElementById("tags").innerHTML = x;
+    };
+</script>
 <script src="/js/app/action.js"></script>
 </body>
 

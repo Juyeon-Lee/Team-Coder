@@ -38,14 +38,15 @@ public class GroupService {
         Group group = groupRepository.save(requestDto.toEntity(user));
         //tag, taguser 객체 생성 후 연결
         group.setTagGroups(syncTagGroup(requestDto.getTags(), group));
+        group.make(); // manage의 생성그룹 리스트에 추가
         return group;
     }
 
     @Transactional
-    public Long update(Long id, GroupUpdateRequestDto requestDto) {
+    public Long update(Long groupId, GroupUpdateRequestDto requestDto) {
         //이미 만들어져있음
-        Group group = groupRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 그룹의 정보가 없습니다. id="+ id));
+        Group group = groupRepository.findById(groupId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 그룹의 정보가 없습니다. id="+ groupId));
 
         group.update(requestDto.getName(), requestDto.getFile(), requestDto.getAim(),
                 requestDto.getEducation(), requestDto.getLocation(),
@@ -54,7 +55,7 @@ public class GroupService {
                 new Age(requestDto.getMinAge(),requestDto.getMaxAge()),
                 new Period(requestDto.getStart(), requestDto.getEnd()),
                 syncTagGroup(requestDto.getTags(), group)); //tag, taggroup 객체 생성 후 연결
-        return id;
+        return groupId;
     }
 
     /*

@@ -40,6 +40,9 @@ table.paleBlueRows {
 table.paleBlueRows td, table.paleBlueRows th {
   padding: 5px 3px;
 }
+table.paleBlueRows td a{
+  color: #2b542c;
+}
 table.paleBlueRows tbody td {
   font-size: 15px;
   color: #333333;
@@ -687,7 +690,7 @@ section.featured-places {
   z-index: 9;
   top: 30px;
   left: 30px;
-  color: rgb(34, 32, 32);
+  color: #fff;
   text-align: center;
   width: 120px;
   height: 120px;
@@ -737,6 +740,10 @@ section.featured-places {
   padding: 20px 20px 0px 20px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.featured-places .featured-item .down-content a{
+  color: #2b542c;
 }
 
 .featured-places .featured-item .down-content h4 {

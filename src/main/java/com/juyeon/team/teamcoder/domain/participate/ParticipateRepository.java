@@ -9,7 +9,7 @@ public interface ParticipateRepository extends JpaRepository<Participate,Long> {
 
     Optional<Participate> findByUser_idAndGroup_id(Long uid, Long gid);
 
-    List<Participate> findAllByUser_IdOrderByIdAsc(Long id);
+    //List<Participate> findAllByUser_IdOrderByIdAsc(Long id);
 
-    List<Participate> findAllByGroup_IdOrderByIdAsc(Long id);
+    //List<Participate> findAllByGroup_IdOrderByIdAsc(Long id);
 }

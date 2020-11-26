@@ -4,6 +4,7 @@ import com.juyeon.team.teamcoder.config.auth.LoginUser;
 import com.juyeon.team.teamcoder.config.auth.dto.SessionUser;
 import com.juyeon.team.teamcoder.domain.participate.Participate;
 import com.juyeon.team.teamcoder.service.participate.ParticipateService;
+import com.juyeon.team.teamcoder.service.participate.StoreService;
 import com.juyeon.team.teamcoder.web.dto.ApplyRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class ActionApiController {
 
     @Autowired
     private final ParticipateService participateService;
+
+    @Autowired
+    private final StoreService storeService;
 
     // 참여- 신청, 취소, 승인, 거절
     @PostMapping("/api/v1/participate/apply")
@@ -43,6 +47,15 @@ public class ActionApiController {
     }
 
     //저장하기
+    @PostMapping("/api/v1/storage/{groupId}")
+    public Long store(@PathVariable String groupId,
+                      @LoginUser SessionUser user){
+        return storeService.addToStorage(user.getId(), Long.valueOf(groupId)).getId();
+    }
 
-
+    @DeleteMapping("/api/v1/storage/{storeId}")
+    public Long deleteFromStorage(@PathVariable String storeId,
+                      @LoginUser SessionUser user){
+        return storeService.deleteFromStorage(Long.valueOf(storeId));
+    }
 }

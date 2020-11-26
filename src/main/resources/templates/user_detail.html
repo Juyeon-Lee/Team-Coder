@@ -31,6 +31,7 @@
                             </tr>
                             <tr>
                                 <td>프로필사진</td>
+                                <td><img th:src="@{${userInfo.picture}}" id="picture_img" alt="프로필 사진"></td>
                             </tr>
                             <tr>
                                 <td>태어난 년도</td><td th:text="*{birth}"></td>
@@ -39,13 +40,13 @@
                                 <td>이메일</td><td th:text="*{email}"></td>
                             </tr>
                             <tr>
-                                <td>위치한 지역</td><td th:text="*{location}"></td>
+                                <td>위치한 지역</td><td th:text="*{location.getTitle()}"></td>
                             </tr>
                             <tr>
-                                <td>최종학력</td><td th:text="*{education}"></td>
+                                <td>최종학력</td><td th:text="*{education.getTitle()}"></td>
                             </tr>
                             <tr>
-                                <td>관심 분야</td><td th:text="*{tags}"></td>
+                                <td>관심 분야</td><td id="tags" th:text="*{tags}"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -65,6 +66,13 @@
 <script th:src="@{/js/main.js}"></script>
 
 <!--custom_js 추가-->
+<script>
+    window.onload = function() {
+        var x = document.getElementById("tags").textContent;
+        x = x.toString().slice(1,-1);
+        document.getElementById("tags").innerHTML = x;
+    };
+</script>
 <script src="/js/app/action.js"></script>
 </body>
 

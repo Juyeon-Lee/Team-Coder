@@ -38,8 +38,8 @@
                                     <span id="groupId" th:text="${par.groupId}"></span>
                                 </h5>
                                 <a th:href="@{'/user/detail/'+${par.userId}}">
-                                    <h4 th:text="${par.userName}">유저 이름</h4></a>
-                                <h5 th:text="${par.groupName}">지원 그룹 이름 ()</h5>
+                                    <h3 th:text="${par.userName}">유저 이름</h3></a>
+                                <h5 th:text="${par.groupName}">지원 그룹 이름</h5>
                                 <h5 th:text="'현재 상태 : '+${par.status}">현재 상태</h5>
                                 <p th:text="${par.applyComment}">지원문장</p>
                                 <div class="row">

@@ -18,7 +18,7 @@
                     <div class="thumb">
                         <img src="/assets/img/group_img_1.jpg" alt="">
                         <div class="overlay-content">
-                            <span th:text="${g.status}">모집중/모집종료</span>
+                            <h4 th:text="${g.status}" style="margin-top:40px;">모집중/모집종료</h4>
                         </div>
                         <div class="date-content">
                             <h6 th:text="${g.num.currentNum}+'명'">0명</h6>
@@ -35,14 +35,9 @@
                         </ul>
                         <br>
                         <div class="row">
-                            <div class="col-md-6 first-button">
+                            <div class="col-md-12">
                                 <div class="text-button">
-                                    <a href="#">저장하기/저장함</a>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="text-button">
-                                    <a href="#">참여하기/신청함/참여중</a>
+                                    <a th:href="@{'/group/detail/'+${g.id}}">자세히 알아보기</a>
                                 </div>
                             </div>
                         </div>

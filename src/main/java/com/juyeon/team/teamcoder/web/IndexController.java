@@ -2,8 +2,10 @@ package com.juyeon.team.teamcoder.web;
 
 import com.juyeon.team.teamcoder.config.auth.LoginUser;
 import com.juyeon.team.teamcoder.config.auth.dto.SessionUser;
+import com.juyeon.team.teamcoder.service.StorageService;
 import com.juyeon.team.teamcoder.service.group.GroupService;
 import com.juyeon.team.teamcoder.service.participate.ParticipateService;
+import com.juyeon.team.teamcoder.service.participate.StoreService;
 import com.juyeon.team.teamcoder.service.user.UserService;
 import com.juyeon.team.teamcoder.web.dto.*;
 import com.juyeon.team.teamcoder.web.dto.group.GroupListResponseDto;
@@ -27,6 +29,7 @@ public class IndexController {
     private final UserService userService;
     private final GroupService groupService;
     private final ParticipateService participateService;
+    private final StoreService storeService;
 
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user){ // @LoginUser 어노테이션으로 세션 정보 값 가져옴.
@@ -111,6 +114,7 @@ public class IndexController {
         if(user != null){
             model.addAttribute("user", user);
             model.addAttribute("userName", user.getName());
+            model.addAttribute("list", storeService.findAllById(user.getId()));
         }
         return "storage";
     }

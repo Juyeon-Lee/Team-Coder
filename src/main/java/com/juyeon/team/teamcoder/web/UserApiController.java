@@ -44,7 +44,7 @@ public class UserApiController {
     public UserResponseDto findById (@PathVariable Long id) { return userService.findById(id); }
 
     @DeleteMapping("/api/v1/user/{id}")
-    public String delete(@PathVariable String id){
+    public String delete(@PathVariable String id) throws IllegalAccessException {
         userService.delete(Long.valueOf(id));
         //TODO : 자동 로그아웃/ 세션 재할당
         return id;

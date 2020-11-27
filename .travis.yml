@@ -39,6 +39,7 @@ deploy:
     application: teamcoder-webservice   # 웹 콘솔에서 등록한 CodeDeploy 애플리케이션
     deployment_group: teamcoder-webservice-group  # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
     region: ap-northeast-2
+    cleanup: false  # skip_cleanup: true 에서 변경(deprecated)
 
 # CI 실행 완료 시 메일로 알람
 notifications:

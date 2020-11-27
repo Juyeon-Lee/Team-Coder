@@ -15,7 +15,7 @@ cache:
 script: "./gradlew clean build"
 
 before_deploy:
-  - zip -r Team-Coder
+  - zip -r Team-Coder *
   - mkdir -p deploy
   - mv Team-Coder.zip deploy/Team-Coder.zip
 

@@ -20,8 +20,6 @@ before_deploy:
   - ls -al
   - mv Team-Coder.zip deploy/Team-Coder.zip
   - ls -al deploy
-  - echo -e "machine github.com\n login $GITHUB_TOKEN" > ~/.netrc
-  - git lfs push
 
 deploy:
   - provider: s3
@@ -32,7 +30,7 @@ deploy:
     cleanup: false  # skip_cleanup: true 에서 변경(deprecated)
     acl: private    # zip 파일 접근을 private로
     #wait_until_deployed: true
-    #local_dir: deploy   # before_deploy에서 생성한 디렉토리
+    local_dir: deploy   # before_deploy에서 생성한 디렉토리
 
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY

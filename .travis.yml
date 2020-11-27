@@ -17,7 +17,9 @@ script: "./gradlew clean build"
 before_deploy:
   - zip -r Team-Coder *
   - mkdir -p deploy
+  - ls -al
   - mv Team-Coder.zip deploy/Team-Coder.zip
+  - ls -al
 
 deploy:
   - provider: s3

@@ -20,6 +20,8 @@ before_deploy:
   - ls -al
   - mv Team-Coder.zip deploy/Team-Coder.zip
   - ls -al deploy
+  - echo -e "machine github.com\n login $GITHUB_TOKEN" > ~/.netrc
+  - git lfs push
 
 deploy:
   - provider: s3

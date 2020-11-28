@@ -195,4 +195,11 @@ public class IndexController {
         return "group_update";
     }
 
+    @GetMapping("/privacy/rule")
+    public String privacyRule(Model model, @LoginUser SessionUser user){
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
+        return "privacy_rule";
+    }
 }

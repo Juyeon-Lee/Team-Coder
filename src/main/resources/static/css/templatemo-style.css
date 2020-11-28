@@ -64,6 +64,11 @@ table.paleBlueRows tfoot td {
   font-size: 14px;
 }
 
+#rule p,span,li,em,strong {
+  font-size: 14px;
+  color: #3c3c3c;
+}
+
 
 body {
   font-family: 'Raleway', 'sans-serif';

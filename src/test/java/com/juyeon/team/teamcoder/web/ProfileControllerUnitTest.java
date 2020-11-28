@@ -1,7 +1,5 @@
 package com.juyeon.team.teamcoder.web;
 
-import com.sun.source.tree.AssertTree;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.springframework.mock.env.MockEnvironment;
 

@@ -43,7 +43,7 @@ public class UserService {
      */
     private Set<TagUser> syncTagUser(List<String> tags, User user) {
         //tag, taguser 객체 생성 후 연결
-        Set<TagUser> newTagUsers = new HashSet<TagUser>();
+        Set<TagUser> newTagUsers = new HashSet<>();
         for(String st : tags){
             Optional<Tag> optTag = tagRepository.findByName(st);
             Tag tag;

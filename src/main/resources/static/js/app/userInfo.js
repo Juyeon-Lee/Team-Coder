@@ -66,22 +66,6 @@ var user_info = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
-    },
-    updatePic : function () {
-        var id = $('#id').val();
-
-        $.ajax({
-            type: 'POST',
-            enctype: 'multipart/form-data',
-            url: '/api/v1/user/pic/'+id,  // 어느 게시글을 수정할 지
-            data: $('#picture').val(),
-            processData: false,
-        }).done(function() {
-            alert('내정보가 수정되었습니다.');
-            window.location.href = '/';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
     }
 };
 

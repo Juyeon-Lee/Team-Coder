@@ -101,7 +101,7 @@ public class UserService {
 //            System.out.println("<tag출력>======================"+tags.toString());
 //        }
         List<String> tags = (List<String>) customUserRepository.findTagByUser(entity);
-        System.out.println(tags.toString());
+        System.out.println(tags.toString()); // TODO: for debug print 삭제
         return new UserResponseDto(entity, tags);
     }
 

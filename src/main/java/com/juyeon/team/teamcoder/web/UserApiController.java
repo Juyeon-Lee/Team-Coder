@@ -53,9 +53,9 @@ public class UserApiController {
         userService.delete(Long.valueOf(id));
         // 자동 로그아웃/ 세션 재할당
         httpSession.invalidate();
-        SecurityContextHolder.clearContext();
-        Cookie cookie = new Cookie("JSESSIONID", "");
-        cookie.setMaxAge(0);
+        //SecurityContextHolder.clearContext();
+        //Cookie cookie = new Cookie("JSESSIONID", "");
+        //cookie.setMaxAge(0);
         return id;
     }
 }

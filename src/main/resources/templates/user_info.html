@@ -49,7 +49,7 @@
                                     <tr>
                                         <td>이메일</td>
                                         <td><input type="email" class="form-control" th:field="*{user.email}"
-                                                   placeholder="이메일 주소를 입력하세요 (예: Hong123@naver.com)"></td>
+                                                   placeholder="이메일 주소를 입력하세요 (예: Hong123@naver.com)" readonly></td>
                                     </tr>
                                     <tr>
                                         <td>태어난 년도</td>
@@ -60,8 +60,8 @@
                                         <td>최종 학력</td>
                                         <td>
                                             <select id="education" class="form-control" th:field="*{user.education}">
-                                            <!--/*자동 옵션 반복 */-->
-                                            <option th:each="e: ${edu}" th:value="${e.key}" th:text="${e.value}"
+                                                <!--/*자동 옵션 반복 */-->
+                                                <option th:each="e: ${edu}" th:value="${e.key}" th:text="${e.value}"
                                                     th:selected="${user.education}==${e.key}"></option>
                                             </select>
                                         </td>
@@ -112,17 +112,9 @@
     <script th:src="@{/js/plugins.js}"></script>
     <script th:src="@{/js/main.js}"></script>
 
-    <!--custom_js            
-            index.js 추가
-        <script src="/js/app/index.js"></script>-->
-    <!--
-    <script>
-        console.log("${user.education}")
-        alert( "${user}")
-        alert('${user.location}')
-    </script>
-    -->
+    <!--custom_js 추가-->
     <script type="text/javascript" th:src="@{/js/app/userInfo.js}"></script>
+    <script th:src="@{/js/datepicker.ko.js}"></script>
 </body>
 
 </html>

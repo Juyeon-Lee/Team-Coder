@@ -1,10 +1,31 @@
+function chkEmail(str) {
+    var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    return regExp.test(str); //true or false
+}
+function convertTags(str){
+    return str.toLowerCase().replace(/\s/g,'');
+}
+// 공백, null, undefined 체크
+function isEmpty(target) {
+    return target === undefined || target === null || target === '';
+}
+
 var user_info = {
 
     init : function () {
         var _this = this;
 
         $('#btn-update').on('click', function () {
-            _this.update();
+            var form_continue = true;
+            if( isEmpty($('#name').val())){
+                alert("이름 항목은 필수 입력값입니다.")
+                form_continue = false;
+            }if( isEmpty($('#email').val())){
+                alert("이메일 항목은 필수 입력값입니다.")
+                form_continue = false;
+            }
+
+            if(form_continue){ _this.update();}
         }); // id: btn-update인 버튼이 click 됐을 때 update함수 실행
 
         $('#btn-delete').on('click', function () {
@@ -27,10 +48,11 @@ var user_info = {
     commaToArray : function (param){
         return param.split(',');
     },
+    // 유저 정보 수정
     update : function () {
         var data = {
             name: $('#name').val(),
-            tags: this.commaToArray($('#tags').val()),
+            tags: this.commaToArray(convertTags($('#tags').val())),
             email: $('#email').val(),
             birth: $('#birth').val(),
             education: $('#education').val().toUpperCase(),
@@ -52,6 +74,7 @@ var user_info = {
             alert(JSON.stringify(error));
         });
     },
+    // 탈퇴
     delete : function () {
         var id = $('#id').val();
 

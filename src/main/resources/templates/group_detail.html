@@ -61,11 +61,12 @@
                                 <td>희망 최저학력</td><td th:text="*{education.getTitle()}"></td>
                             </tr>
                             <tr>
-                                <td>추가 정보</td><td th:text="*{description}"></td>
+                                <td>추가 정보</td>
+                                <td><textarea class="formLongText" style="width: 100%;"
+                                              th:text="*{description}" id="description" readonly></textarea></textarea> </td>
                             </tr>
                         </tbody>
                     </table>
-
                 </div>
             </div>
             <br><br>

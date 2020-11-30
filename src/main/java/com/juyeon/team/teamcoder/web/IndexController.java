@@ -90,7 +90,10 @@ public class IndexController {
     }
 
     @GetMapping("/user/denied")
-    public String Denied(){
+    public String Denied(Model model, @LoginUser SessionUser user){
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
         return "user_denied";
     }
 

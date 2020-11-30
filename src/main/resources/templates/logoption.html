@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <th:block th:replace="fragments/main/main_header :: mainHead"></th:block>
@@ -26,18 +26,19 @@
                     <div class="col-md-12" th:if="${not #lists.isEmpty(userName)}" th:object="${user}">
                         <!--# 이후 값이 true 이면 출력-->
                         <h2>Logged in as: <span th:text="*{name}">name</span></h2>
-                        <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" class="btn btn-info active" th:value="Logout" />
+                        </form>
                         <!--/logout 스프링 시큐리티에서 기본 제공. 별도 컨트롤러 필요 없음.-->
                         <span th:text="*{email}">email</span>
-                        <img th:src="*{picture}">
                     </div>
 
                     <div class="col-md-12" th:if="${#lists.isEmpty(userName)}"><!-- 해당 값이 존재 하지 않으면 출력한다.-->
                         <!-- /oauth2/authorization 까지는 고정이다. properties에 등록한 redirect-url 값에 맞춰 자동으로 등록-->
-                        <h2>원하는 소셜로그인으로 로그인하세요.</h2>
-                        <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
-                        <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
-                        <a href="/oauth2/authorization/kakao" class="btn btn-warning active" role="button">Kakao Login</a>
+                        <h2>원하는 소셜로그인으로 회원가입/로그인하세요.</h2>
+                        <a th:href="@{/oauth2/authorization/google}" class="btn btn-success active" role="button">Google Login</a>
+                        <a th:href="@{/oauth2/authorization/naver}" class="btn btn-secondary active" role="button">Naver Login</a>
+                        <a th:href="@{/oauth2/authorization/kakao}" class="btn btn-warning active" role="button">Kakao Login</a>
                     </div>
                 </div>
             </div>

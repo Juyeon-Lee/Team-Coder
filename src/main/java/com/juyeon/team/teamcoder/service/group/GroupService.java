@@ -63,8 +63,7 @@ public class GroupService {
      */
     private Set<TagGroup> syncTagGroup(List<String> tags, Group group) {
 
-        Set<TagGroup> origianlTagGroups = group.getTagGroups(); // 기존 태그
-        Set<TagGroup> newTagGroups = new HashSet<TagGroup>();
+        Set<TagGroup> newTagGroups = new HashSet<>();
         for(String st : tags){
             Optional<Tag> optTag = tagRepository.findByName(st);
             Tag tag;
@@ -126,7 +125,7 @@ public class GroupService {
         User user = userRepository.findById(id)  // 그룹매니저
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저의 정보가 없습니다. id="+id));
 
-        //TODO: tags String으로 변환해서 넣을 건지 생각. - 그냥 세부 화면에만 tag 띄우자..
+        // tags String으로 변환해서 넣을 건지 - 그냥 세부 화면에만 tag 띄우자..
         return groupRepository.findAllByManager(user)
                 .stream().map(GroupListResponseDto::new)
                 .collect(Collectors.toList());

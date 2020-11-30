@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @RestController
@@ -36,7 +37,8 @@ public class UserApiController {
     @PostMapping("/api/v1/user/pic/{id}")
     public String updatePic(@PathVariable String id,
                        @RequestPart("picture") MultipartFile multipartFile) throws IOException{
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
 
         String uploadDir = "user-photos/" + id;
         FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
@@ -54,8 +56,8 @@ public class UserApiController {
         // 자동 로그아웃/ 세션 재할당
         httpSession.invalidate();
         //SecurityContextHolder.clearContext();
-        //Cookie cookie = new Cookie("JSESSIONID", "");
-        //cookie.setMaxAge(0);
+        Cookie cookie = new Cookie("JSESSIONID", "");
+        cookie.setMaxAge(0);
         return id;
     }
 }

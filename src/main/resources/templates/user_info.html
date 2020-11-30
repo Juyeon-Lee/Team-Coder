@@ -89,12 +89,12 @@
                             <div th:if="${message}">
                                 <h3 th:text="${message}"/>
                             </div>*/-->
-                            <form th:action="@{'/api/v1/user/pic/' + ${user.id}}" method="post" enctype="multipart/form-data">
+                            <form th:action="@{'/api/v1/user/pic/' + ${user.id}}" method="post" enctype="multipart/form-data" name="pictureForm">
                                 <table>
                                     <tr><td><label th:for="picture">프로필 사진</label></td>
-                                        <td><input type="file" name="picture" accept="image/png, image/jpeg" /></td></tr>
-                                    <tr><td><img th:src="@{${user.picture}}" id="picture_img" alt="내 프로필 사진"></td>
-                                        <td><input type="submit" class="btn btn-info" th:value="upload" /></td></tr>
+                                        <td><input type="file" id="picture" name="picture" accept="image/png, image/jpeg" /></td></tr>
+                                    <tr><td><img th:src="@{${user.picture}}" id="picture_img" alt="내 프로필 사진을 등록해보세요."></td>
+                                        <td><input type="button" name="Upload" value="Upload" onclick="submit_file_form();" class="btn btn-info"/></td></tr>
                                 </table>
                             </form>
                         </div>
@@ -113,7 +113,8 @@
     <script th:src="@{/js/main.js}"></script>
 
     <!--custom_js 추가-->
-    <script type="text/javascript" th:src="@{/js/app/userInfo.js}"></script>
+    <script th:src="@{/js/app/userInfo.js}"></script>
+    <script th:src="@{/js/app/fileCheck.js}"></script>
     <script th:src="@{/js/datepicker.ko.js}"></script>
 </body>
 

@@ -6,7 +6,6 @@ import com.juyeon.team.teamcoder.service.user.UserService;
 import com.juyeon.team.teamcoder.web.dto.user.UserResponseDto;
 import com.juyeon.team.teamcoder.web.dto.user.UserUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +27,7 @@ public class UserApiController {
     private final HttpSession httpSession;
 
     @PutMapping("/api/v1/user/{id}")
-    public @ResponseBody Long update(@PathVariable String id,
+    public Long update(@PathVariable String id,
                        @RequestBody UserUpdateRequestDto requestDto){
 
         roleService.reloadRolesForAuthenticatedUser(Role.USER.getKey());
@@ -36,7 +35,7 @@ public class UserApiController {
     }
 
     @PostMapping("/api/v1/user/pic/{id}")
-    public @ResponseBody String updatePic(@PathVariable String id,
+    public String updatePic(@PathVariable String id,
                        @RequestPart("picture") MultipartFile multipartFile) throws IOException{
 
         String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
@@ -52,7 +51,6 @@ public class UserApiController {
     public UserResponseDto findById (@PathVariable Long id) { return userService.findById(id); }
 
     @DeleteMapping("/api/v1/user/{id}")
-    @ResponseStatus(value= HttpStatus.OK)
     public String delete(@PathVariable String id) throws IllegalAccessException {
         userService.delete(Long.valueOf(id));
         // 자동 로그아웃/ 세션 재할당

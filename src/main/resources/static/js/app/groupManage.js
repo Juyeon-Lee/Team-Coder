@@ -5,7 +5,7 @@ function convertTags(str){
 function isEmpty(target) {
     return target === undefined || target === null || target === '';
 }
-// convert array to comma_string
+// convert array to comma_string - tags
 function arrayToComma(){
     var x = "${group.tags}";
     x = x.toString().slice(1,-1);
@@ -14,6 +14,7 @@ function arrayToComma(){
 function commaToArray(param){
     return param.split(',');
 }
+
 //form 공란 검사
 function emptyFormCheck() {
     if (isEmpty($('#name').val())) {

@@ -61,6 +61,9 @@ textarea.formLongText {
   resize: vertical;
   height: 300px;
 }
+.form-input{
+  font-size: 15px;
+}
 /*
 for detail show table
  */

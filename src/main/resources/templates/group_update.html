@@ -21,7 +21,7 @@
     <div class="content-wrapper">
         <!--... 실제 컨텐츠 내용 작성... -->
         <div class="container">
-            <div class="row">
+            <div class="row form-input">
                 <div class="col-md-12" th:if="${not #lists.isEmpty(userName)}">
                     <h1>그룹 등록</h1>
                     <form th:action="@{'/api/v1/group/'+${group.id}}" method="put">
@@ -38,7 +38,7 @@
                                 </td>
                             </tr>
                             <tr class="form-check form-check-inline">
-                                <td>그룹의 목적을 하나만 선택하세요 : <small>(필수)</small></td>
+                                <td>그룹의 목적을 하나만 선택하세요 <small>(필수)</small></td>
                                 <td>
                                     <select id="aim" th:field="*{aim}" class="form-control">
                                         <!--/*자동 옵션 반복 */-->
@@ -59,19 +59,28 @@
                             <tr>
                                 <td>최대 인원</td>
                                 <td>
-                                    <input type="text" class="form-control" id="maxNum" th:value="*{num.maxNum}"
-                                           placeholder="최대 인원을 입력하세요 (예: 4)"/>
+                                    <select class="form-control" id="maxNum" th:value="*{num.maxNum}">
+                                        <option>Select</option>
+                                        <option th:each="n : ${#numbers.sequence(1,50)}" th:value="${n}" th:text="${n}"
+                                                th:selected="(*{num.maxNum}==${n})"></option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
-                                <td>나이 제한</td>
+                                <td>나이 제한(최소/최대)</td>
                                 <td>
-                                    <input type="text" class="form-control" id="minAge" th:value="*{age.minAge}"
-                                           placeholder="팀원의 최소 나이 (예: 20)"/>
+                                    <select class="form-control" id="minAge" th:value="*{age.minAge}">
+                                        <option>Select</option>
+                                        <option th:each="n : ${#numbers.sequence(1,100)}" th:value="${n}" th:text="${n}"
+                                                th:selected="(*{age.minAge}==${n})"></option>
+                                    </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" id="maxAge" th:value="*{age.maxAge}"
-                                           placeholder="팀원의 최대 나이 (예: 26)"/>
+                                    <select class="form-control" id="maxAge" th:value="*{age.maxAge}">
+                                        <option>Select</option>
+                                        <option th:each="n : ${#numbers.sequence(1,100)}" th:value="${n}" th:text="${n}"
+                                                th:selected="(*{age.maxAge}==${n})"></option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>

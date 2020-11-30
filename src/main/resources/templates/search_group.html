@@ -117,14 +117,9 @@
                                     <li th:text="'희망 나이:' +${g.age.minAge}+'~'+${g.age.maxAge}">나이</li>
                                 </ul>
                                 <div class="row">
-                                    <div class="col-md-6 first-button">
+                                    <div class="col-md-12">
                                         <div class="text-button">
-                                            <a href="#">저장하기/저장함</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="text-button">
-                                            <a href="#">참여하기/신청함/참여중</a>
+                                            <a th:href="@{'/group/detail/'+${g.id}}">자세히 알아보기</a>
                                         </div>
                                     </div>
                                 </div>

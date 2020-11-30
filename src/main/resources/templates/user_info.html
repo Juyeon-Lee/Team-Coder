@@ -96,6 +96,7 @@
                                     <tr><td><img th:src="@{${user.picture}}" id="picture_img" alt="내 프로필 사진을 등록해보세요."></td>
                                         <td><input type="button" name="Upload" value="Upload" onclick="submit_file_form(document.forms['pictureForm'].picture, 'pictureForm');" class="btn btn-info"/></td></tr>
                                 </table>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                             </form>
                         </div>
                     </div>

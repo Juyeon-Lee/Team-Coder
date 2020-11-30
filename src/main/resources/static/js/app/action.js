@@ -1,3 +1,6 @@
+const csrfToken = $('#_csrf').attr('content');
+const csrfHeader = $('#_csrf_header').attr('content');
+
 var action = {
     init : function () {
         var _this = this;
@@ -51,7 +54,10 @@ var action = {
             url: '/api/v1/participate/apply',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
+            data: JSON.stringify(data),
+            beforeSend: function (xhr){
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            }
         }).done(function() {
             alert('지원에 성공했습니다.');
         }).fail(function (error) {
@@ -65,7 +71,10 @@ var action = {
             type: 'DELETE',
             url: '/api/v1/participate/'+id,
             dataType: 'json',
-            contentType:'application/json; charset=utf-8'
+            contentType:'application/json; charset=utf-8',
+            beforeSend: function (xhr){
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            }
         }).done(function() {
             alert('지원/참가가 취소되었습니다.');
             window.location.href = '/user/apply';
@@ -81,7 +90,10 @@ var action = {
             type: 'POST',
             url: '/api/v1/participate/approve/'+id,
             dataType: 'json',
-            contentType:'application/json; charset=utf-8'
+            contentType:'application/json; charset=utf-8',
+            beforeSend: function (xhr){
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            }
         }).done(function() {
             alert('지원을 승인하였습니다.');
             window.location.href = '/group/'+groupId+'/apply/users';
@@ -97,7 +109,10 @@ var action = {
             type: 'POST',
             url: '/api/v1/participate/reject/'+id,
             dataType: 'json',
-            contentType:'application/json; charset=utf-8'
+            contentType:'application/json; charset=utf-8',
+            beforeSend: function (xhr){
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            }
         }).done(function() {
             alert('지원을 거절하였습니다.');
             window.location.href = '/group/'+groupId+'/apply/users';
@@ -112,7 +127,10 @@ var action = {
             type: 'POST',
             url: '/api/v1/storage/'+groupId,
             dataType: 'json',
-            contentType:'application/json; charset=utf-8'
+            contentType:'application/json; charset=utf-8',
+            beforeSend: function (xhr){
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            }
         }).done(function() {
             alert('저장에 성공했습니다.');
         }).fail(function (error) {
@@ -126,7 +144,10 @@ var action = {
             type: 'DELETE',
             url: '/api/v1/storage/'+id,
             dataType: 'json',
-            contentType:'application/json; charset=utf-8'
+            contentType:'application/json; charset=utf-8',
+            beforeSend: function (xhr){
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            }
         }).done(function() {
             alert('저장소에서 삭제되었습니다.');
             window.location.href = '/user/storage';

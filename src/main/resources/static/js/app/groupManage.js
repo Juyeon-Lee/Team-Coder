@@ -41,6 +41,9 @@ function emptyFormCheck() {
     return true;
 }
 
+const csrfToken = $('#_csrf').attr('content');
+const csrfHeader = $('#_csrf_header').attr('content');
+
 var group_manage = {
     init : function () {
         var _this = this;
@@ -80,7 +83,10 @@ var group_manage = {
             url: '/api/v1/group',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
+            data: JSON.stringify(data),
+            beforeSend: function (xhr){
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            }
         }).done(function() {
             alert('새로운 그룹이 생성되었습니다.');
             window.location.href = '/group/manage';
@@ -110,7 +116,10 @@ var group_manage = {
             url: '/api/v1/group/'+id,  // 어느 게시글을 수정할 지
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
+            data: JSON.stringify(data),
+            beforeSend: function (xhr){
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            }
         }).done(function() {
             alert('그룹이 수정되었습니다.');
             window.location.href = '/group/manage';
@@ -125,7 +134,10 @@ var group_manage = {
             type: 'DELETE',
             url: '/api/v1/group/'+id,
             dataType: 'json',
-            contentType:'application/json; charset=utf-8'
+            contentType:'application/json; charset=utf-8',
+            beforeSend: function (xhr){
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            }
         }).done(function() {
             alert('그룹이 삭제되었습니다.');
             window.location.href = '/group/manage';

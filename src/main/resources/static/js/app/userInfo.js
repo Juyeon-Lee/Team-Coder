@@ -19,6 +19,10 @@ function commaToArray(param){
     return param.split(',');
 }
 
+const csrfToken = $('#_csrf').attr('content');
+const csrfHeader = $('#_csrf_header').attr('content');
+
+
 var user_info = {
 
     init : function () {
@@ -66,7 +70,10 @@ var user_info = {
             url: '/api/v1/user/'+id,  // 어느 게시글을 수정할 지
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
+            data: JSON.stringify(data),
+            beforeSend: function (xhr){
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            }
         }).done(function() {
             alert('내정보가 수정되었습니다.');
             window.location.href = '/';
@@ -82,7 +89,10 @@ var user_info = {
             type: 'DELETE',
             url: '/api/v1/user/'+id,
             dataType: 'json',
-            contentType:'application/json; charset=utf-8'
+            contentType:'application/json; charset=utf-8',
+            beforeSend: function (xhr){
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            }
         }).done(function() {
             alert('탈퇴하였습니다.');
             window.location.href = '/';

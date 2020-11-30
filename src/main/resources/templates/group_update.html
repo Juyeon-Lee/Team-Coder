@@ -146,6 +146,7 @@
                                 <td><input type="button" name="Upload" value="Upload" onclick="submit_file_form(document.forms['fileForm'].file, 'fileForm');" class="btn btn-info"/>
                                 </td></tr>
                         </table>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </form>
 
                 </div>

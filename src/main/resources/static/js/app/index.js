@@ -1,3 +1,6 @@
+const csrfToken = $('#_csrf').attr('content');
+const csrfHeader = $('#_csrf_header').attr('content');
+
 var main = {
     init : function () {
         var _this = this;
@@ -14,18 +17,16 @@ var main = {
             age: $('#age').val(),
             tags: $('#tags').val()
         };
-        // var aim = $('#aim').val();
-        // var period = $('#period').val();
-        // var loc = $('#location').val();
-        // var age = $('#age').val();
-        // var tag = $('#tags').val();
         console.log("javascript 함수 실행중");
         $.ajax({
             type: 'POST',
             url: '/search/redirect',
             dataType: 'json',
             contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
+            data: JSON.stringify(data),
+            beforeSend: function (xhr){
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            }
         }).done(function() {
             alert('결과 화면으로 이동합니다');
             window.location.href = '/search/result'

@@ -7,11 +7,15 @@ import com.juyeon.team.teamcoder.service.participate.ParticipateService;
 import com.juyeon.team.teamcoder.service.participate.StoreService;
 import com.juyeon.team.teamcoder.web.dto.ApplyRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.dom4j.IllegalAddException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
+@ControllerAdvice
 public class ActionApiController {
 
     @Autowired
@@ -57,5 +61,17 @@ public class ActionApiController {
     public Long deleteFromStorage(@PathVariable String storeId,
                       @LoginUser SessionUser user){
         return storeService.deleteFromStorage(Long.valueOf(storeId));
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<String> handleRedundant(IllegalAddException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.OK);
+        //컨트롤러 클래스나 컨트롤러 메소드 위에 @ControllerAdvice 사용해서 사용 범위를 정할 수도 있다.
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<String> handleIllArgument(IllegalArgumentException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.OK);
+        //컨트롤러 클래스나 컨트롤러 메소드 위에 @ControllerAdvice 사용해서 사용 범위를 정할 수도 있다.
     }
 }

@@ -29,6 +29,32 @@ tbody tr{
 }
 
 /*
+for error page
+ */
+.error-block{
+  background-color: #a2cf8d;
+  text-align: center;
+  display: flex;
+  height: 650px;
+}
+.error-block div{
+  margin-left: auto;
+  margin-right: auto;
+}
+.error-block h1,h2,h3{
+  padding: 20px;
+}
+.error-block h4,h5,h6, p{
+  padding: 15px;
+}
+.error-block .detail-list{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  width: 50%;
+  font-size: 15px;
+}
+/*
 for detail show table
  */
 table.paleBlueRows {
@@ -68,7 +94,7 @@ table.paleBlueRows tfoot td {
   font-size: 14px;
   color: #3c3c3c;
 }
-
+/*end of table css */
 
 body {
   font-family: 'Raleway', 'sans-serif';
@@ -101,12 +127,12 @@ section {
 .section-heading span {
   font-size: 17px;
   display: block;
-  margin: 0px;
+  margin: 0;
   color: #4883ff;
 }
 
 .section-heading h2 {
-  margin-bottom: 0px;
+  margin-bottom: 0;
   margin-top: 14px;
   font-size: 23px;
   font-weight: 600;
@@ -244,7 +270,7 @@ section {
 
 .menu .sub-menu li {
   width: 100%;
-  margin-left: 0px;
+  margin-left: 0;
 }
 
 .menu li a {
@@ -256,7 +282,7 @@ section {
   color: #121212;
   font-weight: bold;
   line-height: 100px;
-  padding: 0px 15px;
+  padding: 0 15px;
   font-size: 15px;
   font-weight: 400;
   transition: all 0.5s;
@@ -416,7 +442,7 @@ section {
 /* Banner Style */
 
 section.banner {
-  padding: 0px;
+  padding: 0;
 }
 
 .banner {
@@ -429,7 +455,7 @@ section.banner {
 }
 
 .banner .banner-caption {
-  padding: 200px 0px;
+  padding: 200px 0;
 }
 
 .banner .banner-caption .line-dec {
@@ -474,7 +500,7 @@ section.banner {
   line-height: 35px;
   text-align: center;
   display: inline-block;
-  border-radius: 0px;
+  border-radius: 0;
   background-color: #3251b1;
   font-size: 17px;
   letter-spacing: 0.5px;
@@ -509,7 +535,7 @@ section.banner {
   font-size: 15px;
   color: #9a9a9a;
   outline: none;
-  padding: 0px 10px;
+  padding: 0 10px;
   display: inline-block;
 }
 
@@ -521,13 +547,13 @@ section.banner {
   font-size: 15px;
   color: #9a9a9a;
   outline: none;
-  padding: 0px 10px;
+  padding: 0 10px;
   display: inline-block;
   box-shadow: none;
 }
 
 .submit-form input:focus{
-  border-width: 0px;
+  border-width: 0;
   outline:0; /* I have also tried outline:none */
   -webkit-appearance:none;
   box-shadow: none;
@@ -541,7 +567,7 @@ section.banner {
   line-height: 35px;
   text-align: center;
   display: inline-block;
-  border-radius: 0px;
+  border-radius: 0;
   background-color: #4883ff;
   font-size: 17px;
   letter-spacing: 0.5px;
@@ -606,7 +632,7 @@ section.banner {
   font-size: 21px;
   font-weight: 500;
   letter-spacing: 0.5px;
-  margin-top: 0px;
+  margin-top: 0;
   margin-bottom: 5px;
   color: rgb(237, 245, 124);
 }
@@ -615,7 +641,7 @@ section.banner {
   font-size: 19px;
   font-weight: 500;
   letter-spacing: 0.5px;
-  margin-top: 0px;
+  margin-top: 0;
   margin-bottom: 5px;
 }
 
@@ -741,8 +767,8 @@ section.featured-places {
 
 .featured-places .featured-item .down-content {
   background-color: #fff;
-  box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
-  padding: 20px 20px 0px 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  padding: 20px 20px 0 20px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -752,7 +778,7 @@ section.featured-places {
 }
 
 .featured-places .featured-item .down-content h4 {
-  margin-top: 0px;
+  margin-top: 0;
   font-size: 19px;
   font-weight: 600;
   color: #232323;
@@ -771,8 +797,8 @@ section.featured-places {
 }
 
 .featured-places .featured-item .down-content .col-md-6 {
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .featured-places .featured-item .down-content .text-button {
@@ -780,7 +806,7 @@ section.featured-places {
   height: 50px;
   line-height: 50px;
   border-top: 1px solid #ddd;
-  margin: 0px -5px;
+  margin: 0 -5px;
 }
 
 .featured-places .featured-item .down-content .first-button {
@@ -828,7 +854,7 @@ section.our-services .service-item h4 {
   font-size:  19px;
   font-weight:  600;
   color:  #232323;
-  margin-top: 0px;
+  margin-top: 0;
   margin-bottom:  25px;
 }
 
@@ -880,7 +906,7 @@ section.our-services .service-item h4 {
   transition: all 0.2s ease-in-out;
 }
 .accordion p {
-  margin: 0px;
+  margin: 0;
   padding: 20px;
   border: 1px solid #ddd;
 }
@@ -943,12 +969,12 @@ section#video-container {
 #video-container .video-content .inner span {
   font-size: 17px;
   display: block;
-  margin: 0px;
+  margin: 0;
   color: #fff;
 }
 
 #video-container .video-content .inner h2 {
-  margin-bottom: 0px;
+  margin-bottom: 0;
   margin-top: 14px;
   font-size: 23px;
   font-weight: 500;
@@ -980,7 +1006,7 @@ section.pricing-tables .table-item {
   text-align: center;
   background-color: #eeeeee;
   border-radius: 10px;
-  padding: 0px 0px 25px 0px;
+  padding: 0 0 25px 0;
 }
 
 section.pricing-tables .table-item .top-content {
@@ -995,7 +1021,7 @@ section.pricing-tables .table-item .top-content h4 {
   font-size: 19px;
   font-weight: 500;
   letter-spacing: 0.5px;
-  margin: 0px;
+  margin: 0;
 }
 
 section.pricing-tables .table-item .top-content h1 {
@@ -1071,7 +1097,7 @@ section.contact .section-heading {
 
 .modal-content .section-heading {
   text-align: left;
-  margin-top: 0px!important;
+  margin-top: 0!important;
 }
 .modal-content .section-heading h2 {
   margin-top: 10px;
@@ -1082,7 +1108,7 @@ section.contact .section-heading {
 }
 
 .modal-content .left-content input {
-  border-radius: 0px;
+  border-radius: 0;
   padding-left: 15px;
   font-size: 13px;
   color: #aaa;
@@ -1097,7 +1123,7 @@ section.contact .section-heading {
 }
 
 .modal-content .left-content textarea {
-  border-radius: 0px;
+  border-radius: 0;
   padding-left: 15px;
   padding-top: 10px;
   font-size: 13px;
@@ -1122,7 +1148,7 @@ section.contact .section-heading {
   font-weight: 500;
   padding: 10px 16px;
   text-decoration: none;
-  border-radius: 0px;
+  border-radius: 0;
   border: 2px solid #4883ff;
   transition: all 0.5s;
 }
@@ -1168,13 +1194,13 @@ section.contact .section-heading {
 }
 
 .modal-content .right-content ul li {
-  margin: 10px 0px;
+  margin: 10px 0;
 }
 
 /* Modal Content */
 .modal-content {
   position: relative;
-  top: 0px;
+  top: 0;
   width: 60%;
   margin: 0 auto;
   background-color: #fff;
@@ -1222,7 +1248,7 @@ section.contact .section-heading {
 
 @keyframes totop-out {
   0% {
-    top: 0px;
+    top: 0;
     opacity: 1;
   }
   100% {
@@ -1235,7 +1261,7 @@ section.contact .section-heading {
 
 footer {
   margin-top: 80px;
-  padding: 80px 0px 70px 0px;
+  padding: 80px 0 70px 0;
   border-top: 1px solid #ddd;
 }
 
@@ -1303,7 +1329,7 @@ footer .contact-info p {
 }
 
 footer .contact-info ul li {
-  margin: 10px 0px;
+  margin: 10px 0;
 }
 
 footer .contact-info ul li span {
@@ -1327,8 +1353,8 @@ footer .contact-info ul li a {
   display: inline-block;
   background-color: #f4f4f4;
   width: 100%;
-  margin-bottom: 0px;
-  padding: 30px 0px;
+  margin-bottom: 0;
+  padding: 30px 0;
   font-size: 15px;
   color: #aaaaaa;
 }
@@ -1348,13 +1374,13 @@ footer .contact-info ul li a {
   .submit-form input {
     margin-bottom: 20px;
     border-bottom: 1px solid #ddd;
-    border-radius: 0px;
+    border-radius: 0;
   }
 
   .submit-form select {
     margin-bottom: 20px;
     border-bottom: 1px solid #ddd;
-    border-radius: 0px;
+    border-radius: 0;
   }
 
   .featured-places .featured-item {
@@ -1390,7 +1416,7 @@ footer .contact-info ul li a {
     left: 50%;
     transform: translateX(-50%);
     top: -30px;
-    box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   }
 
   footer .useful-links {

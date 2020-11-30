@@ -60,15 +60,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .exceptionHandling()
                 .accessDeniedPage("/user/denied")
-                .accessDeniedHandler(new AccessDeniedHandler() {
-                    @Override
-                    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException exception) throws IOException, ServletException {
-                        if (exception instanceof MissingCsrfTokenException) {
-                            //Some Exception Handling
-                        } else if (exception instanceof InvalidCsrfTokenException) {
-                            //Some Exception Handling
-                        }
-                    }})
+//                .accessDeniedHandler(new AccessDeniedHandler() {
+//                    @Override
+//                    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException exception) throws IOException, ServletException {
+//                        if (exception instanceof MissingCsrfTokenException) {
+//                            //Some Exception Handling
+//                        } else if (exception instanceof InvalidCsrfTokenException) {
+//                            //Some Exception Handling
+//                        }
+//                    }})
             .and()
                 .oauth2Login()
                     .loginPage("/logoption")
@@ -90,6 +90,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
-        return new ServletListenerRegistrationBean<HttpSessionEventPublisher>(new HttpSessionEventPublisher());
+        return new ServletListenerRegistrationBean<>(new HttpSessionEventPublisher());
     }
 }

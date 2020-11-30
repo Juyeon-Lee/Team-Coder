@@ -24,6 +24,7 @@
 
 datePickerSet($("#start"), $("#end"), true);
 datePickerSet($("#period.startDate"), $('#period.endDate'), true);
+yearPicker($("#birth"));
 
 function datePickerSet(sDate, eDate, flag) {
 
@@ -89,4 +90,15 @@ function datePickerSet(sDate, eDate, flag) {
         else
             return false;
     }
+}
+
+function yearPicker(date) {
+    date.datepicker({
+        maxDate: new Date(new Date().setFullYear(new Date().getFullYear()-20)),
+        language: 'ko',
+        view: 'years',
+        minView: 'years',
+        dateFormat: 'yyyy',
+        autoClose: true
+    });
 }

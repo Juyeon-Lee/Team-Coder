@@ -43,7 +43,7 @@ public class UserService {
      */
     private Set<TagUser> syncTagUser(List<String> tags, User user) {
         //tag, taguser 객체 생성 후 연결
-        Set<TagUser> newTagUsers = new HashSet<TagUser>();
+        Set<TagUser> newTagUsers = new HashSet<>();
         for(String st : tags){
             Optional<Tag> optTag = tagRepository.findByName(st);
             Tag tag;
@@ -101,7 +101,7 @@ public class UserService {
 //            System.out.println("<tag출력>======================"+tags.toString());
 //        }
         List<String> tags = (List<String>) customUserRepository.findTagByUser(entity);
-        System.out.println(tags.toString());
+        System.out.println(tags.toString()); // TODO: for debug print 삭제
         return new UserResponseDto(entity, tags);
     }
 

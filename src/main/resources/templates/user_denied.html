@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <head>
-    <meta charset="UTF-8">
+    <th:block th:replace="fragments/main/main_header :: mainHead"></th:block>
+    <!--/*기본적인 html head 추가부 title*/-->
     <title>로그인필요/권한거부</title>
+    <meta name="description" content="team-coder: 같이 코딩할 개발자 팀원들을 모집하세요.">
+
+    <!--Etc Add on Lib-->
+
+
+    <!--Custom or page css-->
+
 </head>
+
 <body>
- <h2>로그인필요/권한거부 (error 403)</h2>
+<div class="wrap">
+    <th:block th:replace="fragments/main/nav_header :: nav-header"></th:block>
+
+    <div class="content-wrapper">
+        <!--... 실제 컨텐츠 내용 작성... -->
+        <section class="error-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>로그인필요/권한거부 (error 403)</h2>
+                        <h4>다음을 확인해주세요.</h4>
+                        <div class="detail-list">
+                            <ol>
+                                <li>로그인을 하셨나요?</li>
+                                <li>내 정보- 추가정보 입력을 하셨나요?</li>
+                            </ol>
+                            <p>추가 정보를 입력하지 않으면 정상적인 서비스를 이용할 수 없습니다.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <th:block th:replace="fragments/main/main_footer"></th:block>
+</div>
+
+<script th:src="@{/js/vendor/bootstrap.min.js}"></script>
+
+<script th:src="@{/js/datepicker.js}"></script>
+<script th:src="@{/js/plugins.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+<!--custom_js 추가-->
+<script th:src="@{/js/app/userInfo.js}"></script>
+<script th:src="@{/js/app/fileCheck.js}"></script>
+<script th:src="@{/js/datepicker.ko.js}"></script>
 </body>
+
 </html>

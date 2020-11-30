@@ -55,6 +55,13 @@ for error page
   font-size: 15px;
 }
 /*
+textArea size
+ */
+textarea.formLongText {
+  resize: vertical;
+  height: 300px;
+}
+/*
 for detail show table
  */
 table.paleBlueRows {

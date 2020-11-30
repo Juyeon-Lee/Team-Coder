@@ -15,7 +15,7 @@
 
 </head>
 
-<body>
+<body id="userInfo">
     <div class="wrap">
         <th:block th:replace="fragments/main/nav_header :: nav-header"></th:block>
 
@@ -94,7 +94,7 @@
                                     <tr><td><label th:for="picture">프로필 사진</label></td>
                                         <td><input type="file" id="picture" name="picture" accept="image/png, image/jpeg" /></td></tr>
                                     <tr><td><img th:src="@{${user.picture}}" id="picture_img" alt="내 프로필 사진을 등록해보세요."></td>
-                                        <td><input type="button" name="Upload" value="Upload" onclick="submit_file_form();" class="btn btn-info"/></td></tr>
+                                        <td><input type="button" name="Upload" value="Upload" onclick="submit_file_form(document.forms['pictureForm'].picture, 'pictureForm');" class="btn btn-info"/></td></tr>
                                 </table>
                             </form>
                         </div>

@@ -31,58 +31,58 @@
                                 <td><h5 id="groupId" th:text="*{id}"></h5></td>
                             </tr>
                             <tr>
-                                <td>그룹명</td>
+                                <td>그룹명<small>(필수)</small></td>
                                 <td>
                                     <input type="text" class="form-control"
-                                           th:field="*{name}" placeholder="그룹의 이름을 입력하세요">
+                                           th:field="*{name}" placeholder="그룹의 이름을 입력하세요"/>
                                 </td>
                             </tr>
                             <tr class="form-check form-check-inline">
-                                <td>그룹의 목적을 하나만 선택하세요 :</td>
+                                <td>그룹의 목적을 하나만 선택하세요 : <small>(필수)</small></td>
                                 <td>
                                     <select id="aim" th:field="*{aim}" class="form-control">
                                         <!--/*자동 옵션 반복 */-->
-                                        <option th:value="CONTEST" th:selected="*{aim.name()}=='CONTEST'">공모전</option>
-                                        <option th:value="STUDY" th:selected="*{aim.name()}=='STUDY'">스터디</option>
-                                        <option th:value="PROJECT" th:selected="*{aim.name()}=='PROJECT'">프로젝트 개발</option>
-                                        <option th:value="OTHER" th:selected="*{aim.name()}=='OTHER'">기타</option>
+                                        <option th:value="CONTEST" th:selected="(*{aim.name()}=='CONTEST')">공모전</option>
+                                        <option th:value="STUDY" th:selected="(*{aim.name()}=='STUDY')">스터디</option>
+                                        <option th:value="PROJECT" th:selected="(*{aim.name()}=='PROJECT')">프로젝트 개발</option>
+                                        <option th:value="OTHER" th:selected="(*{aim.name()}=='OTHER')">기타</option>
                                     </select>
                                 </td>
                             </tr>
                             <tr>
-                                <td>개발 분야 태그 (띄어쓰기 없이 ','로 구분하여 입력해주세요.)</td>
+                                <td>개발 분야 태그 (띄어쓰기 없이 ','로 구분하여 입력해주세요.) <small>(필수)</small></td>
                                 <td>
                                     <input type="text" class="form-control" id="tags" th:field="*{tags}"
-                                           placeholder="예 : Java, Python, 백엔드, 프론트, 인공지능,...">
+                                           placeholder="예 : Java, Python, 백엔드, 프론트, 인공지능,..."/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>최대 인원</td>
                                 <td>
                                     <input type="text" class="form-control" id="maxNum" th:value="*{num.maxNum}"
-                                           placeholder="최대 인원을 입력하세요 (예: 4)">
+                                           placeholder="최대 인원을 입력하세요 (예: 4)"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>나이 제한</td>
                                 <td>
                                     <input type="text" class="form-control" id="minAge" th:value="*{age.minAge}"
-                                           placeholder="팀원의 최소 나이 (예: 20)">
+                                           placeholder="팀원의 최소 나이 (예: 20)"/>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" id="maxAge" th:value="*{age.maxAge}"
-                                           placeholder="팀원의 최대 나이 (예: 26)">
+                                           placeholder="팀원의 최대 나이 (예: 26)"/>
                                 </td>
                             </tr>
                             <tr>
-                                <td>활동 예정일</td>
+                                <td>활동 예정일 <small>(필수)</small></td>
                                 <td>
                                     <input type="text" class="form-control" id="start"
-                                           th:value="*{period?.startDate}" placeholder="활동 시작 예정일">
+                                           th:value="*{period?.startDate}" placeholder="활동 시작 예정일"/>
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" id="end"
-                                           th:value="*{period?.endDate}" placeholder="활동 종료 예정일">
+                                           th:value="*{period?.endDate}" placeholder="활동 종료 예정일"/>
                                 </td>
                             </tr>
                             <tr>
@@ -91,7 +91,7 @@
                                     <select id="education" class="form-control" th:field="*{education}">
                                         <!--/*자동 옵션 반복 */-->
                                         <option th:each="e: ${edu}" th:value="${e.key}" th:text="${e.value}"
-                                                th:selected="*{education}==${e.key}"></option>
+                                                th:selected="(*{education}==${e.key})"></option>
                                     </select>
                                 </td>
                             </tr>
@@ -101,14 +101,14 @@
                                     <select id="location" class="form-control" th:field="*{location}">
                                         <!--/*자동 옵션 반복 */-->
                                         <option th:each="o: ${loc}" th:value="${o.key}" th:text="${o.value}"
-                                                th:selected="*{location}==${o.key}" ></option>
+                                                th:selected="(*{location}==${o.key})" ></option>
                                     </select>
                                 </td>
                             </tr>
                             <tr>
-                                <td>그룹 설명 및 팀원들께 하고 싶은 말을 적어주세요.</td>
+                                <td>그룹 설명 및 팀원들께 하고 싶은 말을 적어주세요. <small>(필수, 500자 이내)</small></td>
                                 <td>
-                                    <textarea class="form-control" th:field="*{description}" placeholder="기타 세부사항"></textarea>
+                                    <textarea class="form-control formLongText" th:field="*{description}" placeholder="기타 세부사항"></textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -121,18 +121,21 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><input type="button" value="삭제" formmethod="delete" class="btn btn-danger" id="btn-delete" style="float: right;"/></td>
+                                <td><input type="button" value="삭제" class="btn btn-danger" id="btn-delete" style="float: right;"/></td>
                             </tr>
                         </table>
                     </form>
 
-                    <form th:action="@{'/api/v1/group/pic/' + ${group.id}}" method="post" enctype="multipart/form-data">
+                    <form th:action="@{'/api/v1/group/pic/' + ${group.id}}" method="post" enctype="multipart/form-data" name="fileForm">
                         <table>
                             <tr><td><label th:for="picture">관련 문서나 사진</label></td>
-                                <td><input type="file" name="file"
+                                <td><input type="file" name="file" id="file"
                                            accept="image/png, image/jpeg, video/mp4, application/pdf,application/vnd.ms-excel" /></td></tr>
-                            <tr><td><img th:src="@{${group.file}}" id="picture_file" alt="내 프로필 사진"></td>
-                                <td><input type="submit" class="btn btn-info" th:value="upload" /></td></tr>
+                            <tr><td>
+<!--                                <img th:src="@{${group.file}}" id="picture_file" alt="관련 문서나 사진을 입력해보세요.">-->
+                            </td><!--TODO: image가 아님..-->
+                                <td><input type="button" name="Upload" value="Upload" onclick="submit_file_form(document.forms['fileForm'].file, 'fileForm');" class="btn btn-info"/>
+                                </td></tr>
                         </table>
                     </form>
 
@@ -152,6 +155,7 @@
 
 <!--...custom_js 추가...-->
 <script th:src="@{/js/app/groupManage.js}"></script>
+<script th:src="@{/js/app/fileCheck.js}"></script>
 <script th:src="@{/js/datepicker.ko.js}"></script>
 </body>
 

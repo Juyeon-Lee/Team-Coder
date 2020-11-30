@@ -1,12 +1,54 @@
+function convertTags(str){
+    return str.toLowerCase().replace(/\s/g,'');
+}
+// 공백, null, undefined 체크
+function isEmpty(target) {
+    return target === undefined || target === null || target === '';
+}
+// convert array to comma_string
+function arrayToComma(){
+    var x = "${group.tags}";
+    x = x.toString().slice(1,-1);
+    document.getElementById("tags").innerHTML = x;
+}
+function commaToArray(param){
+    return param.split(',');
+}
+//form 공란 검사
+function emptyFormCheck() {
+    if (isEmpty($('#name').val())) {
+        alert("이름 항목은 필수 입력값입니다.")
+        return  false;
+    }if (isEmpty($('#aim').val())){
+        alert("목적 항목은 필수 입력값입니다.")
+        return  false;
+    }if(isEmpty($('#tags').val())){
+        alert("태그 항목은 필수 입력값입니다. 그룹의 대한 구체적인 정보를 입력하는 것이 좋습니다.")
+        return  false;
+    }if(isEmpty($('#start').val()) || isEmpty($('#end'))){
+        alert("활동 예정일을 입력해주세요.")
+        return  false;
+    }
+    let des = $('#description').val();
+    if(isEmpty(des)){
+        alert("활동 목표, 진행 계획, 원하는 조건, 신청자에게 지원시 요구할 사항 등을 적어주세요.")
+        return  false;
+    }if(des.length > 500){
+        alert("마지막의 '팀원들에게 하고싶은 말'을 500자 이내로 작성해주세요.")
+        return false;
+    }
+    return true;
+}
+
 var group_manage = {
     init : function () {
         var _this = this;
         $('#btn-save').on('click', function () {
-            _this.save();
+            if(emptyFormCheck()){ _this.save(); }
         });
 
         $('#btn-update').on('click', function () {
-            _this.update();
+            if(emptyFormCheck()){ _this.update(); }
         }); // id: btn-update인 버튼이 click 됐을 때 update함수 실행
 
         $('#btn-delete').on('click', function () {
@@ -15,15 +57,6 @@ var group_manage = {
                 _this.delete();
             }
         });
-    },
-    arrayToComma : function (){ // param : array
-        var x = "${group.tags}";
-        x = x.toString().slice(1,-1);
-        console.log(x);
-        document.getElementById("tags").innerHTML = x;
-    },
-    commaToArray : function (param){
-        return param.split(',');
     },
     save : function () {
         var data = {
@@ -36,7 +69,7 @@ var group_manage = {
             end: $('#end').val(),
             minAge: $('#minAge').val(),
             maxAge: $('#maxAge').val(),
-            tags: this.commaToArray($('#tags').val()),
+            tags: commaToArray(convertTags($('#tags').val())),
             education: $('#education').val(),
             location: $('#location').val()
         };
@@ -64,7 +97,7 @@ var group_manage = {
             end: $('#end').val(),
             minAge: $('#minAge').val(),
             maxAge: $('#maxAge').val(),
-            tags: this.commaToArray($('#tags').val()),
+            tags: commaToArray(convertTags($('#tags').val())),
             education: $('#education').val(),
             location: $('#location').val()
         };
@@ -99,16 +132,13 @@ var group_manage = {
             alert(JSON.stringify(error));
         });
     }
-
 };
 
 group_manage.init();
 
-var windowLoc = $(location).attr('pathname'); // to get window.location.pathname
-
 window.onload = function() {
     if($('body').is('#update')){ // 생성화면에서는 실행안됨.
-        group_manage.arrayToComma();
+        arrayToComma();
     }
 
 };

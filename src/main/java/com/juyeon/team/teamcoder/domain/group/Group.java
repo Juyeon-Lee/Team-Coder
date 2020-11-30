@@ -41,6 +41,7 @@ public class Group {
     @Enumerated(EnumType.STRING)
     private EduLevel education;
 
+    @Column(length = 500)
     private String description;
 
     @Enumerated(EnumType.STRING)

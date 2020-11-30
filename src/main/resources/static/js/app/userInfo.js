@@ -9,6 +9,15 @@ function convertTags(str){
 function isEmpty(target) {
     return target === undefined || target === null || target === '';
 }
+// convert array to comma_string
+function arrayToComma(){
+    var x = "${user.tags}";
+    x = x.toString().slice(1,-1);
+    document.getElementById("tags").innerHTML = x;
+}
+function commaToArray(param){
+    return param.split(',');
+}
 
 var user_info = {
 
@@ -39,20 +48,11 @@ var user_info = {
             _this.updatePic();
         });
     },
-    arrayToComma : function (){ // param : array
-        var x = "${user.tags}";
-        x = x.toString().slice(1,-1);
-        console.log(x);
-        document.getElementById("tags").innerHTML = x;
-    },
-    commaToArray : function (param){
-        return param.split(',');
-    },
     // 유저 정보 수정
     update : function () {
         var data = {
             name: $('#name').val(),
-            tags: this.commaToArray(convertTags($('#tags').val())),
+            tags: commaToArray(convertTags($('#tags').val())),
             email: $('#email').val(),
             birth: $('#birth').val(),
             education: $('#education').val().toUpperCase(),
@@ -95,8 +95,7 @@ var user_info = {
 user_info.init();
 
 window.onload = function() {
-    user_info.arrayToComma();
-
+    arrayToComma();
 };
 
 // $(document).ready(function(){ //실행될 코드(실행이 빠르다) });

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.juyeon.team.teamcoder.domain.user.EduLevel;
 import com.juyeon.team.teamcoder.domain.user.Location;
 import com.juyeon.team.teamcoder.domain.user.User;
+import com.juyeon.team.teamcoder.service.S3Service;
 import lombok.Getter;
 import net.minidev.json.JSONObject;
 
@@ -25,7 +26,12 @@ public class UserResponseDto {
     public UserResponseDto(User entity, List<String> tags) {
         this.id = entity.getId();
         this.name = entity.getName();
-        this.picture = entity.getPicture();
+        String tmpFile = entity.getPicture();
+        if(tmpFile == null){
+            this.picture = "";
+        }else{
+            this.picture = "https://"+ S3Service.CLOUD_FRONT_DOMAIN_NAME +"/"+tmpFile;
+        }
         this.birth = entity.getBirth();
         this.email = entity.getEmail();
         this.location = entity.getLocation();
@@ -33,30 +39,4 @@ public class UserResponseDto {
         this.tags = tags;
     }
 
-    /*
-    private HashMap<String, Object> userMap = new HashMap<String, Object>();
-
-    public UserResponseDto(User entity, List<String> tags) {
-        this.userMap.put("id", entity.getId());
-        this.userMap.put("name", entity.getName());
-        this.userMap.put("picture", entity.getPicture());
-        this.userMap.put("birth", entity.getBirth());
-        this.userMap.put("email", entity.getEmail());
-        this.userMap.put("location", entity.getLocation());
-        this.userMap.put("tags", tags);
-    }*/
-
-
-    public String toJson(){
-        JSONObject json = new JSONObject();
-        json.appendField("id", this.id);
-        json.appendField("name", this.name);
-        json.appendField("picture", this.picture);
-        json.appendField("birth", this.birth);
-        json.appendField("email", this.email);
-        json.appendField("location", this.location);
-        json.appendField("education", this.education);
-        json.appendField("tags", this.tags);
-        return json.toJSONString();
-    }
 }

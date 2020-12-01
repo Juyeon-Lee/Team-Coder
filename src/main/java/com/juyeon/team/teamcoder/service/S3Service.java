@@ -14,12 +14,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 @Service
 @NoArgsConstructor
 public class S3Service {
     private AmazonS3 s3Client;
+    public static final String CLOUD_FRONT_DOMAIN_NAME = "daahc1tubhj11.cloudfront.net";
 
     @Value("${cloud.aws.credentials.accessKey}")
     private String accessKey;
@@ -45,11 +48,25 @@ public class S3Service {
     }
 
     // parentPath : "groups" or "users"
-    public String upload(MultipartFile file, String parentPath) throws IOException {
-        String fileName = parentPath.concat(Objects.requireNonNull(file.getOriginalFilename()));
+    public String upload(String pastFilePath, MultipartFile file, String parentPath) throws IOException {
+        // 고유한 key 값을 갖기위해 현재 시간을 postfix로 붙여줌
+        SimpleDateFormat date = new SimpleDateFormat("yyyyMMddHHmmss");
+        String fileName = file.getOriginalFilename() + "-" + date.format(new Date());
 
+        // key가 존재하면 기존 파일은 삭제
+        if (!"".equals(pastFilePath) && pastFilePath != null) {
+            boolean isExistObject = s3Client.doesObjectExist(bucket, pastFilePath);
+
+            if (isExistObject) {
+                s3Client.deleteObject(bucket, pastFilePath);
+            }
+        }
+        // groups or users
+        fileName = parentPath.concat(fileName);
+
+        // file upload
         s3Client.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null)
                 .withCannedAcl(CannedAccessControlList.PublicRead));  // 외부에 공개될 이미지, public read 권한
-        return s3Client.getUrl(bucket, fileName).toString();
+        return fileName;
     }
 }

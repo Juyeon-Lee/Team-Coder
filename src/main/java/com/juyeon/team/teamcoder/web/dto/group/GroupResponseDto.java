@@ -4,6 +4,7 @@ import com.juyeon.team.teamcoder.domain.group.*;
 import com.juyeon.team.teamcoder.domain.user.EduLevel;
 import com.juyeon.team.teamcoder.domain.user.Location;
 import com.juyeon.team.teamcoder.domain.user.User;
+import com.juyeon.team.teamcoder.service.S3Service;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,7 +37,12 @@ public class GroupResponseDto {
         this.location = entity.getLocation();
         this.education = entity.getEducation();
         this.description = entity.getDescription();
-        this.file = entity.getFile();
+        String tmpFile = entity.getFile();
+        if(tmpFile== null){
+            this.file = "";
+        }else{
+            this.file = "https://"+ S3Service.CLOUD_FRONT_DOMAIN_NAME +"/"+ tmpFile;
+        }
         this.num = entity.getMemberNum();  // currentNum 반영
         this.period = entity.getWorkPeriod();
         this.age = entity.getAgeLimit();

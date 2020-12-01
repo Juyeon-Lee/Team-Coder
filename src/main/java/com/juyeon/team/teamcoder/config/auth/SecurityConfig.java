@@ -10,14 +10,10 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.InvalidCsrfTokenException;
 import org.springframework.security.web.csrf.MissingCsrfTokenException;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Configuration
 @RequiredArgsConstructor
@@ -33,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // static 디렉터리의 하위 파일 목록은 인증 무시 ( = 항상통과 )
-        web.ignoring().antMatchers("/css/**", "/js/**", "/assets/img/**", "/lib/**");
+        web.ignoring().antMatchers("/css/**", "/js/**", "/assets/img/**", "/lib/**", "/user-photos/**", "/group-files/**");
     }
 
     @Override
@@ -45,8 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .sessionRegistry(sessionRegistry);  // 중복 로그인 방지
         // Principal, UserDetails interface를 구현하는 객체는 equals와 hashcode를 반드시 override하셔야 중복 로그인 방지 처리가 가능해집니다.
 
-        http
-            .headers().frameOptions().disable()  //h2-console 사용 위해 disable
+        http.csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
             .and()
                 .authorizeRequests()  // URL별 권한 관리 설정하는 옵션의 시작점
                 .antMatchers("/", "/logoption","/user/denied", "/search/**", "/privacy/rule","/profile").permitAll()  // 전체 열람 권한

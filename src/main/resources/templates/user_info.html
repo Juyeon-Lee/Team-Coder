@@ -97,7 +97,7 @@
                                         <td><input type="button" name="Upload" value="Upload" onclick="submit_file_form(document.forms['pictureForm'].picture, 'pictureForm');" class="btn btn-info"/></td></tr>
                                 </table>
                                 <input type="hidden" name="pastPath" id="pastPath" th:value="${user.picture}"/>
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                             </form>
                         </div>
                     </div>

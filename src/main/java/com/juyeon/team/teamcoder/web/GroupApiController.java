@@ -34,17 +34,7 @@ public class GroupApiController {
         return groupService.update(Long.valueOf(groupId), requestDto);
     }
 
-    @PostMapping("/api/v1/group/pic/{id}")
-    public String updatePic(@PathVariable String id,
-                       @RequestPart("file") MultipartFile multipartFile) throws IOException{
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
 
-        String uploadDir = "group-files/" + id;
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        groupService.updateFile(Long.valueOf(id), fileName);
-
-        return "You successfully uploaded " + fileName + "!";
-    }
 
     @GetMapping("/api/v1/group/{id}")
     public GroupResponseDto findById (@PathVariable Long id) { return groupService.findById(id); }

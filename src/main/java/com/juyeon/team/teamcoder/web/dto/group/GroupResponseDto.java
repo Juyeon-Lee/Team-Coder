@@ -36,7 +36,7 @@ public class GroupResponseDto {
         this.location = entity.getLocation();
         this.education = entity.getEducation();
         this.description = entity.getDescription();
-        this.file = entity.getFilePath();
+        this.file = entity.getFile();
         this.num = entity.getMemberNum();  // currentNum 반영
         this.period = entity.getWorkPeriod();
         this.age = entity.getAgeLimit();

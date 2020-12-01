@@ -26,14 +26,14 @@ dependencies {
 
 	//thymeleaf 버전 맞추기 중요
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	//implementation 'org.thymeleaf:thymeleaf:3.0.11.RELEASE'    //-> thymeleaf-sping5에 포함
-	//implementation 'org.thymeleaf:thymeleaf-spring5:3.0.11.RELEASE'  //-> spring-boot-starter-thymeleaf에 포함
-	//implementation 'nz.nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.4.1'   //->Layout 인식 안되서 실패..
-	//implementation 'com.github.zhanhb:thymeleaf-layout-dialect:2.4.1'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'commons-fileupload:commons-fileupload:1.2.1'
+	// AWS S3
+	implementation 'org.springframework.cloud:spring-cloud-aws:2.2.5.RELEASE'
+	implementation 'com.amazonaws:aws-java-sdk-bom:1.11.908'
+	implementation 'com.amazonaws:aws-java-sdk-s3:1.11.908'
 	implementation 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.springframework.session:spring-session-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'

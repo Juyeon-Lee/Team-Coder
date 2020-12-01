@@ -2,7 +2,6 @@ package com.juyeon.team.teamcoder.web;
 
 import com.juyeon.team.teamcoder.config.auth.LoginUser;
 import com.juyeon.team.teamcoder.config.auth.dto.SessionUser;
-import com.juyeon.team.teamcoder.service.StorageService;
 import com.juyeon.team.teamcoder.service.group.GroupService;
 import com.juyeon.team.teamcoder.service.participate.ParticipateService;
 import com.juyeon.team.teamcoder.service.participate.StoreService;

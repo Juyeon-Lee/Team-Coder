@@ -43,4 +43,4 @@ out/
 
 ### private settings ###
 application-oauth.properties
-test.txt
+application-s3.properties

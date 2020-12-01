@@ -34,19 +34,6 @@ public class UserApiController {
         return userService.update(Long.valueOf(id), requestDto);
     }
 
-    @PostMapping("/api/v1/user/pic/{id}")
-    public String updatePic(@PathVariable String id,
-                       @RequestPart("picture") MultipartFile multipartFile) throws IOException{
-
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-
-        String uploadDir = "user-photos/" + id;
-        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        userService.updatePic(Long.valueOf(id), fileName);
-
-        return "You successfully uploaded " + fileName + "!";
-    }
-
     @GetMapping("/api/v1/user/{id}")
     public UserResponseDto findById (@PathVariable Long id) { return userService.findById(id); }
 

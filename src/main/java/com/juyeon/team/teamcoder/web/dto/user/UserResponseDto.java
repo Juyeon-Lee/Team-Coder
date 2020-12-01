@@ -25,7 +25,7 @@ public class UserResponseDto {
     public UserResponseDto(User entity, List<String> tags) {
         this.id = entity.getId();
         this.name = entity.getName();
-        this.picture = entity.getPicturePath();
+        this.picture = entity.getPicture();
         this.birth = entity.getBirth();
         this.email = entity.getEmail();
         this.location = entity.getLocation();

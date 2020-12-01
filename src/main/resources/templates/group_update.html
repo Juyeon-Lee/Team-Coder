@@ -151,8 +151,9 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <!--                                <img th:src="@{${group.file}}" id="picture_file" alt="관련 문서나 사진을 입력해보세요.">-->
-                                </td><!--TODO: image가 아님..-->
+                                    <a th:if="${group.file != ''}" th:href="@{${group.file}}" download>파일 다운로드<span th:text="'('+${group.fileName}+')'"></span></a>
+                                    <a th:if="${group.file == ''}">관련 문서나 사진을 입력해보세요.</a>
+                                </td>
                                 <td><input type="button" name="Upload" value="Upload"
                                            onclick="submit_file_form(document.forms['fileForm'].file, 'fileForm');"
                                            class="btn btn-info"/>

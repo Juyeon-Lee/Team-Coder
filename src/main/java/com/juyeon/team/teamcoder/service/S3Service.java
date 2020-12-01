@@ -51,7 +51,12 @@ public class S3Service {
     public String upload(String pastFilePath, MultipartFile file, String parentPath) throws IOException {
         // 고유한 key 값을 갖기위해 현재 시간을 postfix로 붙여줌
         SimpleDateFormat date = new SimpleDateFormat("yyyyMMddHHmmss");
-        String fileName = file.getOriginalFilename() + "-" + date.format(new Date());
+        String fileName = file.getOriginalFilename();
+        assert fileName != null;
+        StringBuilder builder = new StringBuilder(fileName);
+
+        builder.insert(fileName.lastIndexOf("."),"-" + date.format(new Date()));
+        fileName=builder.toString();
 
         // key가 존재하면 기존 파일은 삭제
         if (!"".equals(pastFilePath) && pastFilePath != null) {

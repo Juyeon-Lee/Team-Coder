@@ -31,6 +31,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
         exposeDirectory("user-photos", registry);
+        exposeDirectory("group-files", registry);
     }
 
     // 파일 업로드 시 사용

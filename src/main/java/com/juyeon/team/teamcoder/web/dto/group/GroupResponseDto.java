@@ -23,6 +23,7 @@ public class GroupResponseDto {
     private EduLevel education;
     private String description;
     private String file;
+    private String fileName;
     private GroupStatus status;
     private Num num;
     private Period period;
@@ -40,8 +41,10 @@ public class GroupResponseDto {
         String tmpFile = entity.getFile();
         if(tmpFile== null){
             this.file = "";
+            this.fileName = "";
         }else{
             this.file = "https://"+ S3Service.CLOUD_FRONT_DOMAIN_NAME +"/"+ tmpFile;
+            this.fileName = tmpFile.substring(tmpFile.lastIndexOf("/") + 1); //groups/ 자르기 위해
         }
         this.num = entity.getMemberNum();  // currentNum 반영
         this.period = entity.getWorkPeriod();

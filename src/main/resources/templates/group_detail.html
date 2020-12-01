@@ -52,7 +52,9 @@
                                 <td>활동 희망 나이</td><td th:text="*{age.minAge+' ~ '+age.maxAge}"></td>
                             </tr>
                             <tr>
-                                <td>관련 파일</td><td th:text="*{file}"></td>
+                                <td>관련 파일</td><td>
+                                <a th:if="${group.file != ''}" th:href="@{${group.file}}" download>파일 다운로드<span th:text="'('+*{fileName}+')'"></span></a>
+                                <a th:if="${group.file == ''}">관련 문서나 사진을 입력해보세요.</a></td>
                             </tr>
                             <tr>
                                 <td>관심 태그</td><td id="tags" th:text="*{tags}"></td>

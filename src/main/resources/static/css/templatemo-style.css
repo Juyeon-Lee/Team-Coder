@@ -27,7 +27,78 @@ tbody tr{
   margin-bottom: 5px;
   padding: 10px 0px;
 }
-
+/*
+login button
+cover/contain
+ */
+#naverBtn{
+  display: inline-block;
+  background: #1ec800;
+  color: white;
+  border-radius: 10px;
+  border: thin solid #23c207;
+  box-shadow: 1px 1px 1px grey;
+  white-space: nowrap;
+  text-align: center;
+}
+#naverBtn:hover{
+  cursor: pointer;
+}
+#naverBtn span.icon {
+  background: url('../assets/img/naver.jpg') no-repeat 5px 50%;
+}
+#naverBtn span.buttonText {
+  font-family: 'Nanum Barun Gothic', sans-serif;
+}
+.btn-naver-login{
+  background-image: url(../assets/img/naver_login.png);
+  background-size: contain;
+  width: 180px;
+  height: 44px;
+}
+.btn-kakao-login{
+  background: #FEE500 url(../assets/img/kakao_login.png) no-repeat;
+  background-size: contain;
+  width: 183px;
+  height: 45px;
+  border-radius: 10px;
+  border: thin solid #dbc60c;
+  box-shadow: 1px 1px 1px grey;
+}
+/*google login button*/
+#customBtn{
+  display: inline-block;
+  background: white;
+  color: #444;
+  border-radius: 10px;
+  border: thin solid #888;
+  box-shadow: 1px 1px 1px grey;
+  white-space: nowrap;
+  text-align: center;
+}
+#customBtn:hover{
+  cursor: pointer;
+}
+span.label {
+  font-family: serif;
+  font-weight: normal;
+}
+span.icon {
+  background: url('../assets/img/google_login.png') transparent 5px 50% no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  width: 42px;
+  height: 42px;
+}
+span.buttonText {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}
 /*
 for error page
  */

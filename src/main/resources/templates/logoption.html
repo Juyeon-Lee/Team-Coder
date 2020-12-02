@@ -9,8 +9,9 @@
     <meta name="description" content="team-coder: 같이 코딩할 개발자 팀원들을 모집하세요.">
 
     <!--Etc Add on Lib-->
-
-
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-nanum/1.0/nanumbarungothic/nanumbarungothic.css">
     <!--Custom or page css-->
 
 </head>
@@ -21,7 +22,7 @@
 
         <div class="content-wrapper">
             <!--... 실제 컨텐츠 내용 작성... -->
-            <div class="container" style="padding-top: 60px;">
+            <div class="container" style="padding-top: 60px; height: 300px;">
                 <div class="row">
                     <div class="col-md-12" th:if="${not #lists.isEmpty(userName)}" th:object="${user}">
                         <!--# 이후 값이 true 이면 출력-->
@@ -34,11 +35,20 @@
                     </div>
 
                     <div class="col-md-12" th:if="${#lists.isEmpty(userName)}"><!-- 해당 값이 존재 하지 않으면 출력한다.-->
-                        <!-- /oauth2/authorization 까지는 고정이다. properties에 등록한 redirect-url 값에 맞춰 자동으로 등록-->
+                        <!-- /oauth2/authorization 까지는 고정이다. properties에 등록한 redirect-url 값에 맞춰 자동으로 등록 btn btn-secondary active-->
                         <h2>원하는 소셜로그인으로 회원가입/로그인하세요.</h2>
-                        <a th:href="@{/oauth2/authorization/google}" class="btn btn-success active" role="button">Google Login</a>
-                        <a th:href="@{/oauth2/authorization/naver}" class="btn btn-secondary active" role="button">Naver Login</a>
-                        <a th:href="@{/oauth2/authorization/kakao}" class="btn btn-warning active" role="button">Kakao Login</a>
+                        <a th:href="@{/oauth2/authorization/google}">
+                            <div id="customBtn" role="button">
+                                <span class="icon"></span><span class="buttonText"> 구글 아이디로 로그인 </span>
+                            </div>
+                        </a>
+                        <a th:href="@{/oauth2/authorization/naver}">
+                            <div id="naverBtn" role="button">
+                                <span class="icon"></span><span class="buttonText"> 네이버 아이디로 로그인 </span>
+                            </div>
+                        </a>
+                        <a th:href="@{/oauth2/authorization/kakao}" class="btn btn-kakao-login" role="button"></a>
+
                     </div>
                 </div>
             </div>

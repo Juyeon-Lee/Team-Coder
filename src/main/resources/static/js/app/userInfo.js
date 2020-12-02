@@ -47,10 +47,6 @@ var user_info = {
                 _this.delete();
             }
         });
-
-        $('#btn-picture').on('click', function () {
-            _this.updatePic();
-        });
     },
     // 유저 정보 수정
     update : function () {

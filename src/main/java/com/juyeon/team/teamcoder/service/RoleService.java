@@ -17,7 +17,7 @@ import java.util.List;
 public class RoleService {
     public void reloadRolesForAuthenticatedUser(String newRole) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("<<<<<<Before>>>>>>>" +Arrays.toString(auth.getAuthorities().toArray()));
+        //System.out.println("<<<<<<Before>>>>>>>" +Arrays.toString(auth.getAuthorities().toArray()));
         List<GrantedAuthority> updatedAuthorities = new ArrayList<>(auth.getAuthorities());
         updatedAuthorities.add(new SimpleGrantedAuthority(newRole));
 
@@ -25,6 +25,6 @@ public class RoleService {
                 auth.getPrincipal(),auth.getCredentials(),updatedAuthorities
         );
         SecurityContextHolder.getContext().setAuthentication(newAuth);
-        System.out.println("<<<<<<After>>>>>>>" +Arrays.toString(SecurityContextHolder.getContext().getAuthentication().getAuthorities().toArray()));
+        //System.out.println("<<<<<<After>>>>>>>" +Arrays.toString(SecurityContextHolder.getContext().getAuthentication().getAuthorities().toArray()));
     }
 }

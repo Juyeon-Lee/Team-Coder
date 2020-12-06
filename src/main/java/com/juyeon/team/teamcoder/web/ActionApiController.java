@@ -72,6 +72,5 @@ public class ActionApiController {
     @ExceptionHandler
     public ResponseEntity<String> handleIllArgument(IllegalArgumentException ex){
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.OK);
-        //컨트롤러 클래스나 컨트롤러 메소드 위에 @ControllerAdvice 사용해서 사용 범위를 정할 수도 있다.
     }
 }

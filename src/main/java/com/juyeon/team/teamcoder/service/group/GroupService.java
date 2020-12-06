@@ -1,6 +1,8 @@
 package com.juyeon.team.teamcoder.service.group;
 
 import com.juyeon.team.teamcoder.domain.group.*;
+import com.juyeon.team.teamcoder.domain.store.Store;
+import com.juyeon.team.teamcoder.domain.store.StoreRepository;
 import com.juyeon.team.teamcoder.domain.tag.Tag;
 import com.juyeon.team.teamcoder.domain.tag.TagRepository;
 import com.juyeon.team.teamcoder.domain.tagGroup.TagGroup;
@@ -27,6 +29,7 @@ public class GroupService {
     private final TagGroupRepository tagGroupRepository;
     private final TagRepository tagRepository;
     private final UserRepository userRepository;
+    private final StoreRepository storeRepository;
 
     @Transactional
     public Group save(GroupSaveRequestDto requestDto){
@@ -107,6 +110,10 @@ public class GroupService {
     public void delete(Long id) {
         Group group = groupRepository.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("해당 그룹의 정보가 없습니다. id="+id));
+
+        // related store row delete
+        List<Store> stores = storeRepository.findAllByGroup(group);
+        storeRepository.deleteAll(stores);
 
         groupRepository.delete(group);
     }

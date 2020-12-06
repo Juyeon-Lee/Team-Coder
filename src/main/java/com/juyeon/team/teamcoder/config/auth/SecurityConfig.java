@@ -46,14 +46,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .sessionRegistry(sessionRegistry);  // 중복 로그인 방지
         // Principal, UserDetails interface를 구현하는 객체는 equals와 hashcode를 반드시 override하셔야 중복 로그인 방지 처리가 가능해집니다.
 
-        http.cors().and()
+        http//.cors().and()
                 .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
             .and()
                 .authorizeRequests()  // URL별 권한 관리 설정하는 옵션의 시작점
                 .antMatchers("/", "/logoption","/user/denied", "/search/**", "/privacy/rule","/profile").permitAll()  // 전체 열람 권한
-                .antMatchers("/api/v1/user/**", "/api/v1/**").hasRole("GUEST")
-                .antMatchers("/api/v1/user/**", "/api/v1/**","/api/v1/group/**", "/group/**", "/api/v1/participate/**").hasRole("USER") // USER 권한 가진 사람만 가능
+                .antMatchers("/api/v1/group/**", "/group/**", "/api/v1/participate/**").hasRole("USER") // USER 권한 가진 사람만 가능
                 .anyRequest().authenticated()   // 나머지 URL 들은 모두 인증된(로그인한) 사용자들만 가능
             .and()
                 .logout().logoutSuccessUrl("/")
@@ -79,19 +78,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .userService(customOAuth2UserService);  // 인터페이스의 구현체 등록
 
     }
-
-    @Bean
-    public CorsFilter corsFilter () {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");  // TODO: lock down before deploying
-        config.addAllowedHeader("*");
-        config.addExposedHeader(HttpHeaders.AUTHORIZATION);
-        config.addAllowedMethod("*");
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
-    }
+//
+//    @Bean
+//    public CorsFilter corsFilter () {
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowCredentials(true);
+//        config.addAllowedOrigin("*");  // lock down before deploying
+//        config.addAllowedHeader("*");
+//        config.addExposedHeader(HttpHeaders.AUTHORIZATION);
+//        config.addAllowedMethod("*");
+//        source.registerCorsConfiguration("/**", config);
+//        return new CorsFilter(source);
+//    }
 //    @Bean
 //    public SessionRegistry sessionRegistry() {
 //        return new SessionRegistryImpl();

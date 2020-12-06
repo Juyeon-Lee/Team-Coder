@@ -6,18 +6,16 @@ import com.juyeon.team.teamcoder.service.user.UserService;
 import com.juyeon.team.teamcoder.web.dto.user.UserResponseDto;
 import com.juyeon.team.teamcoder.web.dto.user.UserUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.StringUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.Objects;
 
 @RequiredArgsConstructor
 @RestController
+@ControllerAdvice
 public class UserApiController {
     // 로그인 후 유저 상세정보 입력, 수정, 탈퇴
 
@@ -42,9 +40,18 @@ public class UserApiController {
         userService.delete(Long.valueOf(id));
         // 자동 로그아웃/ 세션 재할당
         httpSession.invalidate();
-        //SecurityContextHolder.clearContext();
         Cookie cookie = new Cookie("JSESSIONID", "");
         cookie.setMaxAge(0);
         return id;
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<String> handleIllDelete(IllegalAccessException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.OK);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<String> handleIllArgument(IllegalArgumentException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.OK);
     }
 }

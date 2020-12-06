@@ -51,7 +51,6 @@ public class User {
     private List<Group> createdGroups = new ArrayList<Group>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
-            //참가신청 테이블은 같이 사라지게 할것인가 아님 냅둘것인가
             orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<Participate> participateGroups = new HashSet<Participate>();
 

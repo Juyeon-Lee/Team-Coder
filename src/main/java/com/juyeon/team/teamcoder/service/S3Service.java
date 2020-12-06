@@ -6,13 +6,16 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.util.IOUtils;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -69,8 +72,15 @@ public class S3Service {
         // groups or users
         fileName = parentPath.concat(fileName);
 
+        // for warning (No content length specified for stream data. Stream contents will be buffered in memory and could result in out of memory errors.)
+        ObjectMetadata objMeta = new ObjectMetadata();
+        byte[] bytes = IOUtils.toByteArray(file.getInputStream());
+
+        objMeta.setContentLength(bytes.length);
+        ByteArrayInputStream byteArrayIs = new ByteArrayInputStream(bytes);
+
         // file upload
-        s3Client.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null)
+        s3Client.putObject(new PutObjectRequest(bucket, fileName, byteArrayIs, null)
                 .withCannedAcl(CannedAccessControlList.PublicRead));  // 외부에 공개될 이미지, public read 권한
         return fileName;
     }

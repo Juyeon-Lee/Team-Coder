@@ -1,4 +1,4 @@
-package com.juyeon.team.teamcoder.web;
+package com.juyeon.team.teamcoder.web.controller;
 
 import com.juyeon.team.teamcoder.config.auth.LoginUser;
 import com.juyeon.team.teamcoder.config.auth.dto.SessionUser;

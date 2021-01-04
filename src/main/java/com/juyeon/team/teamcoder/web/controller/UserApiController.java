@@ -1,4 +1,4 @@
-package com.juyeon.team.teamcoder.web;
+package com.juyeon.team.teamcoder.web.controller;
 
 import com.juyeon.team.teamcoder.domain.user.Role;
 import com.juyeon.team.teamcoder.service.RoleService;

@@ -1,5 +1,6 @@
 package com.juyeon.team.teamcoder.web;
 
+import com.juyeon.team.teamcoder.web.controller.ProfileController;
 import org.junit.Test;
 import org.springframework.mock.env.MockEnvironment;
 

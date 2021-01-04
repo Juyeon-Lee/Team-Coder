@@ -33,10 +33,11 @@ public class GroupRepositoryTest {
     @After  // 단위 테스트가 끝날 때마다 수행되는 메소드
     public void cleanup() {
         groupRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
     @Test
-    public void 게시글저장_불러오기() {
+    public void 그룹저장_불러오기() {
         //given
         String name = "테스트 그룹";
         String content = "테스트 설명";
@@ -124,7 +125,7 @@ public class GroupRepositoryTest {
         List<Group> groupList4 = customGroupRepository.findAllByCondition(aim2,period,age,loc,tags);
 
         //then
-        assertThat(groupList.size()==1);
+        assertThat(groupList.size()).isEqualTo(1);
         Group result = groupList.get(0);
         assertThat(result.getName()).isEqualTo(group.getName());
 

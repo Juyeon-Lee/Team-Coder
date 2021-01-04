@@ -1,4 +1,4 @@
-package com.juyeon.team.teamcoder.web;
+package com.juyeon.team.teamcoder.web.controller;
 
 import com.juyeon.team.teamcoder.service.S3Service;
 import com.juyeon.team.teamcoder.service.group.GroupService;

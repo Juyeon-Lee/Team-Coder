@@ -1,4 +1,4 @@
-package com.juyeon.team.teamcoder.web;
+package com.juyeon.team.teamcoder.web.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;

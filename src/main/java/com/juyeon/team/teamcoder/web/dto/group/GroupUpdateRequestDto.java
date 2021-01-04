@@ -17,6 +17,9 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 public class GroupUpdateRequestDto {
+    private Num num;
+    private Period period;
+    private Age age;
     //ownerId 필요없음.
     private String name;
     private GroupAim aim;
@@ -31,20 +34,20 @@ public class GroupUpdateRequestDto {
     private String file;
     private List<String> tags;
 
-//    @Builder
-//    public GroupUpdateRequestDto(String name,
-//                                 String aim, String location, String education,
-//                                 String description, int maxNum, int currentNum,
-//                                 LocalDate start, LocalDate end, int minAge, int maxAge,
-//                                 List<String> tags) {
-//        this.name = name;
-//        this.aim = GroupAim.valueOf(aim);
-//        this.location = Location.valueOf(location);
-//        this.education = EduLevel.valueOf(education);
-//        this.description = description;
-//        this.num = new Num(maxNum, currentNum);  // currentNum 반영
-//        this.period = new Period(start, end);
-//        this.age = new Age(minAge, maxAge);
-//        this.tags = tags;
-//    }
+    @Builder
+    public GroupUpdateRequestDto(String name,
+                                 String aim, String location, String education,
+                                 String description, int maxNum, int currentNum,
+                                 LocalDate start, LocalDate end, int minAge, int maxAge,
+                                 List<String> tags) {
+        this.name = name;
+        this.aim = GroupAim.valueOf(aim);
+        this.location = Location.valueOf(location);
+        this.education = EduLevel.valueOf(education);
+        this.description = description;
+        this.num = new Num(maxNum, currentNum);  // currentNum 반영
+        this.period = new Period(start, end);
+        this.age = new Age(minAge, maxAge);
+        this.tags = tags;
+    }
 }

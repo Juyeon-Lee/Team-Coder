@@ -23,7 +23,7 @@ public class IndexControllerTest {
         String body = this.restTemplate.getForObject("/", String.class);
 
         //then
-        assertThat(body).contains("스프링부트로 시작하는 웹 서비스"); //html 파일 안에 있는 문장
+        assertThat(body).contains("그룹을 살펴보고 원하는 곳에 참여하세요."); //html 파일 안에 있는 문장
 
     }
 }

@@ -1,4 +1,4 @@
-package com.juyeon.team.teamcoder.web;
+package com.juyeon.team.teamcoder.web.controller;
 
 import com.juyeon.team.teamcoder.domain.group.Group;
 import com.juyeon.team.teamcoder.service.group.GroupService;
@@ -34,10 +34,12 @@ public class GroupApiController {
     @PutMapping("/api/v1/group/{groupId}")
     public Long update(@PathVariable String groupId,
                        @RequestBody GroupUpdateRequestDto requestDto){
+        System.out.println("========================"+requestDto.getName());
+        System.out.println(requestDto.getTags().toString());
         return groupService.update(Long.valueOf(groupId), requestDto);
     }
 
-    @GetMapping("/api/v1/group/{id}")
+    @GetMapping("/api/v1/group/{id}") //안쓰임
     public GroupResponseDto findById (@PathVariable Long id) { return groupService.findById(id); }
 
     @DeleteMapping("/api/v1/group/{id}") //groupId
